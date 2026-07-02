@@ -103,7 +103,7 @@ Used for
 
 ---
 
-## FrDEx
+## OVERDIA
 
 Used to compute
 
@@ -293,7 +293,7 @@ Optimized Gaussian input files for excited-state calculations.
 
 ---
 
-# Step 3 — Generate FrDEx inputs
+# Step 3 — Generate OVERDIA inputs
 
 ```
 prep-overdia_mod.py
@@ -348,9 +348,14 @@ diab_fratd_resp_frag1_frag3.inp
 
 ---
 
-# Step 4 — Run FrDEx
+# Step 4 — Run OVERDIA
 
-Run every generated input file.
+Run every generated input file with a submission script. This **MUST** be adapted to your own OS.  
+
+
+```
+./run_diab.sh
+```
 
 Each calculation produces
 
@@ -373,11 +378,7 @@ Each output contains
 build_exat.py
 ```
 
-This is the main reconstruction program.
-
-It reads every FrDEx calculation and automatically reconstructs the global excitonic model.
-
-Internally it uses
+This is the main reconstruction program. It reads every FrDEx calculation and automatically reconstructs the global excitonic model. Internally it uses
 
 ```
 parse_input.py
@@ -562,9 +563,9 @@ Midpoint between donor and acceptor
 
 # Step 7 — Run EXAT
 
-Example
+Example in py27 environment. 
 
-```bash
+```
 python exat.py \
 -e \
 -omag \
@@ -583,9 +584,9 @@ This computes
 
 # Step 8 — Compute spectra
 
-Example
+Example in py27 environment. 
 
-```bash
+```
 python spectrum.py \
 results.results.out \
 -o spectrum \
@@ -670,8 +671,8 @@ Linear Dichroism
 
 If this software contributes to published work, please cite the original publications describing
 
-- FrDEx
+- OVERDIA
 - EXAT
-- the theoretical methodology used for the construction of diabatic excitonic Hamiltonians
+- FrDEX
 
 and acknowledge the use of this workflow in the computational methods section.
