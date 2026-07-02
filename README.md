@@ -1,38 +1,44 @@
 # FrDEx → EXAT Workflow
 
-Python utilities for converting **FrDEx** pairwise diabatic calculations into a complete excitonic Hamiltonian suitable for **EXAT** calculations.
+A Python toolkit for converting **FrDEx** pairwise diabatic calculations into a complete excitonic Hamiltonian that can be directly used as input for **EXAT**.
 
-The workflow automates the complete procedure:
-
-PDB → fragment geometries → optimized fragments → FrDEx input generation → FrDEx calculations → global excitonic Hamiltonian → EXAT input files → absorption/CD spectra.
+The package reconstructs a global excitonic model starting from pairwise FrDEx calculations and automatically generates all input files required by EXAT for the calculation of absorption, Circular Dichroism (CD), and Linear Dichroism (LD) spectra.
 
 ---
 
-# Workflow
+# Overview
+
+The complete workflow is
 
 ```
-PDB structure
+PDB Structure
       │
       ▼
 fragment_build_xyz.py
       │
       ▼
-fragment xyz files
+Fragment geometries (.xyz, .com)
       │
       ▼
 replace_optimize_heavy.py
       │
       ▼
-Gaussian excited-state inputs
+Optimized fragment geometries
+      │
+      ▼
+Gaussian TDDFT calculations
       │
       ▼
 prep-overdia_mod.py
       │
       ▼
-FrDEx pair calculations
+FrDEx input generation
       │
       ▼
-FrDEx parser
+FrDEx calculations
+      │
+      ▼
+build_exat.py
       │
       ▼
 Global excitonic Hamiltonian
@@ -49,70 +55,181 @@ Absorption / CD / LD spectra
 
 ---
 
+# Features
+
+The package automatically
+
+- extracts fragment excited states from FrDEx calculations
+- identifies identical diabatic states appearing in multiple fragment pairs
+- reconstructs the global excitonic Hamiltonian
+- averages transition properties over all available calculations
+- computes transition centers from fragment geometries
+- generates EXAT external input files
+- interfaces directly with EXAT
+
+---
+
 # Requirements
 
 ## Python
 
-Python ≥ 3.10
+Python **3.10** or newer is recommended.
 
 Required packages
 
 ```bash
 numpy
+rmsd
 ```
 
-Install with
+Install them with
 
 ```bash
-pip install numpy
+pip install numpy rmsd
 ```
 
 ---
 
-## External software
+# External Software
 
-The workflow assumes the following external programs are available.
+This workflow requires three external programs.
 
-### Gaussian
+## Gaussian
 
-Used for TDDFT calculations and fragment optimization.
+Used for
 
----
-
-### FrDEx
-
-Used to compute diabatic Hamiltonians for every fragment pair.
+- geometry optimization
+- TDDFT excited-state calculations
 
 ---
 
-### EXAT
+## OVERDIA
 
 Used to compute
 
-- Excitonic Hamiltonian
-- Absorption spectra
-- Circular Dichroism
-- Linear Dichroism
+- diabatic Hamiltonians
+- transition dipoles
+- magnetic transition dipoles
+- velocity transition dipoles
+
+for every fragment pair.
 
 ---
 
-# Step 1
-## Build fragment geometries
+## EXAT
+
+Used to compute
+
+- excitonic Hamiltonian
+- absorption spectra
+- Circular Dichroism (CD)
+- Linear Dichroism (LD)
+
+---
+
+# Installing EXAT
+
+The current public version of EXAT requires **Python 2.7** together with older scientific libraries.
+
+Since modern Linux distributions (Ubuntu ≥ 22.04) no longer provide Python 2 support, the recommended solution is to install EXAT inside an isolated Conda environment.
+
+## Install Miniconda
+
+```bash
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+
+bash Miniconda3-latest-Linux-x86_64.sh
+
+source ~/.bashrc
+```
+
+---
+
+## Create a Python 2.7 environment
+
+```bash
+conda create -n py27 python=2.7
+
+conda activate py27
+```
+
+---
+
+## Install the required packages
+
+```bash
+conda install \
+-c free \
+-c defaults \
+numpy=1.9.1 \
+scipy=0.15.1 \
+matplotlib=1.4.2 \
+pygtk
+```
+
+---
+
+## Fix the libgfortran issue
+
+On modern Linux distributions you may encounter
+
+```
+ImportError: libgfortran.so.1
+```
+
+Locate your installed library
+
+```bash
+find /usr/lib -name "libgfortran.so.*"
+```
+
+Then create the symbolic link
+
+```bash
+ln -s \
+/usr/lib/x86_64-linux-gnu/libgfortran.so.5 \
+~/miniconda3/envs/py27/lib/libgfortran.so.1
+```
+
+(adjust the path according to your installation)
+
+---
+
+## Running EXAT
+
+```bash
+conda activate py27
+
+python exat.py
+```
+
+---
+
+# Workflow
+
+---
+
+# Step 1 — Build fragment geometries
+
+The first step is to remove the sugar-phosphate backbone and unnecessary bases. This is is done automatically for any PDB which leave only cytosine and guanine bases removing all the rest. Currently, only these bases have been tested. The hydrogen atoms **MUST** be added beforehand according to your preferred protonation state. The program uses **calc_methyl_coords.py** module to remove all sugar base and replace them with methyl group.  
+
 
 ```
 fragment_build_xyz.py
 ```
 
-### Purpose
+## Purpose
 
-Reads a PDB structure and extracts each nucleobase into an independent fragment.
+Reads a PDB structure and extracts every nucleobase into an independent fragment.
 
-Produces
+The script generates
 
 - Gaussian input files
 - optional XYZ files
 
-### Usage
+---
+
+## Usage
 
 ```bash
 ./fragment_build_xyz.py molecule.pdb
@@ -124,7 +241,9 @@ or
 ./fragment_build_xyz.py molecule.pdb --xyz
 ```
 
-### Output
+---
+
+## Output
 
 ```
 frag1.com
@@ -136,29 +255,30 @@ frag2.xyz
 ...
 ```
 
-The XYZ files are later used to compute fragment centroids.
+The generated XYZ files are later used to compute fragment centroids.
 
 ---
 
-# Step 2
-## Replace fragment geometries
+# Step 2 — Replace fragment geometries
 
 ```
 replace_optimize_heavy.py
 ```
 
-### Purpose
+## Purpose
 
-Replaces each fragment geometry using heavy-atom RMSD alignment against optimized reference structures.
+Replaces fragment geometries using heavy-atom RMSD alignment against optimized reference structures. It rotates optimised geometry to match the input geometry. The rotated optimized structure is saved in an array. The RMSD of this rotational transformation will be displayed. We expect the RMSD below 0.2. The saved rotated optimized coordinates will be used to generate TD-DFT input files. Monomer and pairs files can be generated. Currently, only pair base calculations are supported. Trimer or other moieties geometries will be explored in future. 
 
-Reference geometries
+Currently supported references
 
 - standard cytosine
 - hemi-protonated cytosine
 
-The script preserves fragment orientation while replacing coordinates with optimized geometries.
+The procedure preserves the fragment orientation while replacing the coordinates with optimized geometries.
 
-### Usage
+---
+
+## Usage
 
 ```bash
 ./replace_optimize_heavy.py \
@@ -168,40 +288,38 @@ The script preserves fragment orientation while replacing coordinates with optim
 -s quartet
 ```
 
-### Output
+---
 
-Optimized fragment geometries suitable for excited-state calculations.
+## Output
+
+Optimized Gaussian input files for excited-state calculations with the following header. 
+
+```
+1. Monomer calculation: #p m052x/6-31G(d) scrf=(pcm,solvent=water) scf=tight iop(3/33=4)
+td(nstates=10, conver=6) iop(9/40=5) charge nosymm
+```
+
+```
+2. Dimer: #p m052x/6-31G(d) scrf=(pcm,solvent=water) scf=tight iop(9/9=3) iop(3/33=4)
+td(nstates=40, conver=6) iop(9/40=5) charge nosymm
+Dimer calculations are generally used for Hinter Hamiltonian which involves CT states. There-
+fore we need a minimum of 40 States to start with.
+```
 
 ---
 
-# Step 3
-## Generate FrDEx inputs
+# Step 3 — Generate OVERDIA inputs
 
 ```
 prep-overdia_mod.py
 ```
 
-### Purpose
+## Purpose
+Once the TD-DFT results are ready, we can start our FrDEx Calculation. Generally, we will use Dimer calculation for calculating Excitonic coupling and CT couplings. Here our H-intra terms also comes from Pair calculation. Automatically generates FrDEx input files for every unique fragment pair. For **N** fragments the total number of calculations is N(N−1)/2. Example, 8 fragments → 28 FrDEx calculations.
 
-Creates FrDEx input files for every unique fragment pair.
+---
 
-For N fragments the script produces
-
-```
-N(N−1)/2
-```
-
-pair calculations.
-
-Example
-
-8 fragments
-
-```
-28 pair calculations
-```
-
-Usage
+## Usage
 
 ```bash
 ./prep-overdia_mod.py 8
@@ -210,50 +328,137 @@ Usage
 or
 
 ```bash
-./prep-overdia_mod.py 8 -s quartet
+./prep-overdia_mod.py 8 \
+-s quartet
+```
+Here is a sample Input file for overdia 1.1 input file with comments for a dimer calculation with 2 Local Excitation in each Fragment and 4CT states.
+
+```
+{pair_log} log file of pair
+0                       number of modes
+0.1d0                   number of displacement size
+40                      number of TD states
+custom_states           possible ops KSORB/MXORB/FRAMO/FRATD/
+8                       number of diabatic states from input
+2                       number of fragments
+{frag1_fchk} fchk files
+{frag2_fchk} fchk files
+start_read_states       !Block to read state vectors from input files
+d1 1 s1                 !read diabatic state 1 from fragment 1 (C1), s1 state (pipi1)
+d2 1 s3                 !read diabatic state 2 from fragment 1 (C1), s3 state (pipi2)
+d3 2 s1                 !read diabatic state 3 from fragment 2 (C2), s1 state (pipi1)
+d4 2 s3                 !read diabatic state 4 from fragment 2 (C2), s5 state (pipi2)
+end_read_states
+start_define_states     !Block to define states based on orbital transitions
+d5_start                !start the definition of diabatic state 5
+1                       !number of components of the state
+1HO 2LO 1.d0            !transition from HOMO fragment 1 to LUMO fragment 2
+d5_end                  !end the definition of diabatic state 5
+d6_start                !start the definition of diabatic state 6
+1                       !number of components of the state
+1HO 2L1 1.d0            !transition from HOMO fragment 1 to LUMO+1 fragment 2
+d6_end                  !end the definition of diabatic state 6
+d7_start                !start the definition of diabatic state 7
+1                       !number of components of the state
+2HO 1LO 1.d0            !transition from HOMO fragment 2 to LUMO fragment 1
+d7_end                  !end the definition of diabatic state 7
+d8_start                !start the definition of diabatic state 8
+1                       !number of components of the state
+2HO 1L1 1.d0            !transition from HOMO fragment 2 to LUMO+1 fragment 1
+d8_end                  !end the definition of diabatic state 8
+end_define_states
 ```
 
-Example outputs
-
-```
-diab_fratd_resp_frag1_frag2.inp
-
-diab_fratd_resp_frag1_frag3.inp
-
-...
-```
 
 ---
 
-# Step 4
-## Run FrDEx
-
-Run every generated input.
-
-Outputs
+## Output
 
 ```
-diab_fratd_resp_frag1_frag2.out
-
+diab_fratd_resp_frag1_frag2.inp
+diab_fratd_resp_frag1_frag3.inp
 ...
-
 ```
 
-Each output contains
+
+---
+
+# Step 4 — Run OVERDIA
+
+Run every generated input file with a submission script. This **MUST** be adapted to your own OS.  
+
+
+```
+./run_diab.sh
+```
+
+Each calculation produces
+
+```
+diab_fratd_resp_fragX_fragY.out
+```
+
+Each output contains. Below there is an example 
 
 - diabatic Hamiltonian
 - transition dipoles
 - velocity dipoles
 - magnetic dipoles
 
+```
+Hamiltonian in the diabatic (overlap) basis (8x8 Matrix, Energy in eV):
+
+          State 1    State 2    State 3    State 4    State 5    State 6    State 7    State 8
+State 1:  5.09178   -0.00015    0.02015    0.01224    0.00115    0.00064   -0.00115   -0.00011
+State 2: -0.00015    6.77737   -0.00079    0.01002    0.00035    0.00121   -0.00230   -0.00090
+State 3:  0.02015   -0.00079    5.08167   -0.00016   -0.00114   -0.00006    0.00087    0.00018
+State 4:  0.01224    0.01002   -0.00016    6.79181   -0.00010   -0.00096    0.00098    0.00129
+State 5:  0.00115    0.00035   -0.00114   -0.00010    6.58998   -0.00225   -0.00000   -0.00000
+State 6:  0.00064    0.00121   -0.00006   -0.00096   -0.00225    8.20203    0.00001   -0.00000
+State 7: -0.00115   -0.00230    0.00087    0.00098   -0.00000    0.00001    6.77193    0.01585
+State 8: -0.00011   -0.00090    0.00018    0.00129   -0.00000   -0.00000    0.01585    8.17386
+
+TRANSITION DIPOLES DIABATIC STATES (Electric Dipoles, x y z format per state)
+State 1:  -0.4286812   1.5114117  -0.0654172
+State 2:   0.7309090   0.6993476   0.0350359
+State 3:  -0.9073163   1.2679686   0.0675020
+State 4:   0.4162707   0.9085905   0.0704559
+State 5:   0.0009530  -0.0005924   0.0021263
+State 6:   0.0007624  -0.0005075   0.0013506
+State 7:  -0.0002055   0.0001566  -0.0036612
+State 8:   0.0013849  -0.0001245  -0.0026196
+
+TRANSITION VELOCITY DIPOLES DIABATIC STATES (Velocity Dipoles, x y z format per state)
+State 1:   0.0911998  -0.2897161   0.0126361
+State 2:  -0.1837120  -0.1699774  -0.0091568
+State 3:   0.1817079  -0.2403075  -0.0126019
+State 4:  -0.1059482  -0.2241269  -0.0172307
+State 5:  -0.0004258   0.0002497  -0.0007042
+State 6:  -0.0000392  -0.0001089  -0.0003190
+State 7:   0.0010670  -0.0000941   0.0000189
+State 8:  -0.0001890   0.0004077   0.0006046
+
+TRANSITION MAGNETIC DIPOLES DIABATIC STATES (Magnetic Dipoles, x y z format per state)
+State 1: -11.0611415  -3.3718956   2.5555534
+State 2:  -6.3674059   6.9285226  -0.3884603
+State 3:  -6.2079205  -4.8278801   2.6422359
+State 4:  -5.7267382   2.7296817  -0.3795756
+State 5:   0.0175498   0.0164066  -0.0035308
+State 6:   0.0052206   0.0036829  -0.0007626
+State 7:  -0.0058325   0.0032128  -0.0000573
+State 8:  -0.0063028   0.0051785  -0.0019562
+```
+
+
 ---
 
-# Step 5
-## Assemble the global excitonic Hamiltonian
+# Step 5 — Build the global excitonic Hamiltonian
 
-The Python modules included in this repository automatically merge all pair calculations.
+```
+build_exat.py
+```
 
-Modules
+This is the main reconstruction program. It reads every FrDEx calculation and automatically reconstructs the global excitonic model. Internally it uses
 
 ```
 parse_input.py
@@ -263,46 +468,49 @@ state_registry.py
 system_builder.py
 centroid.py
 exat_writer.py
+models.py
 ```
 
-The code
+---
 
-- identifies identical diabatic states
-- removes duplicates
-- builds one global state registry
-- averages repeated quantities
+## What it does
+
+The program
+
+- parses every FrDEx input/output pair
+- identifies duplicate diabatic states
+- builds a global state registry
 - reconstructs the complete Hamiltonian
+- averages repeated Hamiltonian elements
+- averages transition dipoles
+- averages magnetic dipoles
+- averages velocity dipoles
+- computes transition centers
+- writes EXAT input files
 
 ---
 
 ## Global state registry
 
-Each diabatic state receives a unique global index.
+Every diabatic state receives a unique global index.
 
 Example
 
 ```
-0  LE_F1_S1
-1  LE_F1_S3
-2  LE_F2_S1
-3  LE_F2_S3
-4  CT_F1_F2
-5  CT_F2_F1
+0   LE_F1_S1
+
+1   LE_F1_S3
+
+2   LE_F2_S1
+
+3   LE_F2_S3
+
+4   CT_F1_F2
+
+5   CT_F2_F1
+
 ...
 ```
-
----
-
-## Averaged quantities
-
-The program averages
-
-- Hamiltonian elements
-- transition dipoles
-- velocity dipoles
-- magnetic dipoles
-
-over every occurrence of the same state in different pair calculations.
 
 ---
 
@@ -316,42 +524,47 @@ frag*.xyz
 
 Rules
 
-LE states
+### Local Excited (LE) states
 
 ```
-center = fragment centroid
+Center = fragment centroid
 ```
 
-CT states
+### Charge Transfer (CT) states
 
 ```
-center = midpoint(donor,acceptor)
+Center = midpoint(donor, acceptor)
 ```
 
 ---
 
-# Step 6
-## Generate EXAT input
+# Step 6 — Generate EXAT input files
 
 The program writes
 
 ```
 chromlist.in
+
 site.in
+
 coup.in
+
 dipo.in
+
 dipovel.in
+
 dipomag.in
+
 cent.in
 ```
 
-These files correspond to the **external input** mode of EXAT.
+These correspond to the **external input** option of EXAT.
 
 ---
 
 ## chromlist.in
 
-Maps chromophore IDs.
+Chromophore list
 
 Example
 
@@ -366,11 +579,11 @@ Example
 
 ## site.in
 
-Diagonal Hamiltonian elements
+Site energies
 
 ```
-1 5.20
-2 6.71
+1 5.2034
+2 6.7093
 ...
 ```
 
@@ -378,12 +591,12 @@ Diagonal Hamiltonian elements
 
 ## coup.in
 
-Upper triangular couplings
+Upper-triangular excitonic couplings
 
 Units
 
 ```
-cm−1
+cm⁻¹
 ```
 
 ---
@@ -393,7 +606,7 @@ cm−1
 Electric transition dipoles
 
 ```
-μx μy μz
+μx  μy  μz
 ```
 
 ---
@@ -414,66 +627,63 @@ Magnetic transition dipoles
 
 Transition centers
 
-For LE states
+LE
 
 ```
-fragment centroid
+Fragment centroid
 ```
 
-For CT states
+CT
 
 ```
-midpoint between donor and acceptor
+Midpoint between donor and acceptor
 ```
 
 ---
 
-# Step 7
-## Run EXAT
+# Step 7 — Run EXAT
 
-Example
+Example in py27 environment. 
 
-```bash
-exat.py \
+```
+python exat.py \
 -e \
 -omag \
--o test \
+-o results \
 -nloc 24
 ```
 
-This produces
+This computes
 
-- excitonic Hamiltonian
+- excitonic states
 - oscillator strengths
 - rotatory strengths
 - localized states
-- spectra input
 
 ---
 
-# Step 8
-## Compute spectra
+# Step 8 — Compute spectra
 
-Example
+Example in py27 environment. 
 
-```bash
-spectrum.py \
-test.results.out \
+```
+python spectrum.py \
+results.results.out \
 -o spectrum \
 --unitbroad eV \
 --sigma 0.18 \
 -s -0.65
 ```
 
-Outputs
+The program generates
 
-- Absorption
+- Absorption spectrum
 - Circular Dichroism
 - Linear Dichroism
 
 ---
 
-# Repository structure
+# Repository Structure
 
 ```
 .
@@ -481,6 +691,7 @@ Outputs
 ├── replace_optimize_heavy.py
 ├── prep-overdia_mod.py
 │
+├── build_exat.py
 ├── parse_input.py
 ├── parse_output.py
 ├── pair_parser.py
@@ -488,10 +699,7 @@ Outputs
 ├── system_builder.py
 ├── centroid.py
 ├── exat_writer.py
-│
 ├── models.py
-│
-├── build_exat.py
 │
 ├── test_parser.py
 ├── test_registry.py
@@ -502,7 +710,7 @@ Outputs
 
 ---
 
-# Scientific workflow
+# Scientific Workflow
 
 ```
 PDB
@@ -532,16 +740,19 @@ Global excitonic Hamiltonian
 EXAT
  │
  ▼
-Spectra
+Absorption
+Circular Dichroism
+Linear Dichroism
 ```
 
 ---
 
 # Citation
 
-If this workflow contributes to published work, please cite
+If this software contributes to published work, please cite the original publications describing
 
-- FrDEx
+- OVERDIA
 - EXAT
-- the original theoretical methodology used for the diabatic Hamiltonian construction.
-# FrDEx
+- FrDEX
+
+and acknowledge the use of this workflow in the computational methods section.
