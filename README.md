@@ -211,6 +211,9 @@ python exat.py
 
 # Step 1 — Build fragment geometries
 
+The first step is to remove the sugar-phosphate backbone and unnecessary bases. This is is done automatically for any PDB which leave only cytosine and guanine bases removing all the rest. Currently, only these bases have been tested. The hydrogen atoms **MUST** be added beforehand according to your preferred protonation state. The program uses **calc_methyl_coords.py** module to remove all sugar base and replace them with methyl group.  
+
+
 ```
 fragment_build_xyz.py
 ```
@@ -264,7 +267,7 @@ replace_optimize_heavy.py
 
 ## Purpose
 
-Replaces fragment geometries using heavy-atom RMSD alignment against optimized reference structures.
+Replaces fragment geometries using heavy-atom RMSD alignment against optimized reference structures. It rotates optimised geometry to match the input geometry. The rotated optimized structure is saved in an array. The RMSD of this rotational transformation will be displayed. We expect the RMSD below 0.2. The saved rotated optimized coordinates will be used to generate TD-DFT input files. Monomer and pairs files can be generated. Currently, only pair base calculations are supported. Trimer or other moieties geometries will be explored in future. 
 
 Currently supported references
 
@@ -289,7 +292,19 @@ The procedure preserves the fragment orientation while replacing the coordinates
 
 ## Output
 
-Optimized Gaussian input files for excited-state calculations.
+Optimized Gaussian input files for excited-state calculations with the following header. 
+
+```
+1. Monomer calculation: #p m052x/6-31G(d) scrf=(pcm,solvent=water) scf=tight iop(3/33=4)
+td(nstates=10, conver=6) iop(9/40=5) charge nosymm
+```
+
+```
+2. Dimer: #p m052x/6-31G(d) scrf=(pcm,solvent=water) scf=tight iop(9/9=3) iop(3/33=4)
+td(nstates=40, conver=6) iop(9/40=5) charge nosymm
+Dimer calculations are generally used for Hinter Hamiltonian which involves CT states. There-
+fore we need a minimum of 40 States to start with.
+```
 
 ---
 
@@ -300,24 +315,7 @@ prep-overdia_mod.py
 ```
 
 ## Purpose
-
-Automatically generates FrDEx input files for every unique fragment pair.
-
-For **N** fragments the total number of calculations is
-
-```
-N(N−1)/2
-```
-
-Example
-
-```
-8 fragments
-
-↓
-
-28 FrDEx calculations
-```
+Once the TD-DFT results are ready, we can start our FrDEx Calculation. Generally, we will use Dimer calculation for calculating Excitonic coupling and CT couplings. Here our H-intra terms also comes from Pair calculation. Automatically generates FrDEx input files for every unique fragment pair. For **N** fragments the total number of calculations is N(N−1)/2. Example, 8 fragments → 28 FrDEx calculations.
 
 ---
 
@@ -333,6 +331,44 @@ or
 ./prep-overdia_mod.py 8 \
 -s quartet
 ```
+Here is a sample Input file for overdia 1.1 input file with comments for a dimer calculation with 2 Local Excitation in each Fragment and 4CT states.
+
+```
+{pair_log} log file of pair
+0                       number of modes
+0.1d0                   number of displacement size
+40                      number of TD states
+custom_states           possible ops KSORB/MXORB/FRAMO/FRATD/
+8                       number of diabatic states from input
+2                       number of fragments
+{frag1_fchk} fchk files
+{frag2_fchk} fchk files
+start_read_states       !Block to read state vectors from input files
+d1 1 s1                 !read diabatic state 1 from fragment 1 (C1), s1 state (pipi1)
+d2 1 s3                 !read diabatic state 2 from fragment 1 (C1), s3 state (pipi2)
+d3 2 s1                 !read diabatic state 3 from fragment 2 (C2), s1 state (pipi1)
+d4 2 s3                 !read diabatic state 4 from fragment 2 (C2), s5 state (pipi2)
+end_read_states
+start_define_states     !Block to define states based on orbital transitions
+d5_start                !start the definition of diabatic state 5
+1                       !number of components of the state
+1HO 2LO 1.d0            !transition from HOMO fragment 1 to LUMO fragment 2
+d5_end                  !end the definition of diabatic state 5
+d6_start                !start the definition of diabatic state 6
+1                       !number of components of the state
+1HO 2L1 1.d0            !transition from HOMO fragment 1 to LUMO+1 fragment 2
+d6_end                  !end the definition of diabatic state 6
+d7_start                !start the definition of diabatic state 7
+1                       !number of components of the state
+2HO 1LO 1.d0            !transition from HOMO fragment 2 to LUMO fragment 1
+d7_end                  !end the definition of diabatic state 7
+d8_start                !start the definition of diabatic state 8
+1                       !number of components of the state
+2HO 1L1 1.d0            !transition from HOMO fragment 2 to LUMO+1 fragment 1
+d8_end                  !end the definition of diabatic state 8
+end_define_states
+```
+
 
 ---
 
@@ -340,11 +376,10 @@ or
 
 ```
 diab_fratd_resp_frag1_frag2.inp
-
 diab_fratd_resp_frag1_frag3.inp
-
 ...
 ```
+
 
 ---
 
@@ -363,12 +398,57 @@ Each calculation produces
 diab_fratd_resp_fragX_fragY.out
 ```
 
-Each output contains
+Each output contains. Below there is an example 
 
 - diabatic Hamiltonian
 - transition dipoles
 - velocity dipoles
 - magnetic dipoles
+
+```
+Hamiltonian in the diabatic (overlap) basis (8x8 Matrix, Energy in eV):
+
+          State 1    State 2    State 3    State 4    State 5    State 6    State 7    State 8
+State 1:  5.09178   -0.00015    0.02015    0.01224    0.00115    0.00064   -0.00115   -0.00011
+State 2: -0.00015    6.77737   -0.00079    0.01002    0.00035    0.00121   -0.00230   -0.00090
+State 3:  0.02015   -0.00079    5.08167   -0.00016   -0.00114   -0.00006    0.00087    0.00018
+State 4:  0.01224    0.01002   -0.00016    6.79181   -0.00010   -0.00096    0.00098    0.00129
+State 5:  0.00115    0.00035   -0.00114   -0.00010    6.58998   -0.00225   -0.00000   -0.00000
+State 6:  0.00064    0.00121   -0.00006   -0.00096   -0.00225    8.20203    0.00001   -0.00000
+State 7: -0.00115   -0.00230    0.00087    0.00098   -0.00000    0.00001    6.77193    0.01585
+State 8: -0.00011   -0.00090    0.00018    0.00129   -0.00000   -0.00000    0.01585    8.17386
+
+TRANSITION DIPOLES DIABATIC STATES (Electric Dipoles, x y z format per state)
+State 1:  -0.4286812   1.5114117  -0.0654172
+State 2:   0.7309090   0.6993476   0.0350359
+State 3:  -0.9073163   1.2679686   0.0675020
+State 4:   0.4162707   0.9085905   0.0704559
+State 5:   0.0009530  -0.0005924   0.0021263
+State 6:   0.0007624  -0.0005075   0.0013506
+State 7:  -0.0002055   0.0001566  -0.0036612
+State 8:   0.0013849  -0.0001245  -0.0026196
+
+TRANSITION VELOCITY DIPOLES DIABATIC STATES (Velocity Dipoles, x y z format per state)
+State 1:   0.0911998  -0.2897161   0.0126361
+State 2:  -0.1837120  -0.1699774  -0.0091568
+State 3:   0.1817079  -0.2403075  -0.0126019
+State 4:  -0.1059482  -0.2241269  -0.0172307
+State 5:  -0.0004258   0.0002497  -0.0007042
+State 6:  -0.0000392  -0.0001089  -0.0003190
+State 7:   0.0010670  -0.0000941   0.0000189
+State 8:  -0.0001890   0.0004077   0.0006046
+
+TRANSITION MAGNETIC DIPOLES DIABATIC STATES (Magnetic Dipoles, x y z format per state)
+State 1: -11.0611415  -3.3718956   2.5555534
+State 2:  -6.3674059   6.9285226  -0.3884603
+State 3:  -6.2079205  -4.8278801   2.6422359
+State 4:  -5.7267382   2.7296817  -0.3795756
+State 5:   0.0175498   0.0164066  -0.0035308
+State 6:   0.0052206   0.0036829  -0.0007626
+State 7:  -0.0058325   0.0032128  -0.0000573
+State 8:  -0.0063028   0.0051785  -0.0019562
+```
+
 
 ---
 
