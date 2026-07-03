@@ -341,8 +341,8 @@ Here is a sample Input file for overdia 1.1 input file with comments for a dimer
 custom_states           possible ops KSORB/MXORB/FRAMO/FRATD/
 8                       number of diabatic states from input
 2                       number of fragments
-{frag1_fchk} fchk files
-{frag2_fchk} fchk files
+{frag1_fchk}   fchk files without extension 
+{frag2_fchk}   fchk files  
 start_read_states       !Block to read state vectors from input files
 d1 1 s1                 !read diabatic state 1 from fragment 1 (C1), s1 state (pipi1)
 d2 1 s3                 !read diabatic state 2 from fragment 1 (C1), s3 state (pipi2)
@@ -352,19 +352,19 @@ end_read_states
 start_define_states     !Block to define states based on orbital transitions
 d5_start                !start the definition of diabatic state 5
 1                       !number of components of the state
-1HO 2LO 1.d0            !transition from HOMO fragment 1 to LUMO fragment 2
+1H0 2L0 1.d0            !transition from HOMO fragment 1 to LUMO fragment 2
 d5_end                  !end the definition of diabatic state 5
 d6_start                !start the definition of diabatic state 6
 1                       !number of components of the state
-1HO 2L1 1.d0            !transition from HOMO fragment 1 to LUMO+1 fragment 2
+1H0 2L1 1.d0            !transition from HOMO fragment 1 to LUMO+1 fragment 2
 d6_end                  !end the definition of diabatic state 6
 d7_start                !start the definition of diabatic state 7
 1                       !number of components of the state
-2HO 1LO 1.d0            !transition from HOMO fragment 2 to LUMO fragment 1
+2H0 1L0 1.d0            !transition from HOMO fragment 2 to LUMO fragment 1
 d7_end                  !end the definition of diabatic state 7
 d8_start                !start the definition of diabatic state 8
 1                       !number of components of the state
-2HO 1L1 1.d0            !transition from HOMO fragment 2 to LUMO+1 fragment 1
+2H0 1L1 1.d0            !transition from HOMO fragment 2 to LUMO+1 fragment 1
 d8_end                  !end the definition of diabatic state 8
 end_define_states
 ```
@@ -385,8 +385,23 @@ diab_fratd_resp_frag1_frag3.inp
 
 # Step 4 — Run OVERDIA
 
-Run every generated input file with a submission script. This **MUST** be adapted to your own OS.  
+Run every generated input file with a submission script. This **MUST** be adapted to your own OS. The program is quite quick and it can be run locally. Only the current path is working **/home/roberto/JAMES/Programs/Overdia/1.1/source/overdia-par.e** 
 
+```
+#!/bin/tcsh -f
+cd /home/roberto/IMOT/EFALBO/FrDEX/NEW
+setenv OMP_NUM_THREADS 1
+
+foreach f1 (1 2 3 4 5)
+  @ start = $f1 + 1
+  foreach f2 (`seq $start 6`)
+/home/roberto/JAMES/Programs/Overdia/1.1/source/overdia-par.e  < diab_test_frag${f1}_frag${f2}.inp > diab_test_frag${f1}_frag${f2}.
+out
+  end
+end
+```
+
+or submitting to a HPC-Scheduler (not tested). 
 
 ```
 ./run_diab.sh
