@@ -23,7 +23,8 @@ args = parser.parse_args()
 NFRAGS = args.NFRAGS
 
 OVERDIA_EXE = (
-    "/home/roberto/JAMES/Programs/OVERDIA-REF/FRAG-ORB/overdia-par.e"
+    # "/home/roberto/JAMES/Programs/OVERDIA-REF/FRAG-ORB/overdia-par.e"
+    "/home/roberto/JAMES/Programs/Overdia/1.1/source/overdia-par.e"
 )
 
 SYSTEM_NAME = args.system_name
@@ -55,11 +56,13 @@ with run_script.open("w") as runfile:
             )
 
             frag1_fchk = (
-                f"{SYSTEM_NAME}_frag{frag1}-mon_sub-diab.fchk"
+                f"{SYSTEM_NAME}_frag{frag1}-mon_sub-diab"
+                # f"{SYSTEM_NAME}_frag{frag1}-mon_sub-diab.fchk"
             )
 
             frag2_fchk = (
-                f"{SYSTEM_NAME}_frag{frag2}-mon_sub-diab.fchk"
+                f"{SYSTEM_NAME}_frag{frag2}-mon_sub-diab"
+                # f"{SYSTEM_NAME}_frag{frag2}-mon_sub-diab.fchk"
             )
 
             # Rebuilt exactly to mirror the sample formatting provided in the reference image
@@ -82,19 +85,19 @@ with run_script.open("w") as runfile:
                 "start_define_states    !Block to define states based on orbital transitions",
                 "d5_start               !start the definition of diabatic state 5",
                 "1                      !number of components of the state",
-                "1HO 2LO 1.do           !transition from HOMO fragment 1 to LUMO fragment 2",
+                "1H0 2L0 1.d0           !transition from HOMO fragment 1 to LUMO fragment 2",
                 "d5_end                 !end the definition of diabatic state 5",
                 "d6_start               !start the definition of diabatic state 6",
                 "1                      !number of components of the state",
-                "1HO 2L1 1.d0           !transition from HOMO fragment 1 to LUMO+1 fragment 2",
+                "1H0 2L1 1.d0           !transition from HOMO fragment 1 to LUMO+1 fragment 2",
                 "d6_end                 !end the definition of diabatic state 6",
                 "d7_start               !start the definition of diabatic state 7",
                 "1                      !number of components of the state",
-                "2HO 1LO 1.d0           !transition from HOMO fragment 2 to LUMO fragment 1",
+                "2H0 1L0 1.d0           !transition from HOMO fragment 2 to LUMO fragment 1",
                 "d7_end                 !end the definition of diabatic state 7",
                 "d8_start               !start the definition of diabatic state 8",
                 "1                      !number of components of the state",
-                "2HO 1L1 1.d0           !transition from HOMO fragment 2 to LUMO+1 fragment 1",
+                "2H0 1L1 1.d0           !transition from HOMO fragment 2 to LUMO+1 fragment 1",
                 "d8_end                 !end the definition of diabatic state 8",
                 "end_define_states"
             ]
@@ -105,6 +108,7 @@ with run_script.open("w") as runfile:
 
             runfile.write(
                 f"{OVERDIA_EXE} < {inp_name} > {out_name}\n"
+                # f"{OVERDIA_EXE}  {inp_name} > {out_name}\n"
             )
 
 print(
