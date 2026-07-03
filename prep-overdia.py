@@ -1,36 +1,90 @@
 #!/usr/bin/env python3
-
 """
-Generate OVERDIA input files for all unique fragment pairs
-and create a run_diab.sh script to execute them.
+Generate OVERDIA input files for all unique fragment pairs.
 
-Equivalent to the original Bash script.
+The electronic model is configurable from the command line.
+
+Examples
+--------
+
+Two LE states + one CT state per direction (6 states)
+
+    ./prep-overdia_mod.py 8 \
+        --le-states s1 s3 \
+        --ct-levels 1
+
+Two LE states + two CT states per direction (8 states)
+
+    ./prep-overdia_mod.py 8 \
+        --le-states s1 s3 \
+        --ct-levels 2
 """
 
 from pathlib import Path
 import argparse
 
-# ------------------------------------------------------------------
-# User settings
-# ------------------------------------------------------------------
+# ------------------------------------------------------------
+# Command line
+# ------------------------------------------------------------
 
 parser = argparse.ArgumentParser(
-    description="Generate OVERDIA input files for all unique fragment pairs."
+    description="Generate OVERDIA input files."
 )
-parser.add_argument("NFRAGS", type=int, help="number of fragments")
-parser.add_argument('-s', '--system-name', default='G4-1qdf', help='System name for output files (default: G4-1qdf)')
+
+parser.add_argument(
+    "NFRAGS",
+    type=int,
+    help="Number of fragments"
+)
+
+parser.add_argument(
+    "-s",
+    "--system-name",
+    default="test",
+    help="System name"
+)
+
+parser.add_argument(
+    "--le-states",
+    nargs="+",
+    default=["s1", "s3"],
+    help="Local excited states to read from each fragment."
+)
+
+parser.add_argument(
+    "--ct-levels",
+    type=int,
+    default=2,
+    help=(
+        "Number of CT acceptor orbitals.\n"
+        "1 -> LUMO only\n"
+        "2 -> LUMO and LUMO+1"
+    )
+)
+
 args = parser.parse_args()
+
 NFRAGS = args.NFRAGS
-
-OVERDIA_EXE = (
-    "/home/roberto/JAMES/Programs/OVERDIA-REF/FRAG-ORB/overdia-par.e"
-)
-
 SYSTEM_NAME = args.system_name
 
-# ------------------------------------------------------------------
-# Create run script
-# ------------------------------------------------------------------
+LE_STATES = args.le_states
+N_CT = args.ct_levels
+
+OVERDIA_EXE = (
+    "/home/roberto/JAMES/Programs/Overdia/1.1/source/overdia-par.e"
+)
+
+# ------------------------------------------------------------
+# Number of diabatic states
+# ------------------------------------------------------------
+
+N_LE = len(LE_STATES)
+
+TOTAL_STATES = 2 * N_LE + 2 * N_CT
+
+# ------------------------------------------------------------
+# Build run script
+# ------------------------------------------------------------
 
 run_script = Path("run_diab.sh")
 
@@ -55,46 +109,88 @@ with run_script.open("w") as runfile:
             )
 
             frag1_fchk = (
-                f"{SYSTEM_NAME}_frag{frag1}-mon_sub-diab.fchk"
+                f"{SYSTEM_NAME}_frag{frag1}-mon_sub-diab"
             )
 
             frag2_fchk = (
-                f"{SYSTEM_NAME}_frag{frag2}-mon_sub-diab.fchk"
+                f"{SYSTEM_NAME}_frag{frag2}-mon_sub-diab"
             )
 
-            lines = [
-                "'CONCISE'                        printing option",
-                f"'{pair_log}'  log file of pair",
-                "40                                 number of TD states",
-                "'FRAMO'     possible ops KSORB/MXORB/FRAMO/FRATD/",
-                "8                 number of diabatic states from input",
-                f"'{frag1_fchk}' '{frag2_fchk}'     fchk files",
-                "2   4             number of occ and virtual orb from input",
-                "0 'FR1' 0 'FR2'             occ orbitals expressed on these KS occ orbitals 0 is HOMO",
-                "1 'FR1' 2 'FR1' 1 'FR2' 2 'FR2'      virt orbitals expressed on these KS virtual orb   1 is LUMO",
-                "1.0 0.0     coef  Occ    mixing the orbitals",
-                "0.0 1.0     coef  Occ    mixing the orbitals",
-                "1.0 0.0 0.0 0.0    coef  Virt   mixing the orbitals",
-                "0.0 1.0 0.0 0.0    coef  Virt   mixing the orbitals",
-                "0.0 0.0 1.0 0.0    coef  Virt   mixing the orbitals",
-                "0.0 0.0 0.0 1.0    coef  Virt   mixing the orbitals",
-                "1                no components first state",
-                "1                no components second state",
-                "1                no components third state",
-                "1                no components fourth state",
-                "1                no components fifth state",
-                "1                no components sixth state",
-                "1                no components seventh state",
-                "1                no components eighth state",
-                "1    1   1.d0",
-                "1    2   1.d0",
-                "1    3   1.d0",
-                "1    4   1.d0",
-                "2    1   1.d0",
-                "2    2   1.d0",
-                "2    3   1.d0",
-                "2    4   1.d0",
-            ]
+            lines = []
+
+            # -------------------------------------------------
+            # Header
+            # -------------------------------------------------
+
+            lines.append(f"'{pair_log}' log file of pair")
+            lines.append("0                      number of modes")
+            lines.append("0.1d0                  number of displacement size")
+            lines.append("40                     number of TD states")
+            lines.append("custom_states          possible ops KSORB/MXORB/FRAMO/FRATD/")
+            lines.append(f"{TOTAL_STATES}                      number of diabatic states from input")
+            lines.append("2                      number of fragments")
+            lines.append(f"{frag1_fchk}   fchk files")
+            lines.append(f"{frag2_fchk}   fchk files")
+
+            # -------------------------------------------------
+            # LE states
+            # -------------------------------------------------
+
+            lines.append("start_read_states")
+
+            state_index = 1
+
+            for s in LE_STATES:
+
+                lines.append(
+                    f"d{state_index} 1 {s}"
+                )
+                state_index += 1
+
+            for s in LE_STATES:
+
+                lines.append(
+                    f"d{state_index} 2 {s}"
+                )
+                state_index += 1
+
+            lines.append("end_read_states")
+
+            # -------------------------------------------------
+            # CT states
+            # -------------------------------------------------
+
+            lines.append("start_define_states")
+
+            # Fragment 1 -> Fragment 2
+
+            for level in range(N_CT):
+
+                lines.append(f"d{state_index}_start")
+                lines.append("1")
+                lines.append(
+                    f"1H0 2L{level} 1.d0"
+                )
+                lines.append(f"d{state_index}_end")
+
+                state_index += 1
+
+            # Fragment 2 -> Fragment 1
+
+            for level in range(N_CT):
+
+                lines.append(f"d{state_index}_start")
+                lines.append("1")
+                lines.append(
+                    f"2H0 1L{level} 1.d0"
+                )
+                lines.append(f"d{state_index}_end")
+
+                state_index += 1
+
+            lines.append("end_define_states")
+
+            # -------------------------------------------------
 
             with open(inp_name, "w") as inp:
                 inp.write("\n".join(lines))
@@ -104,7 +200,12 @@ with run_script.open("w") as runfile:
                 f"{OVERDIA_EXE} < {inp_name} > {out_name}\n"
             )
 
-print(
-    f"Generated {NFRAGS*(NFRAGS-1)//2} input files "
-    f"and run_diab.sh"
-)
+print()
+
+print(f"Fragments            : {NFRAGS}")
+print(f"LE states            : {LE_STATES}")
+print(f"CT levels            : {N_CT}")
+print(f"Diabatic states/pair : {TOTAL_STATES}")
+print(f"Pair calculations    : {NFRAGS*(NFRAGS-1)//2}")
+
+print("\nGenerated OVERDIA input files and run_diab.sh")
