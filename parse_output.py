@@ -3,6 +3,8 @@
 
 import re
 import numpy as np
+from pathlib import Path
+import argparse
 
 def parse_hamiltonian(lines):
 
@@ -141,7 +143,8 @@ def parse_vector_block(lines, header, nstates):
 
     return np.array(data)
 
-def parse_frdex_output(outfile):
+# def parse_frdex_output(outfile):
+def parse_frdex_output(outfile: str | Path):
 
     with open(outfile) as f:
 
@@ -192,9 +195,19 @@ def parse_frdex_output(outfile):
 
 if __name__ == "__main__":
 
-    H, mu, vel, mag = parse_frdex_output(
-        "diab_fratd_resp_4ct_imot_frag1_frag2.out"
+    # testing the function 
+    parser = argparse.ArgumentParser()
+    
+    parser.add_argument(
+        "outfile",
+        help="FrDEx output file"
     )
+    
+    args = parser.parse_args()
+    
+    outfile = Path(args.outfile)
+    
+    H, mu, vel, mag = parse_frdex_output(outfile)
 
     print("\nHamiltonian")
     print(H)

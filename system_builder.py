@@ -2,8 +2,9 @@
 
 # from os import system
 import numpy as np
-from models import StateRegistry
+# from models import StateRegistry
 from centroid import compute_fragment_centroids
+from pathlib import Path
 
 
 
@@ -58,13 +59,27 @@ class ExcitonicSystem:
         
 
         self.site_energies = None
+        self.state_centers = np.zeros((n, 3))
 
 
-def build_system(pair_results, registry):
+# def build_system(pair_results, registry):
+
+def build_system(
+    pair_results,
+    registry,
+    input_dir=".",
+    centroid_file="fragment_centroids.dat",
+):
 
     system = ExcitonicSystem(registry)
+    system.input_dir = input_dir
 
-    fragment_centroids = compute_fragment_centroids()
+    input_dir = Path(input_dir)
+
+    fragment_centroids = compute_fragment_centroids(
+        directory=input_dir,
+        outfile=centroid_file,
+    )
 
     system.fragment_centroids = fragment_centroids
 
@@ -148,7 +163,7 @@ def build_system(pair_results, registry):
         where=system.mu_count[:, None] > 0
     )
 
-    system.state_centers = np.zeros((len(registry), 3))
+    # system.state_centers = np.zeros((len(registry), 3))
     
     for state in registry.states:
     
@@ -235,35 +250,35 @@ def print_system_summary(system):
     print(np.round(np.diag(system.H), 5))
 
 
-def attach_centroids(system, centroid_dict):
-    """
-    Attach fragment centroids to the excitonic system.
+# def attach_centroids(system, centroid_dict):
+#     """
+#     Attach fragment centroids to the excitonic system.
 
-    Parameters
-    ----------
-    centroid_dict : dict
+#     Parameters
+#     ----------
+#     centroid_dict : dict
 
-        {
-            1 : np.array([x,y,z]),
-            2 : ...
-        }
-    """
+#         {
+#             1 : np.array([x,y,z]),
+#             2 : ...
+#         }
+#     """
 
-    system.centroids = centroid_dict
+#     system.centroids = centroid_dict
 
-    return system
+#     return system
 
-def write_cent_file(system, filename="cent.in"):
-    """
-    Write EXAT transition centers.
-    """
+# def write_cent_file(system, filename="cent.in"):
+#     """
+#     Write EXAT transition centers.
+#     """
 
-    with open(filename, "w") as f:
+#     with open(filename, "w") as f:
 
-        for center in system.state_centers:
+#         for center in system.state_centers:
 
-            f.write(
-                f"{center[0]:18.10f} "
-                f"{center[1]:18.10f} "
-                f"{center[2]:18.10f}\n"
-            )
+#             f.write(
+#                 f"{center[0]:18.10f} "
+#                 f"{center[1]:18.10f} "
+#                 f"{center[2]:18.10f}\n"
+#             )

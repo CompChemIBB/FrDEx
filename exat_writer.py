@@ -86,21 +86,21 @@ def write_chromlist(system, filename="chromlist.in"):
             f.write(f"{i+1:d} 1\n")
 
 
-def write_all(system):
+def write_all(system, output_dir):
 
-    write_site_file(system)
+    write_site_file(system, filename=f"{output_dir}/site.in")
 
-    write_couplings(system)
+    write_couplings(system, filename=f"{output_dir}/coup.in")
 
-    write_dipo_file(system)
+    write_dipo_file(system, filename=f"{output_dir}/dipo.in")
 
-    write_dipovel_file(system)
+    write_dipovel_file(system, filename=f"{output_dir}/dipovel.in")
 
-    write_dipomag_file(system)
+    write_dipomag_file(system, filename=f"{output_dir}/dipomag.in")
 
-    write_cent_file(system)
+    write_cent_file(system, filename=f"{output_dir}/cent.in")
 
-    write_chromlist(system)
+    write_chromlist(system, filename=f"{output_dir}/chromlist.in")
 
     print()
 

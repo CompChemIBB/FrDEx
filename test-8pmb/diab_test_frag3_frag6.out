@@ -1,0 +1,3590 @@
+calculation started at
+hour 10
+minute 22.00000
+second 43.25900
+ 
+ 
+---STARTING TO READ INPUT FILE---
+ 
+Main TD-DFT file test_frag3_frag6-mon_sub-diab.log                           
+Number of modes   0
+Displacement size 0.10000
+Number of states from input  40
+Entering into reading custom states input...
+   
+Number of reference states to input:    8
+   
+Number of fragments:   2
+   
+ Reading number of orbitals from file 
+ test_frag3-mon_sub-diab.fchk                                                   
+                      
+ found n. electrons at line           14
+ number electrons =           66
+ Number MOs =          151
+ Reading number of orbitals from file 
+ test_frag6-mon_sub-diab.fchk                                                   
+                      
+ found n. electrons at line           14
+ number electrons =           66
+ Number MOs =          149
+ 
+Total number of occupied orbitals from fragments   66
+Total number of orbitals from fragments  300
+ 
+Diabatic state   1
+being read from fragment   1
+reference adiabatic state  1
+ 
+Diabatic state   2
+being read from fragment   1
+reference adiabatic state  3
+ 
+Diabatic state   3
+being read from fragment   2
+reference adiabatic state  1
+ 
+Diabatic state   4
+being read from fragment   2
+reference adiabatic state  3
+ 
+Diabatic state   5 has  1 orbital components read from frags
+Component  1
+From fragment  1
+HOMO- 0
+To fragment  2
+LUMO+ 0
+With coeff 1.00000
+Diabatic state   6 has  1 orbital components read from frags
+Component  1
+From fragment  1
+HOMO- 0
+To fragment  2
+LUMO+ 1
+With coeff 1.00000
+Diabatic state   7 has  1 orbital components read from frags
+Component  1
+From fragment  2
+HOMO- 0
+To fragment  1
+LUMO+ 0
+With coeff 1.00000
+Diabatic state   8 has  1 orbital components read from frags
+Component  1
+From fragment  2
+HOMO- 0
+To fragment  1
+LUMO+ 1
+With coeff 1.00000
+End of input
+ 
+---END READING INPUT FILE---
+ 
+ 
+Reading MO coefficients for fragments in read_fragorbcoeffs
+ 
+READING MOs from FCHK filetest_frag3-mon_sub-diab.fchk                                                                        
+ found molecular orbitals at line         396
+READING MOs from FCHK filetest_frag6-mon_sub-diab.fchk                                                                        
+ found molecular orbitals at line         386
+Fragment   1 Number of occupied orbitals:    33
+Fragment   1 Number of total orbitals   151
+Fragment   2 Number of occupied orbitals:    33
+Fragment   2 Number of total orbitals   149
+END READING MOLECULAR ORBITAL COEFFS FROM FCHK
+EXITING FROM read_fragorbcoeffs
+
+ 
+Entering subroutine set_fragstatevec
+Setting reference states based on input into ExStaFrag array
+ 
+Reading adiabatic state   1 of fragment   1 from file test_frag3-mon_sub-diab.log                                                                         
+ found Excited State no           1 at line       69733
+ its energy is (eV)   5.07370000000000     
+ This is the state used as reference diabatic state            1
+ END READING STATE           1
+ no COMPONENTS        3734
+ no    Excitations        1902
+ no de-Excitations        1832
+Reading adiabatic state   3 of fragment   1 from file test_frag3-mon_sub-diab.log                                                                         
+ found Excited State no           1 at line       69733
+ its energy is (eV)   5.07370000000000     
+ found Excited State no           2 at line       73473
+ its energy is (eV)   6.26670000000000     
+ found Excited State no           3 at line       75843
+ its energy is (eV)   6.79040000000000     
+ This is the state used as reference diabatic state            2
+ END READING STATE           3
+ no COMPONENTS        3921
+ no    Excitations        2001
+ no de-Excitations        1920
+Reading adiabatic state   1 of fragment   2 from file test_frag6-mon_sub-diab.log                                                                         
+ found Excited State no           1 at line       67717
+ its energy is (eV)   5.29400000000000     
+ This is the state used as reference diabatic state            3
+ END READING STATE           1
+ no COMPONENTS        2373
+ no    Excitations        1237
+ no de-Excitations        1136
+Reading adiabatic state   3 of fragment   2 from file test_frag6-mon_sub-diab.log                                                                         
+ found Excited State no           1 at line       67717
+ its energy is (eV)   5.29400000000000     
+ found Excited State no           2 at line       70096
+ its energy is (eV)   5.34390000000000     
+ found Excited State no           3 at line       73706
+ its energy is (eV)   6.14850000000000     
+ This is the state used as reference diabatic state            4
+ END READING STATE           3
+ no COMPONENTS        3638
+ no    Excitations        1865
+ no de-Excitations        1773
+ 
+Adding defined diabatic state   5 to ExStaFrag reference state array
+ 
+Component  1
+From fragment  1
+HOMO- 0
+Array Pos   33
+To fragment  2
+LUMO+ 0
+Array Pos  119
+With coeff 1.00000
+Normalised 0.70711
+ 
+Adding defined diabatic state   6 to ExStaFrag reference state array
+ 
+Component  1
+From fragment  1
+HOMO- 0
+Array Pos   33
+To fragment  2
+LUMO+ 1
+Array Pos  120
+With coeff 1.00000
+Normalised 0.70711
+ 
+Adding defined diabatic state   7 to ExStaFrag reference state array
+ 
+Component  1
+From fragment  2
+HOMO- 0
+Array Pos   66
+To fragment  1
+LUMO+ 0
+Array Pos    1
+With coeff 1.00000
+Normalised 0.70711
+ 
+Adding defined diabatic state   8 to ExStaFrag reference state array
+ 
+Component  1
+From fragment  2
+HOMO- 0
+Array Pos   66
+To fragment  1
+LUMO+ 1
+Array Pos    2
+With coeff 1.00000
+Normalised 0.70711
+ 
+Finishing subroutine set_fragstatevec
+Reference states set in ExStaFrag
+ 
+ ******************************************
+  
+ CHECKING INPUT 
+ fileinput contains no. lines      844702
+ There are No. jobs           1
+ There are:
+ No. overlap Matrices           1
+ No. Mol Orbital Matrices           0
+ No. of TD calculations           1
+ No. of chk files           1
+ No. of different chkfiles           1
+  
+ ******************************************
+ Dimension of basis set         300
+ Dimension of independent basis set         300
+ No Molecular Orbitals in log file
+ looking for them in fchk file
+ found no basis function at line         762
+ iniz           3
+ nbasis         300
+ found alpha electrons         763
+ iniz           4
+ alpha electrons          66
+ iniz          29
+ beta electrons          66
+ no. occupied orbitals          66
+ no. virtual orbitals          234
+ found overlap at line        3965
+ END OF READING OVERLAP MATRIX
+ iperturb imodes iper           0           0           0
+         
+         
+ ****REFERENCE/ADIABATIC STATES*****
+ found S0 energy at line      255016
+ = at column          23
+ energy starts at column          26
+ energy ends at column          39
+ EnS0 (Au)=  -868.889292801000     
+ READING MOs from FCHK file
+ test_frag3_frag6-mon_sub-diab.fchk                          
+ found molecular orbitals at line         649
+ iniz          57 ifin          61
+ nbasquare       90000
+ nn nlines nres       90000       18000           0
+ END READING MOLECULAR ORBITALS FROM FCHK
+ EXITING FROM readMO
+ found el transition dipoles      255898
+ TRANSITION DIPOLE MOMENTS
+   1         0.1122000        -0.1799000        -1.3805000
+   2        -0.2853000         0.2138000         1.2398000
+   3         0.0102000         0.0882000        -0.0522000
+   4         0.0538000        -0.0215000        -0.1271000
+   5         0.3866000         0.0971000         0.7361000
+   6        -0.2102000        -0.0967000        -0.5781000
+   7        -0.0523000        -0.0083000        -0.0036000
+   8         0.0103000        -0.0028000        -0.1134000
+   9         1.0025000        -0.2734000        -0.5101000
+  10         0.4893000        -0.0782000        -0.1645000
+  11        -0.4545000         0.1351000        -0.3333000
+  12        -1.2404000         0.0592000        -0.1380000
+  13        -0.0709000        -0.0740000        -0.0838000
+  14         0.4426000         0.1831000         1.4608000
+  15        -0.1800000         0.0108000        -0.0855000
+  16         0.1922000         0.0481000         0.5474000
+  17         0.1339000         0.0359000         0.2960000
+  18        -0.0293000         0.0284000         0.0457000
+  19         0.0169000         0.0077000        -0.0509000
+  20         0.0058000        -0.0184000        -0.0769000
+  21        -0.5213000        -0.0480000        -1.2900000
+  22         0.3946000         0.0425000         0.8018000
+  23         0.9846000        -0.2607000        -0.3488000
+  24         0.0041000        -0.0174000         0.0095000
+  25        -0.6934000         0.0722000         0.3192000
+  26         0.3852000        -0.0552000        -0.2045000
+  27        -0.1057000        -0.0186000         0.0429000
+  28        -0.1727000         0.0201000         0.0431000
+  29        -0.0096000        -0.0720000         0.0037000
+  30         0.0038000         0.0072000         0.0093000
+  31        -0.0002000         0.1052000        -0.0244000
+  32        -0.0079000         0.0251000        -0.0171000
+  33         0.0284000         0.0155000         0.0110000
+  34         0.0046000         0.0305000        -0.0052000
+  35        -0.0181000         0.0310000         0.0082000
+  36        -0.1594000         0.1042000         0.6240000
+  37        -0.0278000        -0.0399000         0.0311000
+  38        -0.0200000         0.0304000        -0.0058000
+  39         0.2612000        -0.0825000        -0.4014000
+  40        -0.0163000         0.2379000        -0.0338000
+ found el vel transition dipoles      255940
+ TRANSITION VELOCITY DIPOLE MOMENTS
+   1        -0.0133000         0.0328000         0.2670000
+   2         0.0500000        -0.0433000        -0.2525000
+   3        -0.0026000        -0.0108000         0.0101000
+   4        -0.0098000         0.0034000         0.0251000
+   5        -0.0950000        -0.0197000        -0.1620000
+   6         0.0551000         0.0221000         0.1280000
+   7         0.0111000        -0.0038000         0.0009000
+   8        -0.0063000         0.0017000         0.0278000
+   9        -0.2464000         0.0645000         0.1227000
+  10        -0.1204000         0.0258000         0.0379000
+  11         0.1233000        -0.0351000         0.0834000
+  12         0.3215000        -0.0160000         0.0338000
+  13         0.0179000         0.0119000         0.0221000
+  14        -0.1145000        -0.0486000        -0.3825000
+  15         0.0514000        -0.0006000         0.0220000
+  16        -0.0472000         0.0011000        -0.1478000
+  17        -0.0360000        -0.0279000        -0.0768000
+  18         0.0105000         0.0009000        -0.0128000
+  19        -0.0070000        -0.0236000         0.0171000
+  20        -0.0022000         0.0067000         0.0233000
+  21         0.1477000         0.0146000         0.3687000
+  22        -0.1127000        -0.0141000        -0.2329000
+  23        -0.3004000         0.0797000         0.1058000
+  24        -0.0017000         0.0002000        -0.0019000
+  25         0.2172000        -0.0233000        -0.1022000
+  26        -0.1247000         0.0169000         0.0655000
+  27         0.0333000         0.0024000        -0.0136000
+  28         0.0508000        -0.0061000        -0.0131000
+  29        -0.0006000         0.0073000         0.0011000
+  30        -0.0026000        -0.0059000        -0.0024000
+  31        -0.0017000        -0.0703000         0.0132000
+  32         0.0038000        -0.0176000         0.0074000
+  33        -0.0145000        -0.0081000        -0.0007000
+  34        -0.0015000        -0.0118000         0.0018000
+  35         0.0067000         0.0017000        -0.0043000
+  36         0.0467000        -0.0351000        -0.2195000
+  37         0.0182000         0.0469000        -0.0152000
+  38         0.0082000        -0.0014000         0.0005000
+  39        -0.0836000         0.0291000         0.1447000
+  40         0.0052000        -0.0985000         0.0135000
+ found mag transition dipoles      255982
+ TRANSITION MAGNETIC DIPOLE MOMENTS
+   1         0.3955000         1.8986000        -0.2587000
+   2         0.1902000         3.2080000        -0.4845000
+   3         0.1659000        -0.0255000         0.4065000
+   4        -0.0308000        -0.2299000         0.0217000
+   5         0.0893000         1.5936000        -0.2628000
+   6        -0.1655000        -1.7305000         0.2674000
+   7         0.6629000        -0.0959000         0.3130000
+   8        -0.1039000         0.2013000        -0.1228000
+   9        -0.3442000        -0.1205000        -0.0969000
+  10         0.6428000        -0.1149000         0.2954000
+  11         0.2241000         1.6142000        -0.2281000
+  12        -0.0538000        -1.3626000         0.2799000
+  13         0.2460000        -0.2110000         0.2822000
+  14         0.2611000         3.6913000        -0.5778000
+  15        -0.0233000        -0.1249000         0.0510000
+  16         0.0510000         0.9648000        -0.0839000
+  17        -0.0070000         0.5107000        -0.0837000
+  18         0.0956000         0.0778000         0.5317000
+  19        -0.0846000         0.0032000         0.0665000
+  20        -0.0204000        -0.2103000         0.0061000
+  21         0.0767000        -0.5205000         0.1650000
+  22         0.1706000         0.1580000         0.0631000
+  23        -0.0069000        -0.0750000         0.0241000
+  24         0.2036000         0.0617000         0.2796000
+  25         0.0101000         0.1686000        -0.0016000
+  26        -0.0516000        -0.0758000        -0.1416000
+  27        -0.0943000        -0.0024000        -0.3013000
+  28         0.0634000         0.0645000         0.0146000
+  29        -0.6162000         0.1507000         0.0210000
+  30        -0.0465000        -0.0153000        -0.0476000
+  31         0.0863000        -0.1625000        -0.8226000
+  32         0.4471000        -0.1008000        -0.1756000
+  33         0.1503000         0.0861000        -0.0619000
+  34        -0.7637000         0.2030000         0.2107000
+  35        -1.1526000         0.0629000        -0.1994000
+  36        -0.1666000        -0.4669000         0.0832000
+  37         0.3324000        -0.1386000        -0.1772000
+  38        -0.0499000        -0.1670000        -0.8263000
+  39        -0.1077000        -1.5103000         0.2476000
+  40        -1.3108000        -0.0508000        -0.5119000
+ Number of Excited states          40
+ found Excited State no           1 at line      256198
+ its energy is (eV)   5.15990000000000     
+ END READING STATE           1
+ no COMPONENTS       17025
+ no    Excitations        8671
+ no de-Excitations        8354
+ population Excitations  0.505715245400000     
+ population de-Excitations  5.713964700000001E-003
+ Normalization  0.500001280700000     
+ found Excited State no           2 at line      273229
+ its energy is (eV)   5.41290000000000     
+ END READING STATE           2
+ no COMPONENTS       16555
+ no    Excitations        8499
+ no de-Excitations        8056
+ population Excitations  0.504842719400000     
+ population de-Excitations  4.844752500000001E-003
+ Normalization  0.499997966900000     
+ found Excited State no           3 at line      289787
+ its energy is (eV)   5.73980000000000     
+ END READING STATE           3
+ no COMPONENTS       13234
+ no    Excitations        7046
+ no de-Excitations        6188
+ population Excitations  0.501150675100000     
+ population de-Excitations  1.146767500000000E-003
+ Normalization  0.500003907600000     
+ found Excited State no           4 at line      303024
+ its energy is (eV)   5.92720000000000     
+ END READING STATE           4
+ no COMPONENTS       12163
+ no    Excitations        6472
+ no de-Excitations        5691
+ population Excitations  0.500088903000000     
+ population de-Excitations  8.521300000000001E-005
+ Normalization  0.500003690000000     
+ found Excited State no           5 at line      315190
+ its energy is (eV)   6.16850000000000     
+ END READING STATE           5
+ no COMPONENTS       17277
+ no    Excitations        8866
+ no de-Excitations        8411
+ population Excitations  0.502655574700000     
+ population de-Excitations  2.654915400000000E-003
+ Normalization  0.500000659300000     
+ found Excited State no           6 at line      332470
+ its energy is (eV)   6.26550000000000     
+ END READING STATE           6
+ no COMPONENTS       16789
+ no    Excitations        8649
+ no de-Excitations        8140
+ population Excitations  0.501947434100000     
+ population de-Excitations  1.953413300000000E-003
+ Normalization  0.499994020800000     
+ found Excited State no           7 at line      349262
+ its energy is (eV)   6.37910000000000     
+ END READING STATE           7
+ no COMPONENTS       14001
+ no    Excitations        7412
+ no de-Excitations        6589
+ population Excitations  0.501134445200000     
+ population de-Excitations  1.140634500000000E-003
+ Normalization  0.499993810700000     
+ found Excited State no           8 at line      363266
+ its energy is (eV)   6.60340000000000     
+ END READING STATE           8
+ no COMPONENTS       16514
+ no    Excitations        8553
+ no de-Excitations        7961
+ population Excitations  0.500485625800000     
+ population de-Excitations  4.888281999999999E-004
+ Normalization  0.499996797600000     
+ found Excited State no           9 at line      379783
+ its energy is (eV)   6.71770000000000     
+ END READING STATE           9
+ no COMPONENTS       18817
+ no    Excitations        9561
+ no de-Excitations        9256
+ population Excitations  0.503589809700000     
+ population de-Excitations  3.587892300000001E-003
+ Normalization  0.500001917400000     
+ found Excited State no          10 at line      398603
+ its energy is (eV)   6.73730000000000     
+ END READING STATE          10
+ no COMPONENTS       17615
+ no    Excitations        9050
+ no de-Excitations        8565
+ population Excitations  0.501389464300000     
+ population de-Excitations  1.394979500000000E-003
+ Normalization  0.499994484800000     
+ found Excited State no          11 at line      416221
+ its energy is (eV)   6.87410000000000     
+ END READING STATE          11
+ no COMPONENTS       18608
+ no    Excitations        9479
+ no de-Excitations        9129
+ population Excitations  0.503916881900000     
+ population de-Excitations  3.918427800000001E-003
+ Normalization  0.499998454100000     
+ found Excited State no          12 at line      434832
+ its energy is (eV)   6.95790000000000     
+ END READING STATE          12
+ no COMPONENTS       18108
+ no    Excitations        9237
+ no de-Excitations        8871
+ population Excitations  0.504422263000000     
+ population de-Excitations  4.421182600000000E-003
+ Normalization  0.500001080400000     
+ found Excited State no          13 at line      452943
+ its energy is (eV)   7.02150000000000     
+ END READING STATE          13
+ no COMPONENTS       13717
+ no    Excitations        7277
+ no de-Excitations        6440
+ population Excitations  0.500612178900000     
+ population de-Excitations  6.150726000000000E-004
+ Normalization  0.499997106300000     
+ found Excited State no          14 at line      466663
+ its energy is (eV)   7.21520000000000     
+ END READING STATE          14
+ no COMPONENTS       18123
+ no    Excitations        9258
+ no de-Excitations        8865
+ population Excitations  0.504439290800000     
+ population de-Excitations  4.447272400000000E-003
+ Normalization  0.499992018400000     
+ found Excited State no          15 at line      484789
+ its energy is (eV)   7.28800000000000     
+ END READING STATE          15
+ no COMPONENTS       12983
+ no    Excitations        6948
+ no de-Excitations        6035
+ population Excitations  0.500081682400000     
+ population de-Excitations  8.221600000000000E-005
+ Normalization  0.499999466400000     
+ found Excited State no          16 at line      497775
+ its energy is (eV)   7.39840000000000     
+ END READING STATE          16
+ no COMPONENTS       16523
+ no    Excitations        8562
+ no de-Excitations        7961
+ population Excitations  0.500440106800000     
+ population de-Excitations  4.378278000000000E-004
+ Normalization  0.500002279000000     
+ found Excited State no          17 at line      514301
+ its energy is (eV)   7.40400000000000     
+ END READING STATE          17
+ no COMPONENTS       15868
+ no    Excitations        8273
+ no de-Excitations        7595
+ population Excitations  0.500245668400000     
+ population de-Excitations  2.368726000000000E-004
+ Normalization  0.500008795800000     
+ found Excited State no          18 at line      530172
+ its energy is (eV)   7.45500000000000     
+ END READING STATE          18
+ no COMPONENTS       14266
+ no    Excitations        7560
+ no de-Excitations        6706
+ population Excitations  0.500259141200000     
+ population de-Excitations  2.568426000000001E-004
+ Normalization  0.500002298600000     
+ found Excited State no          19 at line      544441
+ its energy is (eV)   7.49480000000000     
+ END READING STATE          19
+ no COMPONENTS       13677
+ no    Excitations        7307
+ no de-Excitations        6370
+ population Excitations  0.500201345000000     
+ population de-Excitations  2.000710000000000E-004
+ Normalization  0.500001274000000     
+ found Excited State no          20 at line      558121
+ its energy is (eV)   7.61560000000000     
+ END READING STATE          20
+ no COMPONENTS       10240
+ no    Excitations        5762
+ no de-Excitations        4478
+ population Excitations  0.500027840500000     
+ population de-Excitations  3.147880000000000E-005
+ Normalization  0.499996361700000     
+ found Excited State no          21 at line      568364
+ its energy is (eV)   7.92310000000000     
+ END READING STATE          21
+ no COMPONENTS       17550
+ no    Excitations        9053
+ no de-Excitations        8497
+ population Excitations  0.502721848700000     
+ population de-Excitations  2.716569500000001E-003
+ Normalization  0.500005279200000     
+ found Excited State no          22 at line      585917
+ its energy is (eV)   8.00890000000000     
+ END READING STATE          22
+ no COMPONENTS       16741
+ no    Excitations        8676
+ no de-Excitations        8065
+ population Excitations  0.501257993500000     
+ population de-Excitations  1.246894700000000E-003
+ Normalization  0.500011098800000     
+ found Excited State no          23 at line      602661
+ its energy is (eV)   8.50550000000000     
+ END READING STATE          23
+ no COMPONENTS       16625
+ no    Excitations        8619
+ no de-Excitations        8006
+ population Excitations  0.503999846500000     
+ population de-Excitations  4.004769900000002E-003
+ Normalization  0.499995076600000     
+ found Excited State no          24 at line      619289
+ its energy is (eV)   8.60750000000000     
+ END READING STATE          24
+ no COMPONENTS       10156
+ no    Excitations        5760
+ no de-Excitations        4396
+ population Excitations  0.500279054000000     
+ population de-Excitations  2.752399000000000E-004
+ Normalization  0.500003814100000     
+ found Excited State no          25 at line      629448
+ its energy is (eV)   8.78340000000000     
+ END READING STATE          25
+ no COMPONENTS       17138
+ no    Excitations        8903
+ no de-Excitations        8235
+ population Excitations  0.502800012200000     
+ population de-Excitations  2.798235800000000E-003
+ Normalization  0.500001776400000     
+ found Excited State no          26 at line      646589
+ its energy is (eV)   8.80230000000000     
+ END READING STATE          26
+ no COMPONENTS       16587
+ no    Excitations        8635
+ no de-Excitations        7952
+ population Excitations  0.500923919600000     
+ population de-Excitations  9.252551000000001E-004
+ Normalization  0.499998664500000     
+ found Excited State no          27 at line      663179
+ its energy is (eV)   8.82510000000000     
+ END READING STATE          27
+ no COMPONENTS       14623
+ no    Excitations        7817
+ no de-Excitations        6806
+ population Excitations  0.500266930800000     
+ population de-Excitations  2.740696000000001E-004
+ Normalization  0.499992861200000     
+ found Excited State no          28 at line      677805
+ its energy is (eV)   8.86460000000000     
+ END READING STATE          28
+ no COMPONENTS       14258
+ no    Excitations        7687
+ no de-Excitations        6571
+ population Excitations  0.500126415200000     
+ population de-Excitations  1.247938000000000E-004
+ Normalization  0.500001621400000     
+ found Excited State no          29 at line      692066
+ its energy is (eV)   8.90110000000000     
+ END READING STATE          29
+ no COMPONENTS       12068
+ no    Excitations        6665
+ no de-Excitations        5403
+ population Excitations  0.500790906000000     
+ population de-Excitations  7.833344000000000E-004
+ Normalization  0.500007571600000     
+ found Excited State no          30 at line      704137
+ its energy is (eV)   8.96190000000000     
+ END READING STATE          30
+ no COMPONENTS        8356
+ no    Excitations        5059
+ no de-Excitations        3297
+ population Excitations  0.500008139400000     
+ population de-Excitations  1.278999999999999E-005
+ Normalization  0.499995349400000     
+ found Excited State no          31 at line      712496
+ its energy is (eV)   9.21630000000000     
+ END READING STATE          31
+ no COMPONENTS       11406
+ no    Excitations        6435
+ no de-Excitations        4971
+ population Excitations  0.500440307200000     
+ population de-Excitations  4.400749000000000E-004
+ Normalization  0.500000232300000     
+ found Excited State no          32 at line      723905
+ its energy is (eV)   9.24840000000000     
+ END READING STATE          32
+ no COMPONENTS       12656
+ no    Excitations        6953
+ no de-Excitations        5703
+ population Excitations  0.500150245900000     
+ population de-Excitations  1.570637000000000E-004
+ Normalization  0.499993182200000     
+ found Excited State no          33 at line      736564
+ its energy is (eV)   9.25250000000000     
+ END READING STATE          33
+ no COMPONENTS       14292
+ no    Excitations        7637
+ no de-Excitations        6655
+ population Excitations  0.500093311800000     
+ population de-Excitations  9.213550000000003E-005
+ Normalization  0.500001176300000     
+ found Excited State no          34 at line      750859
+ its energy is (eV)   9.32580000000000     
+ END READING STATE          34
+ no COMPONENTS       11664
+ no    Excitations        6530
+ no de-Excitations        5134
+ population Excitations  0.500532055000000     
+ population de-Excitations  5.252391000000000E-004
+ Normalization  0.500006815900000     
+ found Excited State no          35 at line      762526
+ its energy is (eV)   9.47820000000000     
+ END READING STATE          35
+ no COMPONENTS       11262
+ no    Excitations        6336
+ no de-Excitations        4926
+ population Excitations  0.500655492500000     
+ population de-Excitations  6.477112000000000E-004
+ Normalization  0.500007781300000     
+ found Excited State no          36 at line      773791
+ its energy is (eV)   9.60280000000000     
+ END READING STATE          36
+ no COMPONENTS       16108
+ no    Excitations        8422
+ no de-Excitations        7686
+ population Excitations  0.502905364800000     
+ population de-Excitations  2.907815900000000E-003
+ Normalization  0.499997548900000     
+ found Excited State no          37 at line      789902
+ its energy is (eV)   9.63920000000000     
+ END READING STATE          37
+ no COMPONENTS       13345
+ no    Excitations        7264
+ no de-Excitations        6081
+ population Excitations  0.500386728600000     
+ population de-Excitations  3.869974999999998E-004
+ Normalization  0.499999731100000     
+ found Excited State no          38 at line      803250
+ its energy is (eV)   9.75260000000000     
+ END READING STATE          38
+ no COMPONENTS       12617
+ no    Excitations        6988
+ no de-Excitations        5629
+ population Excitations  0.500642429800000     
+ population de-Excitations  6.383528000000001E-004
+ Normalization  0.500004077000000     
+ found Excited State no          39 at line      815870
+ its energy is (eV)   9.78030000000000     
+ END READING STATE          39
+ no COMPONENTS       16305
+ no    Excitations        8504
+ no de-Excitations        7801
+ population Excitations  0.502370567000000     
+ population de-Excitations  2.369421200000000E-003
+ Normalization  0.500001145800000     
+ found Excited State no          40 at line      832178
+ its energy is (eV)   9.91820000000000     
+ END READING STATE          40
+ no COMPONENTS       11994
+ no    Excitations        6690
+ no de-Excitations        5304
+ population Excitations  0.500184790100000     
+ population de-Excitations  1.842020000000000E-004
+ Normalization  0.500000588100000     
+ STATES ENERGY in EV WITH RESPECT TO ES0 REF GEO
+           1   5.15990000000000     
+           2   5.41290000000000     
+           3   5.73980000000000     
+           4   5.92720000000000     
+           5   6.16850000000000     
+           6   6.26550000000000     
+           7   6.37910000000000     
+           8   6.60340000000000     
+           9   6.71770000000000     
+          10   6.73730000000000     
+          11   6.87410000000000     
+          12   6.95790000000000     
+          13   7.02150000000000     
+          14   7.21520000000000     
+          15   7.28800000000000     
+          16   7.39840000000000     
+          17   7.40400000000000     
+          18   7.45500000000000     
+          19   7.49480000000000     
+          20   7.61560000000000     
+          21   7.92310000000000     
+          22   8.00890000000000     
+          23   8.50550000000000     
+          24   8.60750000000000     
+          25   8.78340000000000     
+          26   8.80230000000000     
+          27   8.82510000000000     
+          28   8.86460000000000     
+          29   8.90110000000000     
+          30   8.96190000000000     
+          31   9.21630000000000     
+          32   9.24840000000000     
+          33   9.25250000000000     
+          34   9.32580000000000     
+          35   9.47820000000000     
+          36   9.60280000000000     
+          37   9.63920000000000     
+          38   9.75260000000000     
+          39   9.78030000000000     
+          40   9.91820000000000     
+ DELTAE EnS0-EnS0ref (eV)  0.000000000000000E+000
+   
+ STATES ENERGY in EV WITH RESPECT TO ES0 REF GEO
+ from FCHK FILE. Use this for diabatization
+           1  -868.699672000000     
+           1   5.15984026239219     
+           2  -868.690373000000     
+           2   5.41287871780760     
+           3  -868.678360000000     
+           3   5.73976880974550     
+           4  -868.671473000000     
+           4   5.92717345997224     
+           5  -868.662605000000     
+           5   6.16848381835912     
+           6  -868.659041000000     
+           6   6.26546511259526     
+           7  -868.654866000000     
+           7   6.37907254902649     
+           8  -868.646621000000     
+           8   6.60343022887487     
+           9  -868.642422000000     
+           9   6.71769073799292     
+          10  -868.641703000000     
+          10   6.73725570728486     
+          11  -868.636675000000     
+          11   6.87407443551869     
+          12  -868.633594000000     
+          12   6.95791264189869     
+          13  -868.631257000000     
+          13   7.02150559493798     
+          14  -868.624140000000     
+          14   7.21516885842881     
+          15  -868.621464000000     
+          15   7.28798646319409     
+          16  -868.617407000000     
+          16   7.39838295890588     
+          17  -868.617199000000     
+          17   7.40404292220396     
+          18  -868.615326000000     
+          18   7.45500980326727     
+          19  -868.613864000000     
+          19   7.49479281453796     
+          20  -868.609423000000     
+          20   7.61563847326660     
+          21  -868.598125000000     
+          21   7.92307244136037     
+          22  -868.594973000000     
+          22   8.00884265444504     
+          23  -868.576722000000     
+          23   8.50547722265737     
+          24  -868.572974000000     
+          24   8.60746540750478     
+          25  -868.566509000000     
+          25   8.78338686296054     
+          26  -868.565816000000     
+          26   8.80224433683867     
+          27  -868.564976000000     
+          27   8.82510188093591     
+          28  -868.563523000000     
+          28   8.86463998994905     
+          29  -868.562182000000     
+          29   8.90113042641754     
+          30  -868.559950000000     
+          30   8.96186618644584     
+          31  -868.550598000000     
+          31   9.21634684404772     
+          32  -868.549421000000     
+          32   9.24837461714394     
+          33  -868.549270000000     
+          33   9.25248353281085     
+          34  -868.546576000000     
+          34   9.32579094209124     
+          35  -868.540974000000     
+          35   9.47822899212180     
+          36  -868.536397000000     
+          36   9.60277539608500     
+          37  -868.535058000000     
+          37   9.63921140982650     
+          38  -868.530892000000     
+          38   9.75257394400018     
+          39  -868.529872000000     
+          39   9.78032953326089     
+          40  -868.524805000000     
+          40   9.91820950461079     
+ Check Orthogonalization of the excited states
+
+
+ ROOT NO.    1           2           3           4           5           6
+
+        0.000000    0.000000    0.000000    0.000000    0.000000    0.000000
+  
+    1     1.00000     0.00000    -0.00001     0.00000    -0.00001     0.00000
+    2     0.00000     1.00000     0.00000     0.00000    -0.00000     0.00000
+    3    -0.00001     0.00000     1.00001    -0.00000     0.00000    -0.00001
+    4     0.00000     0.00000    -0.00000     1.00001     0.00001     0.00000
+    5    -0.00001    -0.00000     0.00000     0.00001     1.00000    -0.00000
+    6     0.00000     0.00000    -0.00001     0.00000    -0.00000     0.99999
+    7     0.00000     0.00000     0.00000    -0.00000     0.00000     0.00000
+    8    -0.00000     0.00000    -0.00001    -0.00000     0.00000     0.00001
+    9     0.00001     0.00000    -0.00001     0.00001     0.00001     0.00000
+   10    -0.00000     0.00000     0.00000     0.00001     0.00001    -0.00001
+  
+   11     0.00001     0.00000     0.00000     0.00000     0.00001     0.00000
+   12     0.00001    -0.00001    -0.00000    -0.00000    -0.00001     0.00001
+   13     0.00000    -0.00000    -0.00000     0.00001     0.00001     0.00001
+   14     0.00001    -0.00001    -0.00000    -0.00000     0.00000     0.00000
+   15    -0.00000    -0.00000     0.00000     0.00000     0.00001     0.00000
+   16     0.00000     0.00000     0.00000     0.00001    -0.00000    -0.00001
+   17     0.00000    -0.00001     0.00000     0.00001     0.00001    -0.00000
+   18     0.00000    -0.00000    -0.00000     0.00000     0.00001     0.00001
+   19    -0.00000    -0.00001    -0.00001    -0.00001     0.00000    -0.00000
+   20    -0.00001    -0.00001    -0.00001     0.00001    -0.00001    -0.00001
+  
+   21    -0.00000    -0.00000     0.00001    -0.00000    -0.00000     0.00000
+   22     0.00000    -0.00001     0.00000    -0.00001    -0.00001    -0.00000
+   23     0.00000     0.00000    -0.00000     0.00000     0.00000    -0.00000
+   24    -0.00000    -0.00001    -0.00001    -0.00000    -0.00000     0.00000
+   25     0.00001    -0.00000     0.00000    -0.00001     0.00001    -0.00000
+   26     0.00000    -0.00000     0.00000     0.00000     0.00000     0.00001
+   27    -0.00000     0.00000     0.00000    -0.00000    -0.00001    -0.00000
+   28    -0.00000    -0.00001     0.00001     0.00001    -0.00001    -0.00000
+   29    -0.00001     0.00000    -0.00001     0.00000     0.00000    -0.00001
+   30    -0.00000    -0.00000    -0.00000    -0.00001     0.00001    -0.00000
+  
+   31     0.00001     0.00000     0.00000    -0.00000    -0.00000    -0.00001
+   32    -0.00000     0.00000     0.00000     0.00000    -0.00001     0.00000
+   33     0.00001     0.00001    -0.00000     0.00000     0.00001    -0.00001
+   34    -0.00001     0.00001     0.00000    -0.00000    -0.00000     0.00000
+   35     0.00001     0.00000    -0.00001     0.00000    -0.00000     0.00001
+   36     0.00000     0.00000     0.00000     0.00000     0.00000    -0.00000
+   37    -0.00000     0.00001     0.00000     0.00001    -0.00000     0.00000
+   38    -0.00000    -0.00000    -0.00000    -0.00001     0.00000    -0.00001
+   39    -0.00001     0.00001    -0.00000    -0.00000    -0.00001     0.00000
+   40    -0.00000    -0.00001    -0.00001    -0.00001    -0.00001    -0.00000
+  
+1
+
+
+ ROOT NO.    7           8           9          10          11          12
+
+        0.000000    0.000000    0.000000    0.000000    0.000000    0.000000
+  
+    1     0.00000    -0.00000     0.00001    -0.00000     0.00001     0.00001
+    2     0.00000     0.00000     0.00000     0.00000     0.00000    -0.00001
+    3     0.00000    -0.00001    -0.00001     0.00000     0.00000    -0.00000
+    4    -0.00000    -0.00000     0.00001     0.00001     0.00000    -0.00000
+    5     0.00000     0.00000     0.00001     0.00001     0.00001    -0.00001
+    6     0.00000     0.00001     0.00000    -0.00001     0.00000     0.00001
+    7     0.99999    -0.00001     0.00000    -0.00000     0.00002     0.00001
+    8    -0.00001     0.99999    -0.00000     0.00000     0.00000    -0.00001
+    9     0.00000    -0.00000     1.00000    -0.00000     0.00000     0.00000
+   10    -0.00000     0.00000    -0.00000     0.99999    -0.00000     0.00000
+  
+   11     0.00002     0.00000     0.00000    -0.00000     1.00000     0.00000
+   12     0.00001    -0.00001     0.00000     0.00000     0.00000     1.00000
+   13    -0.00001    -0.00000    -0.00001     0.00001    -0.00000     0.00000
+   14     0.00000    -0.00001     0.00001    -0.00000     0.00000    -0.00000
+   15    -0.00001     0.00001    -0.00000     0.00000    -0.00000    -0.00000
+   16    -0.00000     0.00000    -0.00000    -0.00001    -0.00001    -0.00000
+   17     0.00000     0.00001     0.00001    -0.00000     0.00001     0.00000
+   18    -0.00000     0.00000    -0.00000    -0.00001     0.00001    -0.00000
+   19     0.00000     0.00000    -0.00000     0.00001    -0.00001    -0.00000
+   20     0.00001     0.00000     0.00000    -0.00001    -0.00000    -0.00000
+  
+   21     0.00001     0.00001     0.00000     0.00000     0.00000    -0.00001
+   22     0.00000     0.00000    -0.00001     0.00000     0.00000    -0.00000
+   23    -0.00000    -0.00000     0.00000     0.00001     0.00000    -0.00000
+   24     0.00000    -0.00001    -0.00001     0.00000    -0.00000     0.00000
+   25     0.00001     0.00000    -0.00000     0.00000     0.00001    -0.00000
+   26    -0.00000     0.00001    -0.00000    -0.00001    -0.00001    -0.00000
+   27     0.00000     0.00000     0.00000    -0.00001     0.00000    -0.00001
+   28     0.00001    -0.00001     0.00001     0.00001     0.00001     0.00001
+   29    -0.00001     0.00000    -0.00000     0.00001     0.00001     0.00000
+   30     0.00000    -0.00000    -0.00001    -0.00000    -0.00000     0.00000
+  
+   31    -0.00000     0.00000     0.00000    -0.00001    -0.00000     0.00000
+   32     0.00001     0.00000    -0.00000     0.00000    -0.00000    -0.00001
+   33     0.00000     0.00000     0.00000    -0.00000     0.00001    -0.00001
+   34    -0.00000     0.00001     0.00000    -0.00000    -0.00001    -0.00001
+   35    -0.00000    -0.00000    -0.00000     0.00001     0.00001    -0.00001
+   36     0.00001    -0.00001     0.00000    -0.00001     0.00001    -0.00000
+   37     0.00001    -0.00000     0.00001    -0.00000     0.00001    -0.00000
+   38     0.00001     0.00000    -0.00000     0.00001    -0.00000    -0.00001
+   39     0.00001     0.00001    -0.00000     0.00001     0.00000    -0.00000
+   40    -0.00001    -0.00001     0.00001    -0.00001     0.00000    -0.00000
+  
+1
+
+
+ ROOT NO.   13          14          15          16          17          18
+
+        0.000000    0.000000    0.000000    0.000000    0.000000    0.000000
+  
+    1     0.00000     0.00001    -0.00000     0.00000     0.00000     0.00000
+    2    -0.00000    -0.00001    -0.00000     0.00000    -0.00001    -0.00000
+    3    -0.00000    -0.00000     0.00000     0.00000     0.00000    -0.00000
+    4     0.00001    -0.00000     0.00000     0.00001     0.00001     0.00000
+    5     0.00001     0.00000     0.00001    -0.00000     0.00001     0.00001
+    6     0.00001     0.00000     0.00000    -0.00001    -0.00000     0.00001
+    7    -0.00001     0.00000    -0.00001    -0.00000     0.00000    -0.00000
+    8    -0.00000    -0.00001     0.00001     0.00000     0.00001     0.00000
+    9    -0.00001     0.00001    -0.00000    -0.00000     0.00001    -0.00000
+   10     0.00001    -0.00000     0.00000    -0.00001    -0.00000    -0.00001
+  
+   11    -0.00000     0.00000    -0.00000    -0.00001     0.00001     0.00001
+   12     0.00000    -0.00000    -0.00000    -0.00000     0.00000    -0.00000
+   13     0.99999     0.00000     0.00001    -0.00000    -0.00000     0.00001
+   14     0.00000     0.99998     0.00000    -0.00000     0.00000     0.00001
+   15     0.00001     0.00000     1.00000     0.00000     0.00000     0.00000
+   16    -0.00000    -0.00000     0.00000     1.00000     0.00000     0.00000
+   17    -0.00000     0.00000     0.00000     0.00000     1.00002    -0.00001
+   18     0.00001     0.00001     0.00000     0.00000    -0.00001     1.00000
+   19     0.00001     0.00000    -0.00000     0.00000    -0.00000    -0.00001
+   20     0.00001    -0.00000    -0.00000    -0.00000     0.00000     0.00000
+  
+   21     0.00000    -0.00001    -0.00002     0.00000     0.00001    -0.00000
+   22     0.00001     0.00001    -0.00001    -0.00002     0.00000     0.00001
+   23    -0.00000     0.00000     0.00001     0.00001     0.00001    -0.00001
+   24     0.00001    -0.00000     0.00001    -0.00000     0.00000    -0.00001
+   25    -0.00001    -0.00001     0.00001     0.00000    -0.00001    -0.00000
+   26    -0.00001    -0.00000     0.00000     0.00000    -0.00000    -0.00001
+   27     0.00000     0.00000    -0.00001    -0.00000    -0.00000     0.00001
+   28    -0.00000    -0.00001     0.00000     0.00001    -0.00000    -0.00001
+   29     0.00001     0.00000     0.00000    -0.00000     0.00001    -0.00001
+   30    -0.00001    -0.00001     0.00000     0.00000     0.00000     0.00000
+  
+   31    -0.00001     0.00000     0.00000    -0.00000     0.00000    -0.00000
+   32     0.00000     0.00000     0.00001     0.00000    -0.00001     0.00001
+   33    -0.00000     0.00001     0.00001     0.00000     0.00000     0.00001
+   34    -0.00000    -0.00000    -0.00000    -0.00000     0.00000    -0.00001
+   35     0.00000     0.00001     0.00001    -0.00000    -0.00000    -0.00000
+   36     0.00001     0.00000    -0.00001    -0.00001    -0.00001    -0.00001
+   37    -0.00000    -0.00000     0.00000    -0.00001     0.00000     0.00000
+   38    -0.00000     0.00000    -0.00000     0.00000     0.00000     0.00001
+   39     0.00000     0.00000    -0.00000     0.00000    -0.00000     0.00001
+   40    -0.00000     0.00000     0.00000    -0.00000    -0.00000     0.00001
+  
+1
+
+
+ ROOT NO.   19          20          21          22          23          24
+
+        0.000000    0.000000    0.000000    0.000000    0.000000    0.000000
+  
+    1    -0.00000    -0.00001    -0.00000     0.00000     0.00000    -0.00000
+    2    -0.00001    -0.00001    -0.00000    -0.00001     0.00000    -0.00001
+    3    -0.00001    -0.00001     0.00001     0.00000    -0.00000    -0.00001
+    4    -0.00001     0.00001    -0.00000    -0.00001     0.00000    -0.00000
+    5     0.00000    -0.00001    -0.00000    -0.00001     0.00000    -0.00000
+    6    -0.00000    -0.00001     0.00000    -0.00000    -0.00000     0.00000
+    7     0.00000     0.00001     0.00001     0.00000    -0.00000     0.00000
+    8     0.00000     0.00000     0.00001     0.00000    -0.00000    -0.00001
+    9    -0.00000     0.00000     0.00000    -0.00001     0.00000    -0.00001
+   10     0.00001    -0.00001     0.00000     0.00000     0.00001     0.00000
+  
+   11    -0.00001    -0.00000     0.00000     0.00000     0.00000    -0.00000
+   12    -0.00000    -0.00000    -0.00001    -0.00000    -0.00000     0.00000
+   13     0.00001     0.00001     0.00000     0.00001    -0.00000     0.00001
+   14     0.00000    -0.00000    -0.00001     0.00001     0.00000    -0.00000
+   15    -0.00000    -0.00000    -0.00002    -0.00001     0.00001     0.00001
+   16     0.00000    -0.00000     0.00000    -0.00002     0.00001    -0.00000
+   17    -0.00000     0.00000     0.00001     0.00000     0.00001     0.00000
+   18    -0.00001     0.00000    -0.00000     0.00001    -0.00001    -0.00001
+   19     1.00000    -0.00000     0.00001     0.00000     0.00001    -0.00001
+   20    -0.00000     0.99999     0.00000     0.00000    -0.00001    -0.00000
+  
+   21     0.00001     0.00000     1.00001    -0.00000     0.00001     0.00000
+   22     0.00000     0.00000    -0.00000     1.00002     0.00001    -0.00000
+   23     0.00001    -0.00001     0.00001     0.00001     0.99999     0.00000
+   24    -0.00001    -0.00000     0.00000    -0.00000     0.00000     1.00001
+   25    -0.00001     0.00001     0.00000    -0.00001     0.00000    -0.00000
+   26     0.00000    -0.00001    -0.00000     0.00001     0.00001     0.00001
+   27    -0.00000    -0.00000    -0.00001    -0.00000     0.00000    -0.00001
+   28     0.00001     0.00000     0.00001     0.00001     0.00001     0.00000
+   29    -0.00002    -0.00001     0.00000    -0.00000    -0.00000     0.00000
+   30     0.00001     0.00000     0.00000     0.00001    -0.00000     0.00000
+  
+   31    -0.00000    -0.00000     0.00001    -0.00000     0.00000    -0.00000
+   32    -0.00000    -0.00001     0.00000    -0.00000    -0.00001    -0.00000
+   33    -0.00001     0.00001    -0.00000    -0.00001     0.00001    -0.00001
+   34     0.00000     0.00001    -0.00001     0.00001     0.00000    -0.00001
+   35     0.00000    -0.00000    -0.00000     0.00000    -0.00000     0.00001
+   36    -0.00001    -0.00000     0.00001    -0.00000     0.00000    -0.00000
+   37    -0.00000     0.00001     0.00001    -0.00000    -0.00000    -0.00000
+   38     0.00000     0.00001    -0.00001    -0.00000     0.00000     0.00000
+   39     0.00001     0.00000     0.00001    -0.00000    -0.00001    -0.00001
+   40     0.00000    -0.00000    -0.00000    -0.00001     0.00000     0.00001
+  
+1
+
+
+ ROOT NO.   25          26          27          28          29          30
+
+        0.000000    0.000000    0.000000    0.000000    0.000000    0.000000
+  
+    1     0.00001     0.00000    -0.00000    -0.00000    -0.00001    -0.00000
+    2    -0.00000    -0.00000     0.00000    -0.00001     0.00000    -0.00000
+    3     0.00000     0.00000     0.00000     0.00001    -0.00001    -0.00000
+    4    -0.00001     0.00000    -0.00000     0.00001     0.00000    -0.00001
+    5     0.00001     0.00000    -0.00001    -0.00001     0.00000     0.00001
+    6    -0.00000     0.00001    -0.00000    -0.00000    -0.00001    -0.00000
+    7     0.00001    -0.00000     0.00000     0.00001    -0.00001     0.00000
+    8     0.00000     0.00001     0.00000    -0.00001     0.00000    -0.00000
+    9    -0.00000    -0.00000     0.00000     0.00001    -0.00000    -0.00001
+   10     0.00000    -0.00001    -0.00001     0.00001     0.00001    -0.00000
+  
+   11     0.00001    -0.00001     0.00000     0.00001     0.00001    -0.00000
+   12    -0.00000    -0.00000    -0.00001     0.00001     0.00000     0.00000
+   13    -0.00001    -0.00001     0.00000    -0.00000     0.00001    -0.00001
+   14    -0.00001    -0.00000     0.00000    -0.00001     0.00000    -0.00001
+   15     0.00001     0.00000    -0.00001     0.00000     0.00000     0.00000
+   16     0.00000     0.00000    -0.00000     0.00001    -0.00000     0.00000
+   17    -0.00001    -0.00000    -0.00000    -0.00000     0.00001     0.00000
+   18    -0.00000    -0.00001     0.00001    -0.00001    -0.00001     0.00000
+   19    -0.00001     0.00000    -0.00000     0.00001    -0.00002     0.00001
+   20     0.00001    -0.00001    -0.00000     0.00000    -0.00001     0.00000
+  
+   21     0.00000    -0.00000    -0.00001     0.00001     0.00000     0.00000
+   22    -0.00001     0.00001    -0.00000     0.00001    -0.00000     0.00001
+   23     0.00000     0.00001     0.00000     0.00001    -0.00000    -0.00000
+   24    -0.00000     0.00001    -0.00001     0.00000     0.00000     0.00000
+   25     1.00000     0.00001     0.00000     0.00000     0.00000    -0.00000
+   26     0.00001     1.00000    -0.00001    -0.00000    -0.00000     0.00000
+   27     0.00000    -0.00001     0.99999     0.00001    -0.00000    -0.00000
+   28     0.00000    -0.00000     0.00001     1.00000    -0.00000    -0.00000
+   29     0.00000    -0.00000    -0.00000    -0.00000     1.00002    -0.00000
+   30    -0.00000     0.00000    -0.00000    -0.00000    -0.00000     0.99999
+  
+   31    -0.00000     0.00000     0.00001     0.00000     0.00000     0.00000
+   32    -0.00000    -0.00000    -0.00000     0.00001    -0.00000    -0.00000
+   33     0.00001     0.00001     0.00001     0.00001    -0.00000     0.00000
+   34    -0.00000     0.00001    -0.00001    -0.00001     0.00001     0.00001
+   35     0.00001     0.00000    -0.00001     0.00000    -0.00001    -0.00000
+   36    -0.00000    -0.00000     0.00001    -0.00000    -0.00000    -0.00000
+   37    -0.00001     0.00000    -0.00001    -0.00001     0.00001    -0.00000
+   38    -0.00001    -0.00000    -0.00000     0.00000     0.00000     0.00001
+   39    -0.00000    -0.00000    -0.00000     0.00001    -0.00000    -0.00000
+   40    -0.00001     0.00001     0.00000     0.00001     0.00000    -0.00000
+  
+1
+
+
+ ROOT NO.   31          32          33          34          35          36
+
+        0.000000    0.000000    0.000000    0.000000    0.000000    0.000000
+  
+    1     0.00001    -0.00000     0.00001    -0.00001     0.00001     0.00000
+    2     0.00000     0.00000     0.00001     0.00001     0.00000     0.00000
+    3     0.00000     0.00000    -0.00000     0.00000    -0.00001     0.00000
+    4    -0.00000     0.00000     0.00000    -0.00000     0.00000     0.00000
+    5    -0.00000    -0.00001     0.00001    -0.00000    -0.00000     0.00000
+    6    -0.00001     0.00000    -0.00001     0.00000     0.00001    -0.00000
+    7    -0.00000     0.00001     0.00000    -0.00000    -0.00000     0.00001
+    8     0.00000     0.00000     0.00000     0.00001    -0.00000    -0.00001
+    9     0.00000    -0.00000     0.00000     0.00000    -0.00000     0.00000
+   10    -0.00001     0.00000    -0.00000    -0.00000     0.00001    -0.00001
+  
+   11    -0.00000    -0.00000     0.00001    -0.00001     0.00001     0.00001
+   12     0.00000    -0.00001    -0.00001    -0.00001    -0.00001    -0.00000
+   13    -0.00001     0.00000    -0.00000    -0.00000     0.00000     0.00001
+   14     0.00000     0.00000     0.00001    -0.00000     0.00001     0.00000
+   15     0.00000     0.00001     0.00001    -0.00000     0.00001    -0.00001
+   16    -0.00000     0.00000     0.00000    -0.00000    -0.00000    -0.00001
+   17     0.00000    -0.00001     0.00000     0.00000    -0.00000    -0.00001
+   18    -0.00000     0.00001     0.00001    -0.00001    -0.00000    -0.00001
+   19    -0.00000    -0.00000    -0.00001     0.00000     0.00000    -0.00001
+   20    -0.00000    -0.00001     0.00001     0.00001    -0.00000    -0.00000
+  
+   21     0.00001     0.00000    -0.00000    -0.00001    -0.00000     0.00001
+   22    -0.00000    -0.00000    -0.00001     0.00001     0.00000    -0.00000
+   23     0.00000    -0.00001     0.00001     0.00000    -0.00000     0.00000
+   24    -0.00000    -0.00000    -0.00001    -0.00001     0.00001    -0.00000
+   25    -0.00000    -0.00000     0.00001    -0.00000     0.00001    -0.00000
+   26     0.00000    -0.00000     0.00001     0.00001     0.00000    -0.00000
+   27     0.00001    -0.00000     0.00001    -0.00001    -0.00001     0.00001
+   28     0.00000     0.00001     0.00001    -0.00001     0.00000    -0.00000
+   29     0.00000    -0.00000    -0.00000     0.00001    -0.00001    -0.00000
+   30     0.00000    -0.00000     0.00000     0.00001    -0.00000    -0.00000
+  
+   31     1.00000    -0.00000    -0.00001     0.00000    -0.00001     0.00000
+   32    -0.00000     0.99999     0.00000     0.00001     0.00001     0.00001
+   33    -0.00001     0.00000     1.00000    -0.00000     0.00001    -0.00000
+   34     0.00000     0.00001    -0.00000     1.00001    -0.00000    -0.00001
+   35    -0.00001     0.00001     0.00001    -0.00000     1.00002    -0.00000
+   36     0.00000     0.00001    -0.00000    -0.00001    -0.00000     1.00000
+   37     0.00000    -0.00001     0.00000     0.00000     0.00001     0.00000
+   38    -0.00000     0.00000     0.00000     0.00001    -0.00000    -0.00000
+   39    -0.00001     0.00001     0.00000     0.00000    -0.00000    -0.00000
+   40    -0.00001     0.00000    -0.00001    -0.00001     0.00001    -0.00001
+  
+1
+
+
+ ROOT NO.   37          38          39          40
+
+        0.000000    0.000000    0.000000    0.000000
+  
+    1    -0.00000    -0.00000    -0.00001    -0.00000
+    2     0.00001    -0.00000     0.00001    -0.00001
+    3     0.00000    -0.00000    -0.00000    -0.00001
+    4     0.00001    -0.00001    -0.00000    -0.00001
+    5    -0.00000     0.00000    -0.00001    -0.00001
+    6     0.00000    -0.00001     0.00000    -0.00000
+    7     0.00001     0.00001     0.00001    -0.00001
+    8    -0.00000     0.00000     0.00001    -0.00001
+    9     0.00001    -0.00000    -0.00000     0.00001
+   10    -0.00000     0.00001     0.00001    -0.00001
+  
+   11     0.00001    -0.00000     0.00000     0.00000
+   12    -0.00000    -0.00001    -0.00000    -0.00000
+   13    -0.00000    -0.00000     0.00000    -0.00000
+   14    -0.00000     0.00000     0.00000     0.00000
+   15     0.00000    -0.00000    -0.00000     0.00000
+   16    -0.00001     0.00000     0.00000    -0.00000
+   17     0.00000     0.00000    -0.00000    -0.00000
+   18     0.00000     0.00001     0.00001     0.00001
+   19    -0.00000     0.00000     0.00001     0.00000
+   20     0.00001     0.00001     0.00000    -0.00000
+  
+   21     0.00001    -0.00001     0.00001    -0.00000
+   22    -0.00000    -0.00000    -0.00000    -0.00001
+   23    -0.00000     0.00000    -0.00001     0.00000
+   24    -0.00000     0.00000    -0.00001     0.00001
+   25    -0.00001    -0.00001    -0.00000    -0.00001
+   26     0.00000    -0.00000    -0.00000     0.00001
+   27    -0.00001    -0.00000    -0.00000     0.00000
+   28    -0.00001     0.00000     0.00001     0.00001
+   29     0.00001     0.00000    -0.00000     0.00000
+   30    -0.00000     0.00001    -0.00000    -0.00000
+  
+   31     0.00000    -0.00000    -0.00001    -0.00001
+   32    -0.00001     0.00000     0.00001     0.00000
+   33     0.00000     0.00000     0.00000    -0.00001
+   34     0.00000     0.00001     0.00000    -0.00001
+   35     0.00001    -0.00000    -0.00000     0.00001
+   36     0.00000    -0.00000    -0.00000    -0.00001
+   37     1.00000    -0.00000    -0.00000    -0.00000
+   38    -0.00000     1.00001     0.00000    -0.00000
+   39    -0.00000     0.00000     1.00000     0.00001
+   40    -0.00000    -0.00000     0.00001     1.00000
+  
+ 
+ Fragment diabatisation, writing AO response vectors from fragments
+ 
+ ista1 ista2           1           1
+ aaa11   0.501719146087553     
+ aaa12   8.103969133429306E-006
+ aaa21   8.078687140095714E-006
+ aaa22   5.655979377001833E-003
+ aaatot=   0.496063191992545     
+ ista1 ista2           1           2
+ aaa11  -3.264264614239403E-002
+ aaa12   1.850534406453396E-007
+ aaa21  -2.363041191833344E-008
+ aaa22  -3.885969922590121E-004
+ aaatot=  -3.225384046628246E-002
+ ista1 ista2           1           3
+ aaa11   1.104076826066159E-003
+ aaa12   1.003934921672060E-007
+ aaa21  -1.884671085830649E-006
+ aaa22   1.476600855152988E-005
+ aaatot=   1.091295882092627E-003
+ ista1 ista2           1           4
+ aaa11  -2.012879481438142E-002
+ aaa12  -3.230792352051503E-007
+ aaa21  -3.357154853351301E-007
+ aaa22  -1.338329977234392E-004
+ aaatot=  -1.999494918040785E-002
+ ista1 ista2           1           5
+ aaa11  -2.005829746259188E-002
+ aaa12  -1.688699265045716E-006
+ aaa21   1.243748541595987E-007
+ aaa22  -4.170672988503896E-004
+ aaatot=  -1.964304323786069E-002
+ ista1 ista2           1           6
+ aaa11   7.758309560470536E-003
+ aaa12   1.175878110983506E-006
+ aaa21   1.925633551671199E-006
+ aaa22   2.558353671165464E-005
+ aaatot=   7.731976268318194E-003
+ ista1 ista2           1           7
+ aaa11  -1.354234769070765E-003
+ aaa12   5.704759873896003E-008
+ aaa21  -1.924500087562721E-007
+ aaa22  -2.705277615452752E-005
+ aaatot=  -1.326932495308742E-003
+ ista1 ista2           1           8
+ aaa11   4.709765057161767E-004
+ aaa12   5.204887470400315E-009
+ aaa21  -4.137985979655831E-006
+ aaa22   2.384115245221841E-004
+ aaatot=   2.367081720611189E-004
+ ista1 ista2           1           9
+ aaa11   6.049292450121351E-003
+ aaa12  -2.508355904370976E-008
+ aaa21  -1.884007221776880E-006
+ aaa22   6.112825528567315E-004
+ aaatot=   5.439868820927353E-003
+ ista1 ista2           1          10
+ aaa11   4.978433054865509E-003
+ aaa12   2.605392182073366E-007
+ aaa21  -2.765309818868092E-007
+ aaa22   1.806181015222642E-004
+ aaatot=   4.798352023543339E-003
+ ista1 ista2           1          11
+ aaa11  -3.003081398411643E-002
+ aaa12   4.255808063826056E-007
+ aaa21  -1.880051310479142E-006
+ aaa22   7.535311499636910E-004
+ aaatot=  -3.078203950196326E-002
+ ista1 ista2           1          12
+ aaa11   6.070177948439844E-003
+ aaa12   2.093738656542733E-006
+ aaa21   1.288908844259951E-006
+ aaa22   4.765204540841457E-004
+ aaatot=   5.594462324167981E-003
+ ista1 ista2           1          13
+ aaa11   9.964828504946005E-004
+ aaa12  -5.329173481192452E-008
+ aaa21  -9.298025563121819E-007
+ aaa22   3.765825916714576E-005
+ aaatot=   9.597011021489550E-004
+ ista1 ista2           1          14
+ aaa11  -6.441603642937892E-003
+ aaa12  -1.309950171015780E-006
+ aaa21  -4.854278574978877E-007
+ aaa22  -2.499264660606224E-004
+ aaatot=  -6.192501699190787E-003
+ ista1 ista2           1          15
+ aaa11   1.464756400022813E-003
+ aaa12   5.473759492060702E-007
+ aaa21   1.017987969806166E-006
+ aaa22   1.643978974430269E-004
+ aaatot=   1.299887890559186E-003
+ ista1 ista2           1          16
+ aaa11  -5.562045504807352E-003
+ aaa12  -1.578721677745008E-006
+ aaa21  -5.759649624421916E-007
+ aaa22  -4.474414665646058E-004
+ aaatot=  -5.115606794958048E-003
+ ista1 ista2           1          17
+ aaa11  -4.864855840843059E-003
+ aaa12  -6.664608078421947E-007
+ aaa21  -3.661436956258031E-008
+ aaa22  -2.599643389605668E-004
+ aaatot=  -4.605521348320772E-003
+ ista1 ista2           1          18
+ aaa11  -7.325833824114877E-004
+ aaa12  -2.349715238401291E-007
+ aaa21  -6.138559346052549E-007
+ aaa22  -7.868027851417379E-005
+ aaatot=  -6.535242194865488E-004
+ ista1 ista2           1          19
+ aaa11   1.070029083157146E-003
+ aaa12   1.906610396939750E-007
+ aaa21   6.642343093354631E-007
+ aaa22   8.445636403158097E-005
+ aaatot=   9.850991458559234E-004
+ ista1 ista2           1          20
+ aaa11  -7.447257004367588E-003
+ aaa12   2.229583792371550E-007
+ aaa21   9.027036829541338E-009
+ aaa22  -4.442287415652085E-005
+ aaatot=  -7.402620198868659E-003
+ ista1 ista2           1          21
+ aaa11   1.142651952393521E-002
+ aaa12   6.296772055253071E-006
+ aaa21   1.585124412308345E-006
+ aaa22   2.373954692365380E-003
+ aaatot=   9.057276479212770E-003
+ ista1 ista2           1          22
+ aaa11  -3.722220021264579E-003
+ aaa12  -3.928589555006633E-006
+ aaa21  -6.346322926483801E-006
+ aaa22  -1.440817475956382E-003
+ aaatot=  -2.278984811936720E-003
+ ista1 ista2           1          23
+ aaa11  -6.939602457649602E-003
+ aaa12   2.995161303474317E-006
+ aaa21   1.006462072229928E-006
+ aaa22   1.717337894909892E-003
+ aaatot=  -8.654951653328250E-003
+ ista1 ista2           1          24
+ aaa11   1.362849475200907E-005
+ aaa12   2.679517595527341E-008
+ aaa21   2.328568529199524E-008
+ aaa22   5.434045902903663E-008
+ aaatot=   1.357766378364331E-005
+ ista1 ista2           1          25
+ aaa11   2.476626506973620E-003
+ aaa12   4.424448332741091E-007
+ aaa21   9.037887333151697E-007
+ aaa22   9.200269436174486E-005
+ aaatot=   2.384162468711834E-003
+ ista1 ista2           1          26
+ aaa11   4.375672575230148E-003
+ aaa12  -7.254043700355556E-008
+ aaa21   5.369875548960640E-007
+ aaa22   1.178815305627647E-004
+ aaatot=   4.257181516675483E-003
+ ista1 ista2           1          27
+ aaa11  -8.028958545748697E-004
+ aaa12   1.635154354796289E-007
+ aaa21  -2.856896811241957E-007
+ aaa22  -4.612260904128129E-006
+ aaatot=  -7.978343885541377E-004
+ ista1 ista2           1          28
+ aaa11   2.693755911100018E-003
+ aaa12   1.917808083005087E-007
+ aaa21   1.644504036072966E-006
+ aaa22   1.370863414595607E-004
+ aaatot=   2.555216846412685E-003
+ ista1 ista2           1          29
+ aaa11   4.868489450094656E-005
+ aaa12  -2.690531333179173E-007
+ aaa21   1.537739095383879E-007
+ aaa22  -1.628885170742620E-005
+ aaatot=   6.455091916551644E-005
+ ista1 ista2           1          30
+ aaa11   4.703167778172426E-004
+ aaa12  -8.767064652219691E-008
+ aaa21  -2.658268470786492E-007
+ aaa22  -3.236344279565666E-005
+ aaatot=   5.028583768134556E-004
+ ista1 ista2           1          31
+ aaa11   1.811039760883790E-004
+ aaa12   1.358477052522366E-007
+ aaa21   1.620947324829900E-007
+ aaa22   1.341418924797430E-005
+ aaatot=   1.676635398131739E-004
+ ista1 ista2           1          32
+ aaa11  -1.019592640182679E-003
+ aaa12  -1.432955666230071E-007
+ aaa21   8.872206452790737E-007
+ aaa22  -7.645663491580190E-005
+ aaatot=  -9.441665214787791E-004
+ ista1 ista2           1          33
+ aaa11   1.454207235225341E-003
+ aaa12   1.626540153195838E-007
+ aaa21  -2.376539785153813E-006
+ aaa22   9.389804538821172E-005
+ aaatot=   1.362848383637603E-003
+ ista1 ista2           1          34
+ aaa11  -3.028972451323468E-004
+ aaa12  -1.252967207088386E-008
+ aaa21   9.476378943550652E-008
+ aaa22  -4.454198173593453E-006
+ aaatot=  -2.985503404202597E-004
+ ista1 ista2           1          35
+ aaa11  -4.252627746985806E-005
+ aaa12  -2.900469499002883E-008
+ aaa21   5.494809879237616E-007
+ aaa22  -1.063669811424551E-005
+ aaatot=  -3.246806503852635E-005
+ ista1 ista2           1          36
+ aaa11  -2.580517297475633E-003
+ aaa12  -4.082217330373628E-006
+ aaa21   3.873153773189727E-007
+ aaa22  -2.605067532910242E-003
+ aaatot=   2.008070272691576E-005
+ ista1 ista2           1          37
+ aaa11  -1.087034876178739E-004
+ aaa12  -1.673794158972558E-007
+ aaa21   2.907788839933775E-008
+ aaa22  -8.207178787353197E-005
+ aaatot=  -2.682815704863849E-005
+ ista1 ista2           1          38
+ aaa11   1.038208470084138E-006
+ aaa12  -1.340224843396364E-007
+ aaa21   3.207836553417521E-007
+ aaa22  -1.085484967811753E-005
+ aaatot=   1.143825200852027E-005
+ ista1 ista2           1          39
+ aaa11  -2.263614590639198E-003
+ aaa12  -1.422164402688972E-006
+ aaa21  -1.459541343648349E-006
+ aaa22  -2.611468396345897E-004
+ aaatot=  -2.002430374063649E-003
+ ista1 ista2           1          40
+ aaa11   2.801794612688216E-004
+ aaa12  -2.848580313780285E-008
+ aaa21   2.719926388963102E-007
+ aaa22   9.173508533528499E-006
+ aaatot=   2.707054742932590E-004
+ ista1 ista2           2           1
+ aaa11  -8.864034532618321E-003
+ aaa12  -2.141963030460500E-006
+ aaa21   4.350771630352718E-007
+ aaa22   4.165089253295381E-004
+ aaatot=  -9.283120498141353E-003
+ ista1 ista2           2           2
+ aaa11  -3.504266770648363E-003
+ aaa12  -3.719202455097266E-007
+ aaa21  -3.791840071642653E-007
+ aaa22  -1.189267572018715E-005
+ aaatot=  -3.492366831166522E-003
+ ista1 ista2           2           3
+ aaa11   1.071180795498476E-003
+ aaa12  -3.089409888007668E-007
+ aaa21   1.355768893987473E-006
+ aaa22   6.833459641047726E-006
+ aaatot=   1.062682625974640E-003
+ ista1 ista2           2           4
+ aaa11   1.528595871198713E-002
+ aaa12   1.668308154749865E-007
+ aaa21   1.447018718289318E-006
+ aaa22   1.089230081431045E-004
+ aaatot=   1.517575551594121E-002
+ ista1 ista2           2           5
+ aaa11  -3.213697180331489E-002
+ aaa12   1.510700609486738E-006
+ aaa21   2.241580764466568E-006
+ aaa22  -2.433729084604828E-004
+ aaatot=  -3.189432977500938E-002
+ ista1 ista2           2           6
+ aaa11  -9.377202164624015E-003
+ aaa12  -1.777673134336206E-006
+ aaa21   1.642592780440351E-007
+ aaa22  -8.012989611311660E-005
+ aaatot=  -9.299014200923279E-003
+ ista1 ista2           2           7
+ aaa11   1.182873317454921E-002
+ aaa12  -2.352589641863543E-007
+ aaa21  -2.149781293267843E-006
+ aaa22   1.015972957452764E-004
+ aaatot=   1.172905040113302E-002
+ ista1 ista2           2           8
+ aaa11   7.642144194855392E-002
+ aaa12   1.174699116240096E-006
+ aaa21  -1.363860987303211E-006
+ aaa22   5.605951013299327E-004
+ aaatot=   7.586338540732754E-002
+ ista1 ista2           2           9
+ aaa11   0.452425371327764     
+ aaa12   3.549763691698320E-006
+ aaa21   3.897461947450329E-006
+ aaa22   3.770425669873403E-003
+ aaatot=   0.448654597959635     
+ ista1 ista2           2          10
+ aaa11   0.183334363318954     
+ aaa12   1.282217873196429E-006
+ aaa21   1.550011238966109E-006
+ aaa22   1.565821965440656E-003
+ aaatot=   0.181768273560148     
+ ista1 ista2           2          11
+ aaa11  -3.085129782590474E-002
+ aaa12   1.252861599226384E-006
+ aaa21   1.401129839482771E-006
+ aaa22  -5.391388795081853E-004
+ aaatot=  -3.031230721463682E-002
+ ista1 ista2           2          12
+ aaa11   6.967237032451098E-002
+ aaa12   1.626421315124625E-006
+ aaa21   2.170521021480232E-006
+ aaa22   6.410970329124003E-004
+ aaatot=   6.903072919189222E-002
+ ista1 ista2           2          13
+ aaa11   1.363061126314670E-003
+ aaa12   2.522107782474548E-007
+ aaa21  -4.107307392100594E-007
+ aaa22   9.719723144985494E-006
+ aaatot=   1.354004344687141E-003
+ ista1 ista2           2          14
+ aaa11  -4.353645078065198E-003
+ aaa12  -2.085920247081912E-006
+ aaa21  -2.507427900015144E-006
+ aaa22  -8.837924574037215E-005
+ aaatot=  -4.264844324671893E-003
+ ista1 ista2           2          15
+ aaa11  -2.609157992265675E-002
+ aaa12  -1.795445106296659E-007
+ aaa21  -1.057581368542962E-006
+ aaa22  -2.209657841329260E-004
+ aaatot=  -2.586973610166591E-002
+ ista1 ista2           2          16
+ aaa11   3.706510626988624E-003
+ aaa12   3.917039113878963E-007
+ aaa21   1.757616008935891E-007
+ aaa22   1.205492935669856E-004
+ aaatot=   3.586177275732132E-003
+ ista1 ista2           2          17
+ aaa11  -1.403433257313499E-003
+ aaa12   9.467264691055271E-008
+ aaa21   7.621826056850605E-007
+ aaa22   5.822907146649501E-005
+ aaatot=  -1.462329838738768E-003
+ ista1 ista2           2          18
+ aaa11  -3.507456692257744E-003
+ aaa12  -2.283682337687255E-008
+ aaa21  -1.250484394694798E-006
+ aaa22  -5.103897786197060E-005
+ aaatot=  -3.455190066824455E-003
+ ista1 ista2           2          19
+ aaa11   7.049173040010261E-003
+ aaa12  -1.784434854894485E-008
+ aaa21   8.929562445681939E-007
+ aaa22   5.349814190232000E-005
+ aaatot=   6.994764097514824E-003
+ ista1 ista2           2          20
+ aaa11   1.519398589373173E-002
+ aaa12   1.240308518347857E-007
+ aaa21  -4.688725398038794E-007
+ aaa22   1.165187157535297E-004
+ aaatot=   1.507806008136984E-002
+ ista1 ista2           2          21
+ aaa11  -1.699416049110549E-002
+ aaa12  -3.804456713028085E-006
+ aaa21  -2.951434401356151E-006
+ aaa22  -7.906028935214803E-004
+ aaatot=  -1.620441061989568E-002
+ ista1 ista2           2          22
+ aaa11   9.226408871858488E-003
+ aaa12   2.569772366000284E-006
+ aaa21   6.785478320966551E-006
+ aaa22   5.498816828223296E-004
+ aaatot=   8.672311483081192E-003
+ ista1 ista2           2          23
+ aaa11   2.606505658601990E-003
+ aaa12   1.069753933645679E-006
+ aaa21   2.432283804455866E-006
+ aaa22   1.291516563560793E-003
+ aaatot=   1.313626565170386E-003
+ ista1 ista2           2          24
+ aaa11  -3.398766932822416E-005
+ aaa12   4.684424416658679E-008
+ aaa21  -3.968877270848010E-008
+ aaa22  -3.004549507669859E-006
+ aaatot=  -3.089658680367924E-005
+ ista1 ista2           2          25
+ aaa11   8.768892623889035E-003
+ aaa12  -8.418141221688222E-009
+ aaa21  -4.881672908322437E-009
+ aaa22   2.018900937914604E-004
+ aaatot=   8.566998993629260E-003
+ ista1 ista2           2          26
+ aaa11   3.374513895324429E-003
+ aaa12  -2.656308633889166E-008
+ aaa21   7.301371743643464E-007
+ aaa22  -5.016716993062418E-005
+ aaatot=   3.423924364994350E-003
+ ista1 ista2           2          27
+ aaa11  -3.672196310495485E-003
+ aaa12  -5.604112268989145E-008
+ aaa21  -9.351571263568370E-008
+ aaa22  -2.077233478445460E-005
+ aaatot=  -3.651386501121084E-003
+ ista1 ista2           2          28
+ aaa11  -1.438174799366127E-003
+ aaa12  -1.346301806599934E-007
+ aaa21   4.640972811632480E-007
+ aaa22  -2.176907763450182E-005
+ aaatot=  -1.417004449193449E-003
+ ista1 ista2           2          29
+ aaa11   4.707104814829501E-004
+ aaa12   2.029047420522548E-008
+ aaa21   1.433161641111633E-007
+ aaa22  -4.851241607090155E-006
+ aaatot=   4.754386974001343E-004
+ ista1 ista2           2          30
+ aaa11  -3.412995376834647E-003
+ aaa12   1.151975639063787E-007
+ aaa21   8.100822782737003E-008
+ aaa22  -9.476802411776850E-006
+ aaatot=  -3.403484385086791E-003
+ ista1 ista2           2          31
+ aaa11  -3.561259501394725E-004
+ aaa12   2.127729858942652E-007
+ aaa21   2.776889483420021E-008
+ aaa22  -7.219869133068949E-006
+ aaatot=  -3.487210769153434E-004
+ ista1 ista2           2          32
+ aaa11   5.411678520442947E-004
+ aaa12  -4.395222274615717E-008
+ aaa21   2.188854599574406E-007
+ aaa22   1.097017459398282E-005
+ aaatot=   5.299348397676081E-004
+ ista1 ista2           2          33
+ aaa11   3.682936313798081E-004
+ aaa12   9.606656521055125E-008
+ aaa21  -4.335946629705819E-007
+ aaa22   1.052464882002471E-005
+ aaatot=   3.582986437879646E-004
+ ista1 ista2           2          34
+ aaa11  -3.934581900753681E-004
+ aaa12   5.506902252724301E-008
+ aaa21  -4.929596232740208E-009
+ aaa22   6.887526558725056E-007
+ aaatot=  -3.940869441124807E-004
+ ista1 ista2           2          35
+ aaa11  -5.386385544108259E-005
+ aaa12  -6.479322747856554E-009
+ aaa21  -4.340839341242852E-008
+ aaa22   5.192833163614258E-006
+ aaatot=  -5.901975953403227E-005
+ ista1 ista2           2          36
+ aaa11  -3.239182249191175E-003
+ aaa12  -4.469737222393160E-007
+ aaa21  -4.867402311082821E-007
+ aaa22  -1.192797682999134E-004
+ aaatot=  -3.119862714382393E-003
+ ista1 ista2           2          37
+ aaa11  -1.494302822521000E-003
+ aaa12  -4.884423453635157E-008
+ aaa21   7.662111500968091E-008
+ aaa22  -1.720372601262322E-005
+ aaatot=  -1.477224561857922E-003
+ ista1 ista2           2          38
+ aaa11  -2.879036540036676E-004
+ aaa12   1.255771358719707E-008
+ aaa21  -5.870304997155336E-007
+ aaa22   5.822202053526498E-006
+ aaatot=  -2.931262678438914E-004
+ ista1 ista2           2          39
+ aaa11  -2.492381347901196E-003
+ aaa12  -6.321811401114827E-007
+ aaa21  -1.946244438760474E-006
+ aaa22  -1.208574710490182E-005
+ aaatot=  -2.478981537497646E-003
+ ista1 ista2           2          40
+ aaa11   5.128544285627040E-004
+ aaa12  -2.563982037488264E-008
+ aaa21   8.890712321067794E-008
+ aaa22   1.994701980776962E-005
+ aaatot=   4.927928618113487E-004
+ ista1 ista2           3           1
+ aaa11  -7.224414161807451E-004
+ aaa12  -7.078485758882463E-007
+ aaa21  -6.918017666789323E-008
+ aaa22  -2.606423308744144E-007
+ aaatot=  -7.228194422490911E-004
+ ista1 ista2           3           2
+ aaa11   7.162395480427430E-004
+ aaa12  -1.573276018839713E-008
+ aaa21   2.926816381096313E-007
+ aaa22  -6.142394211659864E-007
+ aaatot=   7.165453730656110E-004
+ ista1 ista2           3           3
+ aaa11   0.489075486599330     
+ aaa12   1.976607475502929E-006
+ aaa21  -4.995953172728487E-006
+ aaa22   1.252619294722689E-003
+ aaatot=   0.487829839865256     
+ ista1 ista2           3           4
+ aaa11  -7.524221884865000E-003
+ aaa12   9.708073863442654E-008
+ aaa21   3.326639836474409E-007
+ aaa22  -1.088183544660451E-005
+ aaatot=  -7.513575632663408E-003
+ ista1 ista2           3           5
+ aaa11   1.312856193406561E-002
+ aaa12   1.362728324956609E-006
+ aaa21   1.847465406533942E-008
+ aaa22   1.816941366592803E-005
+ aaatot=   1.311173677407057E-002
+ ista1 ista2           3           6
+ aaa11  -1.133813830489665E-003
+ aaa12  -1.251325217525421E-006
+ aaa21  -3.181026195039794E-006
+ aaa22  -1.271629020986776E-005
+ aaatot=  -1.119167839302283E-003
+ ista1 ista2           3           7
+ aaa11  -1.848120988883813E-002
+ aaa12  -2.266234535621827E-007
+ aaa21  -9.507922199283677E-008
+ aaa22  -3.945880055438330E-005
+ aaatot=  -1.844188263251532E-002
+ ista1 ista2           3           8
+ aaa11  -1.741382641200920E-002
+ aaa12  -7.833258042607400E-007
+ aaa21  -8.392631346278495E-007
+ aaa22   2.683191700108274E-005
+ aaatot=  -1.744060239167991E-002
+ ista1 ista2           3           9
+ aaa11   4.677647573847460E-003
+ aaa12   8.543453494322579E-007
+ aaa21  -5.173071309831919E-007
+ aaa22  -7.246749594975042E-005
+ aaatot=   4.751486722277626E-003
+ ista1 ista2           3          10
+ aaa11  -2.225168602397404E-003
+ aaa12  -3.220375141814987E-007
+ aaa21   1.039006683788532E-006
+ aaa22   1.668911939502547E-004
+ aaatot=  -2.393420840545629E-003
+ ista1 ista2           3          11
+ aaa11   4.131287812787565E-003
+ aaa12   4.142797768464850E-007
+ aaa21  -1.815922447075562E-007
+ aaa22   1.735947725200271E-005
+ aaatot=   4.114524207557116E-003
+ ista1 ista2           3          12
+ aaa11  -4.139037144832882E-005
+ aaa12  -1.170552767351781E-006
+ aaa21  -2.787856823071939E-007
+ aaa22   7.489536235285755E-006
+ aaatot=  -4.977167476865917E-005
+ ista1 ista2           3          13
+ aaa11   7.828583075730870E-003
+ aaa12  -5.462862565093503E-006
+ aaa21  -2.351818296290287E-006
+ aaa22  -2.925114425369385E-004
+ aaatot=   8.117983473999004E-003
+ ista1 ista2           3          14
+ aaa11   2.796736636749900E-003
+ aaa12   7.503235787949271E-007
+ aaa21  -8.333598476815141E-007
+ aaa22  -2.376732473456050E-005
+ aaatot=   2.822087644910937E-003
+ ista1 ista2           3          15
+ aaa11   3.781299367463890E-004
+ aaa12  -2.420863616621134E-007
+ aaa21  -5.632049504153536E-008
+ aaa22   9.336156075493423E-006
+ aaatot=   3.686080148042750E-004
+ ista1 ista2           3          16
+ aaa11  -2.129511951478069E-003
+ aaa12   4.424051522127412E-007
+ aaa21   5.590571938819135E-007
+ aaa22  -3.957519379809172E-005
+ aaatot=  -2.090053409721647E-003
+ ista1 ista2           3          17
+ aaa11   5.708594165416973E-003
+ aaa12  -5.346849415260122E-008
+ aaa21  -1.024774457394258E-006
+ aaa22   1.347681670880318E-004
+ aaatot=   5.574797304292183E-003
+ ista1 ista2           3          18
+ aaa11   2.172729757246023E-003
+ aaa12  -4.725778081866377E-007
+ aaa21   4.033173036954554E-007
+ aaa22   1.253405528957893E-004
+ aaatot=   2.046513309238351E-003
+ ista1 ista2           3          19
+ aaa11   8.742866326867531E-003
+ aaa12   6.632075672833237E-007
+ aaa21  -1.002012963205001E-006
+ aaa22   1.857166058796723E-004
+ aaatot=   8.558814941518347E-003
+ ista1 ista2           3          20
+ aaa11  -2.938283722451967E-003
+ aaa12  -3.231770339870604E-007
+ aaa21  -2.566007137771151E-006
+ aaa22  -3.002534057867247E-005
+ aaatot=  -2.906015551769511E-003
+ ista1 ista2           3          21
+ aaa11   4.326576492699255E-003
+ aaa12  -9.629336388444334E-007
+ aaa21   3.253551971193664E-007
+ aaa22   1.146553971038427E-005
+ aaatot=   4.313822664152906E-003
+ ista1 ista2           3          22
+ aaa11   5.325544010297594E-003
+ aaa12   8.279540949660659E-007
+ aaa21  -3.544300297993835E-007
+ aaa22  -7.600934550360955E-007
+ aaatot=   5.327486487877396E-003
+ ista1 ista2           3          23
+ aaa11  -4.994419320240049E-004
+ aaa12   1.944210588012018E-007
+ aaa21   6.069754068774430E-007
+ aaa22  -1.256601819910084E-006
+ aaatot=  -4.985978845521711E-004
+ ista1 ista2           3          24
+ aaa11  -8.348200580898076E-004
+ aaa12   1.745699074517515E-007
+ aaa21  -4.302844403065268E-007
+ aaa22   7.300773444700383E-005
+ aaatot=  -9.072229381890531E-004
+ ista1 ista2           3          25
+ aaa11   3.142087404820486E-003
+ aaa12  -4.587993086442334E-007
+ aaa21  -7.334449871094494E-007
+ aaa22   6.654032180549172E-006
+ aaatot=   3.135708018318402E-003
+ ista1 ista2           3          26
+ aaa11  -2.208000106076818E-004
+ aaa12  -1.534814815306351E-007
+ aaa21  -1.511014550672955E-006
+ aaa22  -9.095788861099202E-007
+ aaatot=  -2.185328986524296E-004
+ ista1 ista2           3          27
+ aaa11  -4.710221698287520E-004
+ aaa12   2.126346335537538E-009
+ aaa21   9.839030605987861E-007
+ aaa22  -1.126966726632965E-006
+ aaatot=  -4.708769798163823E-004
+ ista1 ista2           3          28
+ aaa11  -5.052945345105487E-003
+ aaa12   3.462749863688163E-007
+ aaa21   2.841401373449951E-006
+ aaa22  -8.336095690850817E-006
+ aaatot=  -5.047104375801718E-003
+ ista1 ista2           3          29
+ aaa11   7.629161241178663E-004
+ aaa12   7.397461060707066E-007
+ aaa21   5.737484006419238E-007
+ aaa22  -2.697855109150969E-006
+ aaatot=   7.657799769324460E-004
+ ista1 ista2           3          30
+ aaa11   5.995063778785659E-004
+ aaa12  -1.508082152219603E-007
+ aaa21  -1.183071118794232E-007
+ aaa22   5.327983724913069E-006
+ aaatot=   5.941458930503103E-004
+ ista1 ista2           3          31
+ aaa11  -1.166132532375314E-002
+ aaa12   3.910894492579569E-007
+ aaa21  -3.509093892059844E-006
+ aaa22   8.102729400264048E-006
+ aaatot=  -1.166552786981209E-002
+ ista1 ista2           3          32
+ aaa11   4.047877110585825E-002
+ aaa12  -1.222507996768306E-008
+ aaa21   1.420135730287746E-005
+ aaa22   8.980152361084619E-005
+ aaatot=   4.037475599986455E-002
+ ista1 ista2           3          33
+ aaa11   2.047074055123551E-002
+ aaa12   3.948122124142185E-008
+ aaa21   7.992116827940499E-006
+ aaa22   4.631979102155635E-005
+ aaatot=   2.041646812460725E-002
+ ista1 ista2           3          34
+ aaa11  -6.579342452158286E-004
+ aaa12  -3.130744960791524E-007
+ aaa21  -9.855606189773796E-008
+ aaa22   1.034198410320816E-006
+ aaatot=  -6.591829620603309E-004
+ ista1 ista2           3          35
+ aaa11   8.639784500886960E-003
+ aaa12  -2.032050636059590E-006
+ aaa21   5.605076043913457E-006
+ aaa22  -1.092689270924652E-005
+ aaatot=   8.643074266916233E-003
+ ista1 ista2           3          36
+ aaa11  -8.997073863849621E-006
+ aaa12  -1.921098975051423E-007
+ aaa21   3.085449298114922E-007
+ aaa22  -4.307090774453255E-008
+ aaatot=  -9.454657783421723E-006
+ ista1 ista2           3          37
+ aaa11   7.619316388489809E-005
+ aaa12   6.573491461593263E-008
+ aaa21  -5.280372540344558E-007
+ aaa22  -4.166088471120706E-006
+ aaatot=   8.095302452466918E-005
+ ista1 ista2           3          38
+ aaa11  -7.725895215248732E-003
+ aaa12  -2.828884342100687E-006
+ aaa21  -3.099787164868421E-006
+ aaa22  -1.239790795546409E-004
+ aaatot=  -7.601645232871323E-003
+ ista1 ista2           3          39
+ aaa11   1.045341955191099E-003
+ aaa12   3.119428369394744E-007
+ aaa21   1.226582842560814E-007
+ aaa22   3.787287180111948E-006
+ aaatot=   1.041743952563671E-003
+ ista1 ista2           3          40
+ aaa11   2.123310656287449E-003
+ aaa12  -1.185291092765510E-006
+ aaa21  -4.032670394074412E-006
+ aaa22  -2.639772965207014E-005
+ aaatot=   2.152555765240828E-003
+ ista1 ista2           4           1
+ aaa11  -2.237731297493437E-002
+ aaa12   2.370806227668329E-007
+ aaa21  -1.808986277542856E-007
+ aaa22  -1.124959560027427E-004
+ aaatot=  -2.226439903968111E-002
+ ista1 ista2           4           2
+ aaa11  -8.162662354672585E-002
+ aaa12  -4.029121347413290E-006
+ aaa21   6.869178228315473E-006
+ aaa22  -1.274577230401157E-003
+ aaatot=  -8.036294461590042E-002
+ ista1 ista2           4           3
+ aaa11   1.195418615640024E-002
+ aaa12  -3.827187958300466E-007
+ aaa21  -2.156487754730589E-006
+ aaa22   1.484804612111184E-004
+ aaatot=   1.180747946414802E-002
+ ista1 ista2           4           4
+ aaa11   3.912740069611751E-002
+ aaa12   1.061714265127196E-006
+ aaa21   1.566039322016554E-006
+ aaa22   3.007670166502052E-004
+ aaatot=   3.882612935441042E-002
+ ista1 ista2           4           5
+ aaa11  -0.375798346939098     
+ aaa12  -1.659305257812666E-005
+ aaa21  -2.037606727011083E-005
+ aaa22  -3.355555763968587E-003
+ aaatot=  -0.372439008160438     
+ ista1 ista2           4           6
+ aaa11   0.316969427948510     
+ aaa12   1.414458539051434E-005
+ aaa21   1.399560182209562E-005
+ aaa22   2.903268780999618E-003
+ aaatot=   0.314066308151079     
+ ista1 ista2           4           7
+ aaa11   1.013695490472681E-002
+ aaa12   1.393005435777388E-008
+ aaa21  -5.321039730573402E-007
+ aaa22   7.170771997147331E-005
+ aaatot=   1.006579321878275E-002
+ ista1 ista2           4           8
+ aaa11  -1.376692031246800E-002
+ aaa12  -1.087998429456488E-006
+ aaa21   2.821508135667086E-006
+ aaa22  -2.398836086122049E-004
+ aaatot=  -1.353094621042092E-002
+ ista1 ista2           4           9
+ aaa11  -1.835699343973575E-002
+ aaa12  -3.213914565313690E-006
+ aaa21  -1.676829537396475E-006
+ aaa22  -3.791223977095518E-004
+ aaatot=  -1.797940812705412E-002
+ ista1 ista2           4          10
+ aaa11  -4.705652247894298E-003
+ aaa12  -1.256919431295727E-006
+ aaa21  -1.611401921383951E-006
+ aaa22  -1.045055143726540E-004
+ aaatot=  -4.600792251031556E-003
+ ista1 ista2           4          11
+ aaa11   8.563663598113200E-003
+ aaa12  -1.766048523578569E-006
+ aaa21  -2.959367822289764E-006
+ aaa22  -5.256424581579045E-004
+ aaatot=   9.090499375569817E-003
+ ista1 ista2           4          12
+ aaa11   1.000069108813341E-003
+ aaa12   7.255892141400669E-006
+ aaa21   3.476538980488242E-006
+ aaa22   1.152334429308946E-003
+ aaatot=  -1.484859673346920E-004
+ ista1 ista2           4          13
+ aaa11  -3.355936490890127E-003
+ aaa12   5.984047672922055E-007
+ aaa21   9.737070819115534E-007
+ aaa22   6.874557439633203E-005
+ aaatot=  -3.425057367601079E-003
+ ista1 ista2           4          14
+ aaa11   2.325345561268674E-002
+ aaa12  -4.870317336063134E-006
+ aaa21  -6.543066574647455E-006
+ aaa22  -1.256972504837480E-003
+ aaatot=   2.451210086676281E-002
+ ista1 ista2           4          15
+ aaa11  -2.851959153009830E-003
+ aaa12   9.306814676918879E-007
+ aaa21   4.283619236327898E-007
+ aaa22   1.135983603755745E-004
+ aaatot=  -2.965055193841346E-003
+ ista1 ista2           4          16
+ aaa11  -1.440008513589379E-002
+ aaa12  -2.858620982336740E-006
+ aaa21  -4.597971517727848E-006
+ aaa22  -5.652661379884923E-004
+ aaatot=  -1.383307964736991E-002
+ ista1 ista2           4          17
+ aaa11  -7.403229504908771E-003
+ aaa12  -1.604458351622478E-006
+ aaa21  -4.058737743598176E-007
+ aaa22  -2.895044618628084E-004
+ aaatot=  -7.114923627623226E-003
+ ista1 ista2           4          18
+ aaa11  -8.853666038551491E-004
+ aaa12  -2.233275683455296E-007
+ aaa21  -4.779213649767606E-006
+ aaa22  -3.234097209808145E-005
+ aaatot=  -8.484697456756456E-004
+ ista1 ista2           4          19
+ aaa11   1.084500602654345E-003
+ aaa12  -5.701255734507465E-008
+ aaa21   1.281285825833422E-006
+ aaa22   2.848900853999630E-005
+ aaatot=   1.054673295731171E-003
+ ista1 ista2           4          20
+ aaa11   4.299051227337487E-003
+ aaa12   3.359397022367354E-007
+ aaa21  -2.038762176263989E-006
+ aaa22   8.306194061604443E-005
+ aaatot=   4.218363988599943E-003
+ ista1 ista2           4          21
+ aaa11   1.706082155364214E-002
+ aaa12   4.712617977604537E-006
+ aaa21   1.946827217064429E-006
+ aaa22   6.542912381585888E-004
+ aaatot=   1.640929610624409E-002
+ ista1 ista2           4          22
+ aaa11  -1.075825436467051E-002
+ aaa12  -3.563091749817656E-006
+ aaa21  -1.695219227953668E-006
+ aaa22  -3.595549942287924E-004
+ aaatot=  -1.040056724296358E-002
+ ista1 ista2           4          23
+ aaa11   1.549759229355916E-003
+ aaa12  -3.940482452624959E-007
+ aaa21  -1.811997780665160E-006
+ aaa22   4.212927337834858E-005
+ aaatot=   1.509047905512970E-003
+ ista1 ista2           4          24
+ aaa11   2.419187975125916E-005
+ aaa12  -3.034000119032997E-008
+ aaa21  -2.121083746914697E-007
+ aaa22  -1.039554133043954E-005
+ aaatot=   3.476918945519985E-005
+ ista1 ista2           4          25
+ aaa11   8.686156744350393E-003
+ aaa12   1.688761481410339E-006
+ aaa21   1.606056607760469E-006
+ aaa22   5.117267832886647E-004
+ aaatot=   8.174512665935378E-003
+ ista1 ista2           4          26
+ aaa11   8.790144541984129E-004
+ aaa12  -1.197775322178894E-006
+ aaa21   2.692091983739562E-007
+ aaa22  -3.223205437286393E-004
+ aaatot=   1.199868013406499E-003
+ ista1 ista2           4          27
+ aaa11  -2.197317025237177E-003
+ aaa12   2.871338113885197E-007
+ aaa21   2.155204022074733E-006
+ aaa22   8.106759726844567E-005
+ aaatot=  -2.280252692716309E-003
+ ista1 ista2           4          28
+ aaa11  -1.375941795841476E-002
+ aaa12  -2.564239448807290E-007
+ aaa21  -3.106774199523963E-006
+ aaa22   5.735906051553941E-006
+ aaatot=  -1.376230351421167E-002
+ ista1 ista2           4          29
+ aaa11  -9.348961182442095E-005
+ aaa12  -5.957568609238721E-008
+ aaa21   9.248593372177559E-008
+ aaa22  -1.630144211680475E-006
+ aaatot=  -9.201152923255464E-005
+ ista1 ista2           4          30
+ aaa11   2.260017279697149E-005
+ aaa12   5.565618154017575E-008
+ aaa21  -5.471631706751645E-008
+ aaa22   1.364427778022982E-005
+ aaatot=   9.066267515349354E-006
+ ista1 ista2           4          31
+ aaa11  -9.554008844546656E-004
+ aaa12   2.111201379968359E-007
+ aaa21  -2.502830826055591E-007
+ aaa22   1.081964901150035E-005
+ aaatot=  -9.657591302455635E-004
+ ista1 ista2           4          32
+ aaa11   3.682568906628457E-003
+ aaa12  -2.182175752516761E-009
+ aaa21   2.163315514881737E-006
+ aaa22   6.995737944721954E-005
+ aaatot=   3.610446029490603E-003
+ ista1 ista2           4          33
+ aaa11   9.271723323116348E-004
+ aaa12  -4.030616272743601E-007
+ aaa21   9.606424369250209E-007
+ aaa22  -9.929055327055073E-005
+ aaatot=   1.025099181517986E-003
+ ista1 ista2           4          34
+ aaa11  -1.942018242004577E-004
+ aaa12   3.250023027245778E-008
+ aaa21  -1.805656454663903E-006
+ aaa22   5.912154862640895E-006
+ aaatot=  -1.982758223781622E-004
+ ista1 ista2           4          35
+ aaa11  -1.212079983787795E-004
+ aaa12   1.628199192018024E-007
+ aaa21   1.150886671667619E-006
+ aaa22  -7.524184913938693E-006
+ aaatot=  -1.146718802173066E-004
+ ista1 ista2           4          36
+ aaa11   9.910233711294366E-004
+ aaa12   1.520533230090827E-006
+ aaa21   6.752550620209234E-007
+ aaa22   3.424781900177239E-005
+ aaatot=   9.576208302957341E-004
+ ista1 ista2           4          37
+ aaa11  -2.418501755572285E-004
+ aaa12  -4.141452007113900E-008
+ aaa21   7.517563555936038E-007
+ aaa22  -1.170814478881256E-005
+ aaatot=  -2.309352016440807E-004
+ ista1 ista2           4          38
+ aaa11  -2.336699339999305E-003
+ aaa12   3.356853655687246E-007
+ aaa21   1.110900355078505E-006
+ aaa22   2.096423835271157E-005
+ aaatot=  -2.358438793341527E-003
+ ista1 ista2           4          39
+ aaa11  -7.462063621852171E-003
+ aaa12   9.805135269698158E-008
+ aaa21   7.885947280553721E-007
+ aaa22   6.339432406356996E-004
+ aaatot=  -8.096697405863228E-003
+ ista1 ista2           4          40
+ aaa11  -1.335703386718603E-003
+ aaa12   1.161580764115802E-007
+ aaa21   7.345226942650504E-007
+ aaa22   2.238476120902632E-005
+ aaatot=  -1.358706512545483E-003
+ ista1 ista2           5           1
+ aaa11   1.045829824309808E-002
+ aaa12  -2.562229338975436E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   1.045804202016418E-002
+ ista1 ista2           5           2
+ aaa11   6.142903724143227E-003
+ aaa12   1.425598107889562E-006
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   6.144329322251117E-003
+ ista1 ista2           5           3
+ aaa11   1.034404593761587E-003
+ aaa12  -7.396218489576629E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   1.033664971912630E-003
+ ista1 ista2           5           4
+ aaa11  -1.374735896560636E-003
+ aaa12   4.603041872772680E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -1.374689866141908E-003
+ ista1 ista2           5           5
+ aaa11   1.532188755312708E-003
+ aaa12   7.896008098320601E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   1.532978356122540E-003
+ ista1 ista2           5           6
+ aaa11  -2.184396938313323E-003
+ aaa12  -1.032592937207683E-006
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -2.185429531250531E-003
+ ista1 ista2           5           7
+ aaa11  -7.856592415215541E-004
+ aaa12  -5.440372106295585E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -7.862032787321837E-004
+ ista1 ista2           5           8
+ aaa11  -8.863755921655601E-004
+ aaa12   5.633584549562864E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -8.858122337106037E-004
+ ista1 ista2           5           9
+ aaa11  -1.342408628646984E-002
+ aaa12  -5.332428223100641E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -1.342461952929215E-002
+ ista1 ista2           5          10
+ aaa11  -6.542547524688197E-003
+ aaa12  -4.714557518558204E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -6.543018980440052E-003
+ ista1 ista2           5          11
+ aaa11   1.062507061234192E-002
+ aaa12   2.923353695425964E-006
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   1.062799396603735E-002
+ ista1 ista2           5          12
+ aaa11  -2.580828348440220E-004
+ aaa12  -3.312133060480037E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -2.581159561746267E-004
+ ista1 ista2           5          13
+ aaa11  -2.071544604998430E-004
+ aaa12  -1.186787532891289E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -2.072731392531321E-004
+ ista1 ista2           5          14
+ aaa11   9.364736961390679E-003
+ aaa12   6.769804956906097E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   9.365413941886370E-003
+ ista1 ista2           5          15
+ aaa11   4.053120685703363E-003
+ aaa12   1.225111670124497E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   4.053132936820064E-003
+ ista1 ista2           5          16
+ aaa11  -6.509999348520723E-003
+ aaa12   2.285259055720104E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -6.509770822615150E-003
+ ista1 ista2           5          17
+ aaa11   1.522358650774714E-002
+ aaa12  -4.624228971121190E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   1.522354026545742E-002
+ ista1 ista2           5          18
+ aaa11   2.365118032156743E-002
+ aaa12  -7.149969051232531E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   2.365110882187692E-002
+ ista1 ista2           5          19
+ aaa11   3.869747869746077E-002
+ aaa12  -6.519478395125939E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   3.869741350267682E-002
+ ista1 ista2           5          20
+ aaa11   0.494607843103371     
+ aaa12   5.191763111876789E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   0.494608362279682     
+ ista1 ista2           5          21
+ aaa11  -1.574915312513043E-002
+ aaa12  -3.025372017620526E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -1.574945566233219E-002
+ ista1 ista2           5          22
+ aaa11   8.121925150033142E-003
+ aaa12   8.709773789380357E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   8.122012247771036E-003
+ ista1 ista2           5          23
+ aaa11  -1.538253937978959E-005
+ aaa12  -1.311807441172198E-006
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -1.669434682096179E-005
+ ista1 ista2           5          24
+ aaa11  -2.850518074978048E-004
+ aaa12   1.837157573767776E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -2.848680917404280E-004
+ ista1 ista2           5          25
+ aaa11  -1.632819141352191E-003
+ aaa12   3.335742035209924E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -1.632485567148670E-003
+ ista1 ista2           5          26
+ aaa11  -1.284320628384217E-002
+ aaa12   7.550114135963871E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -1.284245127242857E-002
+ ista1 ista2           5          27
+ aaa11   9.862734023150174E-003
+ aaa12  -3.081413770298814E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   9.862425881773145E-003
+ ista1 ista2           5          28
+ aaa11  -1.009946784334399E-002
+ aaa12  -2.639030854781648E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -1.009973174642947E-002
+ ista1 ista2           5          29
+ aaa11  -7.628127071527329E-004
+ aaa12  -1.592794676048709E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -7.629719866203378E-004
+ ista1 ista2           5          30
+ aaa11  -3.766715774674021E-005
+ aaa12   1.745259189079035E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -3.764970515484942E-005
+ ista1 ista2           5          31
+ aaa11  -1.945614058573817E-003
+ aaa12   8.628572759650012E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -1.944751201297853E-003
+ ista1 ista2           5          32
+ aaa11   4.259943699993374E-003
+ aaa12  -1.669593565267591E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   4.259776740636847E-003
+ ista1 ista2           5          33
+ aaa11   1.641188056528875E-003
+ aaa12  -5.468084056343963E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   1.641133375688312E-003
+ ista1 ista2           5          34
+ aaa11  -2.147806299137798E-004
+ aaa12   1.259098699729658E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -2.146547200438068E-004
+ ista1 ista2           5          35
+ aaa11  -7.784722843695687E-003
+ aaa12   4.963718723750099E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -7.784673206508450E-003
+ ista1 ista2           5          36
+ aaa11  -3.091218804888407E-003
+ aaa12   3.295737791529290E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -3.090889231109254E-003
+ ista1 ista2           5          37
+ aaa11   2.943045650737010E-003
+ aaa12   2.607015364242512E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   2.943071720890653E-003
+ ista1 ista2           5          38
+ aaa11  -2.189421517723508E-003
+ aaa12  -2.839219180482135E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -2.189449909915313E-003
+ ista1 ista2           5          39
+ aaa11   4.053870378492420E-003
+ aaa12   1.055382383183613E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   4.053975916730739E-003
+ ista1 ista2           5          40
+ aaa11  -4.421514536671796E-004
+ aaa12  -2.159535195831550E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -4.421730490191379E-004
+ ista1 ista2           6           1
+ aaa11  -5.879706595719112E-003
+ aaa12   2.197187031238842E-006
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -5.877509408687873E-003
+ ista1 ista2           6           2
+ aaa11   2.023620033029457E-004
+ aaa12  -1.153172355892376E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   2.022466860673564E-004
+ ista1 ista2           6           3
+ aaa11   3.554816268455840E-005
+ aaa12  -3.039841736367293E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   3.524417851092166E-005
+ ista1 ista2           6           4
+ aaa11  -1.266288086283593E-004
+ aaa12   1.095487820746476E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -1.265192598462846E-004
+ ista1 ista2           6           5
+ aaa11   1.012287040286053E-003
+ aaa12   1.533437025170886E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   1.012440383988570E-003
+ ista1 ista2           6           6
+ aaa11  -3.419891409705700E-004
+ aaa12  -4.944848135804209E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -3.424836257841504E-004
+ ista1 ista2           6           7
+ aaa11  -1.886254973430784E-004
+ aaa12  -1.679326425967270E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -1.886422906073381E-004
+ ista1 ista2           6           8
+ aaa11  -1.145165557734834E-003
+ aaa12   4.888763444811869E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -1.144676681390352E-003
+ ista1 ista2           6           9
+ aaa11  -9.739375247367248E-003
+ aaa12   1.153226453412117E-006
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -9.738222020913836E-003
+ ista1 ista2           6          10
+ aaa11  -1.820538799338571E-003
+ aaa12   2.466729987773408E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -1.820292126339793E-003
+ ista1 ista2           6          11
+ aaa11   7.046807822252624E-005
+ aaa12   2.124621408928131E-006
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   7.259269963145437E-005
+ ista1 ista2           6          12
+ aaa11   6.887991131463533E-003
+ aaa12  -5.772468986725904E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   6.887413884564861E-003
+ ista1 ista2           6          13
+ aaa11   3.578616807329430E-003
+ aaa12  -9.602142242275308E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   3.578520785907007E-003
+ ista1 ista2           6          14
+ aaa11  -4.150027789705614E-004
+ aaa12   1.816647881019924E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -4.148211141824594E-004
+ ista1 ista2           6          15
+ aaa11   1.522682051989915E-003
+ aaa12  -2.925671139123678E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   1.522652795278524E-003
+ ista1 ista2           6          16
+ aaa11  -4.639392109529037E-004
+ aaa12  -1.708056953595344E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -4.641100166482632E-004
+ ista1 ista2           6          17
+ aaa11   9.197174585007114E-004
+ aaa12  -1.200397056954263E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   9.195974187950160E-004
+ ista1 ista2           6          18
+ aaa11   9.332924187876751E-004
+ aaa12  -1.065300592814911E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   9.331858887283936E-004
+ ista1 ista2           6          19
+ aaa11   1.039599560821128E-003
+ aaa12  -2.722063327861033E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   1.039572340187850E-003
+ ista1 ista2           6          20
+ aaa11   1.898968297466901E-002
+ aaa12   1.036992079230438E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   1.898978667387693E-002
+ ista1 ista2           6          21
+ aaa11  -3.349837025399842E-003
+ aaa12   1.325215996054782E-006
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -3.348511809403788E-003
+ ista1 ista2           6          22
+ aaa11   2.655311394600035E-003
+ aaa12  -8.864564911171361E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   2.654424938108918E-003
+ ista1 ista2           6          23
+ aaa11  -4.240122536934444E-003
+ aaa12   9.691080692208540E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -4.239153428865223E-003
+ ista1 ista2           6          24
+ aaa11   3.685839825999483E-004
+ aaa12   8.294794231225704E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   3.686669305422606E-004
+ ista1 ista2           6          25
+ aaa11   0.207272921222871     
+ aaa12   1.843394517102284E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   0.207273105562323     
+ ista1 ista2           6          26
+ aaa11   0.387355474145625     
+ aaa12   9.738406665195948E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   0.387356447986292     
+ ista1 ista2           6          27
+ aaa11  -0.163789340630454     
+ aaa12  -3.666314116397799E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -0.163789707261865     
+ ista1 ista2           6          28
+ aaa11   0.159027561852627     
+ aaa12   1.744648611222832E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   0.159027579299113     
+ ista1 ista2           6          29
+ aaa11   2.029019665241800E-003
+ aaa12  -1.643181434453567E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   2.028855347098355E-003
+ ista1 ista2           6          30
+ aaa11  -1.194464751275858E-003
+ aaa12  -1.319477431457332E-009
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -1.194466070753289E-003
+ ista1 ista2           6          31
+ aaa11  -9.566443768196873E-004
+ aaa12   3.505297951598403E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -9.562938470245274E-004
+ ista1 ista2           6          32
+ aaa11   2.409213950101598E-004
+ aaa12  -3.516244638111914E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   2.408862325637787E-004
+ ista1 ista2           6          33
+ aaa11  -6.460097462417735E-005
+ aaa12   1.549074225323032E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -6.458548388192412E-005
+ ista1 ista2           6          34
+ aaa11   1.454236377628848E-004
+ aaa12  -1.622650758447942E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   1.454074112553003E-004
+ ista1 ista2           6          35
+ aaa11   1.603648014298705E-003
+ aaa12   6.065888953087383E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   1.603708673188236E-003
+ ista1 ista2           6          36
+ aaa11   4.019319124246304E-003
+ aaa12  -7.773367791173330E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   4.018541787467187E-003
+ ista1 ista2           6          37
+ aaa11  -7.282259563824841E-003
+ aaa12   6.365563374702897E-009
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -7.282253198261466E-003
+ ista1 ista2           6          38
+ aaa11  -5.427010082537833E-004
+ aaa12   3.680426334264304E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -5.426642039904406E-004
+ ista1 ista2           6          39
+ aaa11   9.965454859078585E-003
+ aaa12   6.076202159780025E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   9.966062479294562E-003
+ ista1 ista2           6          40
+ aaa11  -2.151777675081473E-004
+ aaa12  -2.279966556900768E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -2.152005671737163E-004
+ ista1 ista2           7           1
+ aaa11   2.164060034306328E-002
+ aaa12  -1.906660900445415E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   2.164058127645428E-002
+ ista1 ista2           7           2
+ aaa11   4.142231580462633E-002
+ aaa12  -2.813396485127964E-006
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   4.141950240814121E-002
+ ista1 ista2           7           3
+ aaa11   6.787109209882800E-003
+ aaa12   4.178552823370801E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   6.787527065165137E-003
+ ista1 ista2           7           4
+ aaa11   0.493359652222875     
+ aaa12   8.590515402156868E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   0.493360511274416     
+ ista1 ista2           7           5
+ aaa11   4.484479866023672E-002
+ aaa12  -1.128214060884337E-006
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   4.484367044617584E-002
+ ista1 ista2           7           6
+ aaa11   4.461451406173860E-003
+ aaa12   6.275409008903786E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   4.462078947074751E-003
+ ista1 ista2           7           7
+ aaa11   4.044994790504699E-003
+ aaa12  -6.254016070757506E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   4.044932250343991E-003
+ ista1 ista2           7           8
+ aaa11  -6.149582053272588E-003
+ aaa12  -2.949340065244999E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -6.149876987279113E-003
+ ista1 ista2           7           9
+ aaa11  -1.565236296236721E-002
+ aaa12   1.400227763619275E-006
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -1.565096273460359E-002
+ ista1 ista2           7          10
+ aaa11  -4.071316741027788E-003
+ aaa12  -3.229652051250935E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -4.071639706232913E-003
+ ista1 ista2           7          11
+ aaa11  -3.139931136508572E-002
+ aaa12  -6.138780555459370E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -3.139992524314127E-002
+ ista1 ista2           7          12
+ aaa11   1.334732869798931E-002
+ aaa12  -9.749435736710451E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   1.334635375441563E-002
+ ista1 ista2           7          13
+ aaa11   1.563950522342818E-003
+ aaa12   4.144139977419983E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   1.564364936340560E-003
+ ista1 ista2           7          14
+ aaa11  -9.600159397269095E-003
+ aaa12  -4.209443101981010E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -9.600580341579294E-003
+ ista1 ista2           7          15
+ aaa11  -5.767019177803550E-003
+ aaa12  -9.979888732712033E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -5.767118976690877E-003
+ ista1 ista2           7          16
+ aaa11   4.706429163380810E-003
+ aaa12   1.934596140064784E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   4.706622622994816E-003
+ ista1 ista2           7          17
+ aaa11   3.312274049520807E-003
+ aaa12   7.571207851136570E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   3.312349761599318E-003
+ ista1 ista2           7          18
+ aaa11  -4.841762231190159E-003
+ aaa12  -7.680378038857611E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -4.841839034970548E-003
+ ista1 ista2           7          19
+ aaa11   2.547847755985882E-003
+ aaa12  -5.963353275250021E-009
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   2.547841792632607E-003
+ ista1 ista2           7          20
+ aaa11   7.261660893775803E-004
+ aaa12   1.373759655097112E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   7.263034653430900E-004
+ ista1 ista2           7          21
+ aaa11   9.330827485300579E-004
+ aaa12   2.484014817794672E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   9.333311500118374E-004
+ ista1 ista2           7          22
+ aaa11  -8.025099191657858E-004
+ aaa12  -6.271947095037649E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -8.025726386367361E-004
+ ista1 ista2           7          23
+ aaa11   1.302066080375826E-005
+ aaa12   9.590604448441174E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   1.397972124860238E-005
+ ista1 ista2           7          24
+ aaa11  -3.932633411605748E-004
+ aaa12  -5.873195847920737E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -3.933220731190540E-004
+ ista1 ista2           7          25
+ aaa11   2.224600955816697E-004
+ aaa12  -6.181368870642118E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   2.223982818929632E-004
+ ista1 ista2           7          26
+ aaa11  -4.067712114941642E-004
+ aaa12  -5.601381806975748E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -4.068272253122340E-004
+ ista1 ista2           7          27
+ aaa11   2.659129667012110E-004
+ aaa12   3.428910469134178E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   2.659472558059023E-004
+ ista1 ista2           7          28
+ aaa11   2.094364704054983E-004
+ aaa12  -2.487168554832966E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   2.094115987199499E-004
+ ista1 ista2           7          29
+ aaa11   2.344125280954895E-003
+ aaa12   4.056112970908089E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   2.344165842084603E-003
+ ista1 ista2           7          30
+ aaa11  -2.598276071092559E-004
+ aaa12  -3.392661014465265E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -2.598615337194006E-004
+ ista1 ista2           7          31
+ aaa11  -9.551380416399187E-004
+ aaa12  -8.690864684856393E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -9.552249502867673E-004
+ ista1 ista2           7          32
+ aaa11  -3.392497405050909E-004
+ aaa12   1.516510534521849E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -3.390980894516387E-004
+ ista1 ista2           7          33
+ aaa11   2.680316496843860E-004
+ aaa12  -2.706907581839063E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   2.677609589262021E-004
+ ista1 ista2           7          34
+ aaa11  -9.574835743283934E-004
+ aaa12   2.016733067748026E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -9.574634069977159E-004
+ ista1 ista2           7          35
+ aaa11   1.823629279886725E-005
+ aaa12   1.561680027306771E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   1.825190959914032E-005
+ ista1 ista2           7          36
+ aaa11   2.166461966520449E-003
+ aaa12  -3.726260093367630E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   2.166089340511113E-003
+ ista1 ista2           7          37
+ aaa11  -1.404156974759162E-004
+ aaa12  -4.564835765310161E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -1.404613458335693E-004
+ ista1 ista2           7          38
+ aaa11  -1.050899427176902E-004
+ aaa12   1.865614974201952E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -1.049033812202700E-004
+ ista1 ista2           7          39
+ aaa11  -2.504488222547589E-003
+ aaa12   1.587318242395090E-006
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -2.502900904305194E-003
+ ista1 ista2           7          40
+ aaa11  -1.853956823105571E-003
+ aaa12   3.134423672611957E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -1.853643380738309E-003
+ ista1 ista2           8           1
+ aaa11  -1.871443107140086E-003
+ aaa12   3.577980006416648E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -1.871085309139444E-003
+ ista1 ista2           8           2
+ aaa11  -7.824625496844201E-003
+ aaa12  -4.546256130569787E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -7.825080122457258E-003
+ ista1 ista2           8           3
+ aaa11  -2.216955915335143E-004
+ aaa12  -2.094635002936420E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -2.219050550338080E-004
+ ista1 ista2           8           4
+ aaa11   1.121182780436836E-002
+ aaa12   1.976544330595754E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   1.121202545880142E-002
+ ista1 ista2           8           5
+ aaa11  -5.265707811991679E-003
+ aaa12  -4.406622355008673E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -5.266148474227180E-003
+ ista1 ista2           8           6
+ aaa11  -8.896198023511522E-003
+ aaa12   2.050785626468421E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -8.895992944948874E-003
+ ista1 ista2           8           7
+ aaa11   6.400686796814200E-003
+ aaa12   1.364183560477705E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   6.400823215170248E-003
+ ista1 ista2           8           8
+ aaa11  -2.663322698961701E-003
+ aaa12   2.930173564250702E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -2.663293397226059E-003
+ ista1 ista2           8           9
+ aaa11   2.672754815219343E-002
+ aaa12  -1.763384371432492E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   2.672737181375628E-002
+ ista1 ista2           8          10
+ aaa11   1.243874794801953E-002
+ aaa12  -2.042385260070037E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   1.243854370949352E-002
+ ista1 ista2           8          11
+ aaa11  -8.167659266137954E-003
+ aaa12   1.080194071320146E-006
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -8.166579072066634E-003
+ ista1 ista2           8          12
+ aaa11  -4.258428893017937E-002
+ aaa12  -1.737892005056395E-006
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -4.258602682218442E-002
+ ista1 ista2           8          13
+ aaa11  -8.617516735747835E-004
+ aaa12  -3.130343000921749E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -8.620647078748757E-004
+ ista1 ista2           8          14
+ aaa11   3.730896388250091E-002
+ aaa12  -3.414173444060989E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   3.730862246515650E-002
+ ista1 ista2           8          15
+ aaa11   0.483405819463319     
+ aaa12   1.814592125234207E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   0.483405837609241     
+ ista1 ista2           8          16
+ aaa11  -8.482295897030417E-002
+ aaa12  -7.664620779763875E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -8.482372543238215E-002
+ ista1 ista2           8          17
+ aaa11  -4.035055770401577E-002
+ aaa12  -4.749222306372396E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -4.035103262624641E-002
+ ista1 ista2           8          18
+ aaa11  -2.582396369742938E-003
+ aaa12   2.011068513948588E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -2.582376259057799E-003
+ ista1 ista2           8          19
+ aaa11   3.311546547820339E-003
+ aaa12  -3.993201117617186E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   3.311506615809163E-003
+ ista1 ista2           8          20
+ aaa11  -4.674473131567392E-003
+ aaa12  -2.365064012931473E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -4.674496782207521E-003
+ ista1 ista2           8          21
+ aaa11  -3.078053136359214E-002
+ aaa12   4.999981547086869E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -3.078003136543743E-002
+ ista1 ista2           8          22
+ aaa11   1.487092060610079E-002
+ aaa12  -4.011412639559764E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   1.487051946483683E-002
+ ista1 ista2           8          23
+ aaa11  -1.576711562841245E-003
+ aaa12  -2.016899038083250E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -1.576913252745054E-003
+ ista1 ista2           8          24
+ aaa11  -2.018189000807086E-003
+ aaa12  -2.850971515186328E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -2.018217510522238E-003
+ ista1 ista2           8          25
+ aaa11   1.281899170423642E-003
+ aaa12  -1.138115337327690E-006
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   1.280761055086314E-003
+ ista1 ista2           8          26
+ aaa11  -9.704729729889211E-004
+ aaa12   5.854519323954441E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -9.698875210565256E-004
+ ista1 ista2           8          27
+ aaa11  -1.721041546949346E-004
+ aaa12  -1.168552813267691E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -1.722210099762613E-004
+ ista1 ista2           8          28
+ aaa11  -8.024629124530107E-004
+ aaa12  -1.590765068654822E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -8.026219889598762E-004
+ ista1 ista2           8          29
+ aaa11   1.327880976452305E-004
+ aaa12   2.709004984153212E-009
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   1.327908066502146E-004
+ ista1 ista2           8          30
+ aaa11  -1.006890603907556E-003
+ aaa12   4.898728371214135E-009
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -1.006885705179185E-003
+ ista1 ista2           8          31
+ aaa11   7.857127189276190E-003
+ aaa12   1.684475675451501E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   7.857295636843736E-003
+ ista1 ista2           8          32
+ aaa11  -1.932205642592930E-003
+ aaa12   1.590236942095327E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -1.932046618898720E-003
+ ista1 ista2           8          33
+ aaa11   6.781724922538287E-003
+ aaa12   1.437627232860584E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   6.781868685261573E-003
+ ista1 ista2           8          34
+ aaa11  -8.262385992754467E-004
+ aaa12  -1.077625623176771E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -8.262493755316785E-004
+ ista1 ista2           8          35
+ aaa11  -3.248804195755498E-005
+ aaa12  -5.893320402188649E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -3.254697516157686E-005
+ ista1 ista2           8          36
+ aaa11   3.764611772211322E-004
+ aaa12   4.549821133292819E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   3.769161593344615E-004
+ ista1 ista2           8          37
+ aaa11   1.969881346680554E-004
+ aaa12  -3.950218712950564E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   1.969486324809259E-004
+ ista1 ista2           8          38
+ aaa11  -5.826359927094460E-004
+ aaa12  -1.180846125122768E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=  -5.827540773219583E-004
+ ista1 ista2           8          39
+ aaa11   2.111846895550823E-003
+ aaa12   5.428663362732945E-007
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   2.112389761887096E-003
+ ista1 ista2           8          40
+ aaa11   4.623348205099538E-003
+ aaa12  -3.865829968092813E-008
+ aaa21   0.000000000000000E+000
+ aaa22   0.000000000000000E+000
+ aaatot=   4.623309546799857E-003
+ calculation wall clock time
+ hour              0
+ minute    1.00000000000000     
+ second   -48.3280000000000     
+ cpu time    11.6761200000000     
+ wall clock time    11.6720000000000     
+ PARALLELIZATION GAIN   1.00035298149417     
+ 
+ DIAB-ADIAB OVERLAP MATRIX
+ 
+
+
+ ROOT NO.    1           2           3           4           5           6
+
+        0.000000    0.000000    0.000000    0.000000    0.000000    0.000000
+  
+    1     1.00344    -0.01773    -0.00144    -0.04475     0.02092    -0.01176
+    2    -0.06529    -0.00701     0.00143    -0.16325     0.01229     0.00040
+    3     0.00221     0.00214     0.97815     0.02391     0.00207     0.00007
+    4    -0.04026     0.03057    -0.01505     0.07825    -0.00275    -0.00025
+    5    -0.04012    -0.06427     0.02626    -0.75160     0.00306     0.00202
+    6     0.01552    -0.01875    -0.00227     0.63394    -0.00437    -0.00068
+    7    -0.00271     0.02366    -0.03696     0.02027    -0.00157    -0.00038
+    8     0.00094     0.15284    -0.03483    -0.02753    -0.00177    -0.00229
+    9     0.01210     0.90485     0.00936    -0.03671    -0.02685    -0.01948
+   10     0.00996     0.36667    -0.00445    -0.00941    -0.01309    -0.00364
+  
+   11    -0.06006    -0.06170     0.00826     0.01713     0.02125     0.00014
+   12     0.01214     0.13934    -0.00008     0.00200    -0.00052     0.01378
+   13     0.00199     0.00273     0.01566    -0.00671    -0.00041     0.00716
+   14    -0.01288    -0.00871     0.00559     0.04651     0.01873    -0.00083
+   15     0.00293    -0.05218     0.00076    -0.00570     0.00811     0.00305
+   16    -0.01112     0.00741    -0.00426    -0.02880    -0.01302    -0.00093
+   17    -0.00973    -0.00281     0.01142    -0.01481     0.03045     0.00184
+   18    -0.00147    -0.00701     0.00435    -0.00177     0.04730     0.00187
+   19     0.00214     0.01410     0.01749     0.00217     0.07739     0.00208
+   20    -0.01489     0.03039    -0.00588     0.00860     0.98922     0.03798
+  
+   21     0.02285    -0.03399     0.00865     0.03412    -0.03150    -0.00670
+   22    -0.00744     0.01845     0.01065    -0.02152     0.01624     0.00531
+   23    -0.01388     0.00521    -0.00100     0.00310    -0.00003    -0.00848
+   24     0.00003    -0.00007    -0.00167     0.00005    -0.00057     0.00074
+   25     0.00495     0.01754     0.00628     0.01737    -0.00327     0.41455
+   26     0.00875     0.00675    -0.00044     0.00176    -0.02569     0.77471
+   27    -0.00161    -0.00734    -0.00094    -0.00439     0.01973    -0.32758
+   28     0.00539    -0.00288    -0.01011    -0.02752    -0.02020     0.31806
+   29     0.00010     0.00094     0.00153    -0.00019    -0.00153     0.00406
+   30     0.00094    -0.00683     0.00120     0.00005    -0.00008    -0.00239
+  
+   31     0.00036    -0.00071    -0.02332    -0.00191    -0.00389    -0.00191
+   32    -0.00204     0.00108     0.08096     0.00737     0.00852     0.00048
+   33     0.00291     0.00074     0.04094     0.00185     0.00328    -0.00013
+   34    -0.00061    -0.00079    -0.00132    -0.00039    -0.00043     0.00029
+   35    -0.00009    -0.00011     0.01728    -0.00024    -0.01557     0.00321
+   36    -0.00516    -0.00648    -0.00002     0.00198    -0.00618     0.00804
+   37    -0.00022    -0.00299     0.00015    -0.00048     0.00589    -0.01456
+   38     0.00000    -0.00058    -0.01545    -0.00467    -0.00438    -0.00109
+   39    -0.00453    -0.00498     0.00209    -0.01492     0.00811     0.01993
+   40     0.00056     0.00103     0.00425    -0.00267    -0.00088    -0.00043
+  
+1
+
+
+ ROOT NO.    7           8
+
+        0.000000    0.000000
+  
+    1     0.04328    -0.00374
+    2     0.08284    -0.01565
+    3     0.01357    -0.00044
+    4     0.98672     0.02242
+    5     0.08969    -0.01053
+    6     0.00892    -0.01779
+    7     0.00809     0.01280
+    8    -0.01230    -0.00533
+    9    -0.03130     0.05346
+   10    -0.00814     0.02488
+  
+   11    -0.06280    -0.01634
+   12     0.02669    -0.08517
+   13     0.00313    -0.00172
+   14    -0.01920     0.07462
+   15    -0.01153     0.96681
+   16     0.00941    -0.16965
+   17     0.00662    -0.08070
+   18    -0.00968    -0.00516
+   19     0.00510     0.00662
+   20     0.00145    -0.00935
+  
+   21     0.00187    -0.06156
+   22    -0.00161     0.02974
+   23     0.00003    -0.00315
+   24    -0.00079    -0.00404
+   25     0.00044     0.00256
+   26    -0.00081    -0.00194
+   27     0.00053    -0.00034
+   28     0.00042    -0.00160
+   29     0.00469     0.00027
+   30    -0.00052    -0.00201
+  
+   31    -0.00191     0.01571
+   32    -0.00068    -0.00386
+   33     0.00054     0.01356
+   34    -0.00191    -0.00165
+   35     0.00004    -0.00006
+   36     0.00433     0.00075
+   37    -0.00028     0.00039
+   38    -0.00021    -0.00117
+   39    -0.00501     0.00422
+   40    -0.00371     0.00925
+  
+ Metric Matrix Mprime= <0|DQ><DQ|0>=STr(S)
+
+
+ ROOT NO.    1           2           3           4           5           6
+
+        0.000000    0.000000    0.000000    0.000000    0.000000    0.000000
+  
+    1     1.02022     0.00251    -0.00017     0.00163     0.00213    -0.00170
+    2     0.00251     1.01224     0.00022    -0.00141    -0.00033    -0.00212
+    3    -0.00017     0.00022     0.97092     0.00220    -0.00070    -0.00042
+    4     0.00163    -0.00141     0.00220     1.01144     0.00156     0.00016
+    5     0.00213    -0.00033    -0.00070     0.00156     0.99349     0.00438
+    6    -0.00170    -0.00212    -0.00042     0.00016     0.00438     0.98360
+    7    -0.00142    -0.00157     0.00018     0.00004    -0.00005    -0.00002
+    8     0.00045    -0.00164    -0.00021     0.00008     0.00012     0.00006
+
+
+ ROOT NO.    7           8
+
+        0.000000    0.000000
+  
+    1    -0.00142     0.00045
+    2    -0.00157    -0.00164
+    3     0.00018    -0.00021
+    4     0.00004     0.00008
+    5    -0.00005     0.00012
+    6    -0.00002     0.00006
+    7     0.99744     0.00173
+    8     0.00173     0.99340
+ EIGENVALUES Mprime
+           1  0.970760777953568     
+           2  0.981693324557148     
+           3  0.992667571654152     
+           4  0.994919618610492     
+           5  0.997772029825185     
+           6   1.00982175530363     
+           7   1.01362504172910     
+           8   1.02148168210482     
+ DETERMINANT Mprime   0.981892291686068     
+ EIGENPAIRS Mprime
+ The smallest eigenvalue is  0.970760777953568     
+ START Lowdin orthogonalization of Metric Matrix
+
+
+ ROOT NO.    1           2           3           4           5           6
+
+        0.970761    0.981693    0.992668    0.994920    0.997772    1.009822
+  
+    1     0.00468     0.05664    -0.03720    -0.05568     0.03804    -0.27294
+    2    -0.00594     0.05737     0.05655     0.06749     0.12728     0.60772
+    3     0.99767    -0.00967    -0.00953    -0.03897     0.00595     0.04644
+    4    -0.05549     0.01388     0.00705    -0.07471     0.00619     0.73851
+    5     0.02949    -0.35630    -0.01771     0.92668    -0.02318     0.01340
+    6     0.02261     0.93067    -0.00746     0.35441    -0.03049    -0.02544
+    7    -0.00711     0.01035    -0.33291     0.02085     0.93570    -0.05262
+    8     0.00929     0.00292     0.94026     0.02155     0.32448    -0.07100
+
+
+ ROOT NO.    7           8
+
+        1.013625    1.021482
+  
+    1    -0.11449     0.95039
+    2     0.73185     0.26037
+    3    -0.02741     0.00280
+    4    -0.65514     0.12827
+    5    -0.08754     0.06892
+    6    -0.06118    -0.04856
+    7    -0.06999    -0.07339
+    8    -0.07083    -0.00406
+ 
+ (Mprime)**(-0.5)
+
+
+ ROOT NO.    1           2           3           4           5           6
+
+        0.970761    0.981693    0.992668    0.994920    0.997772    1.009822
+  
+    1     0.99005    -0.00122     0.00008    -0.00080    -0.00106     0.00085
+    2    -0.00122     0.99394    -0.00011     0.00069     0.00016     0.00106
+    3     0.00008    -0.00011     1.01487    -0.00111     0.00036     0.00021
+    4    -0.00080     0.00069    -0.00111     0.99434    -0.00078    -0.00008
+    5    -0.00106     0.00016     0.00036    -0.00078     1.00328    -0.00223
+    6     0.00085     0.00106     0.00021    -0.00008    -0.00223     1.00831
+    7     0.00070     0.00078    -0.00009    -0.00002     0.00003     0.00001
+    8    -0.00022     0.00082     0.00011    -0.00004    -0.00006    -0.00003
+
+
+ ROOT NO.    7           8
+
+        1.013625    1.021482
+  
+    1     0.00070    -0.00022
+    2     0.00078     0.00082
+    3    -0.00009     0.00011
+    4    -0.00002    -0.00004
+    5     0.00003    -0.00006
+    6     0.00001    -0.00003
+    7     1.00128    -0.00087
+    8    -0.00087     1.00332
+    
+ Orthogonalization  following Loewdin
+ The following matrix is Tr(S)(STr(S))**(-0.5)
+
+
+ ROOT NO.    1           2           3           4           5           6
+
+        0.970761    0.981693    0.992668    0.994920    0.997772    1.009822
+  
+    1     0.99351    -0.01886    -0.00133    -0.04533     0.01998    -0.01107
+    2    -0.06445    -0.00695     0.00163    -0.16229     0.01252     0.00033
+    3     0.00225     0.00204     0.99267     0.02268     0.00241     0.00028
+    4    -0.03927     0.03128    -0.01545     0.07786    -0.00275    -0.00025
+    5    -0.03897    -0.06430     0.02748    -0.74738     0.00370     0.00200
+    6     0.01489    -0.01823    -0.00301     0.63033    -0.00489    -0.00074
+    7    -0.00273     0.02355    -0.03754     0.02022    -0.00160    -0.00036
+    8     0.00076     0.15188    -0.03533    -0.02723    -0.00174    -0.00215
+    9     0.01088     0.89932     0.00943    -0.03588    -0.02673    -0.01861
+   10     0.00942     0.36444    -0.00455    -0.00910    -0.01307    -0.00325
+  
+   11    -0.05946    -0.06130     0.00838     0.01701     0.02136    -0.00002
+   12     0.01190     0.13845    -0.00011     0.00208    -0.00053     0.01405
+   13     0.00199     0.00271     0.01590    -0.00669    -0.00042     0.00723
+   14    -0.01283    -0.00856     0.00564     0.04622     0.01877    -0.00090
+   15     0.00274    -0.05109     0.00089    -0.00575     0.00806     0.00297
+   16    -0.01094     0.00723    -0.00432    -0.02860    -0.01302    -0.00090
+   17    -0.00962    -0.00284     0.01160    -0.01475     0.03057     0.00178
+   18    -0.00149    -0.00697     0.00443    -0.00181     0.04746     0.00177
+   19     0.00202     0.01403     0.01777     0.00208     0.07765     0.00194
+   20    -0.01580     0.03042    -0.00562     0.00782     0.99239     0.03611
+  
+   21     0.02268    -0.03385     0.00873     0.03390    -0.03164    -0.00670
+   22    -0.00740     0.01837     0.01084    -0.02140     0.01631     0.00533
+   23    -0.01376     0.00519    -0.00102     0.00310     0.00000    -0.00856
+   24     0.00003    -0.00007    -0.00169     0.00005    -0.00057     0.00074
+   25     0.00522     0.01788     0.00644     0.01724    -0.00421     0.41802
+   26     0.00934     0.00751    -0.00029     0.00170    -0.02751     0.78122
+   27    -0.00188    -0.00764    -0.00101    -0.00436     0.02052    -0.33036
+   28     0.00565    -0.00255    -0.01016    -0.02737    -0.02096     0.32075
+   29     0.00010     0.00094     0.00155    -0.00019    -0.00154     0.00410
+   30     0.00094    -0.00679     0.00122     0.00004    -0.00007    -0.00241
+  
+   31     0.00036    -0.00070    -0.02367    -0.00187    -0.00391    -0.00193
+   32    -0.00203     0.00107     0.08216     0.00723     0.00857     0.00048
+   33     0.00287     0.00074     0.04155     0.00179     0.00330    -0.00013
+   34    -0.00060    -0.00078    -0.00134    -0.00038    -0.00043     0.00029
+   35    -0.00006    -0.00011     0.01753    -0.00025    -0.01562     0.00327
+   36    -0.00509    -0.00642    -0.00002     0.00197    -0.00622     0.00811
+   37    -0.00023    -0.00298     0.00015    -0.00049     0.00594    -0.01470
+   38     0.00001    -0.00058    -0.01568    -0.00463    -0.00439    -0.00109
+   39    -0.00446    -0.00494     0.00215    -0.01485     0.00811     0.02007
+   40     0.00055     0.00102     0.00431    -0.00266    -0.00088    -0.00043
+  
+1
+
+
+ ROOT NO.    7           8
+
+        1.013625    1.021482
+  
+    1     0.04403    -0.00403
+    2     0.08292    -0.01576
+    3     0.01351    -0.00035
+    4     0.98796     0.02167
+    5     0.08975    -0.01066
+    6     0.00893    -0.01790
+    7     0.00811     0.01285
+    8    -0.01219    -0.00521
+    9    -0.03068     0.05440
+   10    -0.00788     0.02527
+  
+   11    -0.06296    -0.01637
+   12     0.02692    -0.08536
+   13     0.00314    -0.00173
+   14    -0.01931     0.07488
+   15    -0.01243     0.96999
+   16     0.00957    -0.17021
+   17     0.00669    -0.08098
+   18    -0.00970    -0.00518
+   19     0.00511     0.00665
+   20     0.00150    -0.00941
+  
+   21     0.00191    -0.06180
+   22    -0.00162     0.02986
+   23     0.00002    -0.00316
+   24    -0.00078    -0.00405
+   25     0.00046     0.00257
+   26    -0.00079    -0.00196
+   27     0.00052    -0.00034
+   28     0.00043    -0.00162
+   29     0.00469     0.00026
+   30    -0.00052    -0.00203
+  
+   31    -0.00192     0.01577
+   32    -0.00068    -0.00387
+   33     0.00052     0.01361
+   34    -0.00192    -0.00166
+   35     0.00003    -0.00006
+   36     0.00433     0.00075
+   37    -0.00028     0.00039
+   38    -0.00021    -0.00117
+   39    -0.00503     0.00424
+   40    -0.00372     0.00928
+  
+ Check the new metric matrix  <0|DQ><DQ|0>
+ AFTER LOEWDIN
+
+
+ ROOT NO.    1           2           3           4           5           6
+
+        0.970761    0.981693    0.992668    0.994920    0.997772    1.009822
+  
+    1     1.00000     0.00000     0.00000     0.00000    -0.00000     0.00000
+    2     0.00000     1.00000    -0.00000    -0.00000    -0.00000    -0.00000
+    3     0.00000    -0.00000     1.00000     0.00000     0.00000    -0.00000
+    4     0.00000    -0.00000     0.00000     1.00000    -0.00000     0.00000
+    5    -0.00000    -0.00000     0.00000    -0.00000     1.00000    -0.00000
+    6     0.00000    -0.00000    -0.00000     0.00000    -0.00000     1.00000
+    7    -0.00000    -0.00000     0.00000     0.00000     0.00000    -0.00000
+    8    -0.00000    -0.00000     0.00000     0.00000    -0.00000     0.00000
+
+
+ ROOT NO.    7           8
+
+        1.013625    1.021482
+  
+    1    -0.00000    -0.00000
+    2    -0.00000    -0.00000
+    3     0.00000     0.00000
+    4     0.00000     0.00000
+    5     0.00000    -0.00000
+    6    -0.00000     0.00000
+    7     1.00000     0.00000
+    8     0.00000     1.00000
+ Hamiltonian in the diabatic (overlap) basis
+    
+
+
+ ROOT NO.    1           2           3           4           5           6
+
+        5.159840    5.412879    5.739769    5.927173    6.168484    6.265465
+  
+    1     5.17499     0.02816     0.00000     0.03950    -0.04626     0.04123
+    2     0.02816     6.72455     0.00058    -0.02648     0.02872     0.03243
+    3     0.00000     0.00058     5.77842    -0.00570    -0.00373    -0.00109
+    4     0.03950    -0.02648    -0.00570     6.19525     0.01345     0.00112
+    5    -0.04626     0.02872    -0.00373     0.01345     7.61496    -0.04407
+    6     0.04123     0.03243    -0.00109     0.00112    -0.04407     8.80517
+    7    -0.02795    -0.01706    -0.00252    -0.00664    -0.00012    -0.00018
+    8     0.00655    -0.03000     0.00132    -0.00530     0.00028     0.00004
+
+
+ ROOT NO.    7           8
+
+        6.379073    6.603430
+  
+    1    -0.02795     0.00655
+    2    -0.01706    -0.03000
+    3    -0.00252     0.00132
+    4    -0.00664    -0.00530
+    5    -0.00012     0.00028
+    6    -0.00018     0.00004
+    7     5.93093    -0.02420
+    8    -0.02420     7.28954
+ EIGENVALUES Hamiltonian matrix
+           1   5.17056638398223     
+           2   5.77829132006993     
+           3   5.93084373306865     
+           4   6.19575445599553     
+           5   6.72379350165647     
+           6   7.29155120773636     
+           7   7.61522518454192     
+           8   8.80779114350057     
+   
+ ADIABATIC LVC STATES
+
+
+ ROOT NO.    1           2           3           4           5           6
+
+        5.170566    5.778291    5.930844    6.195754    6.723794    7.291551
+  
+    1     0.99818    -0.00001    -0.03402     0.04118     0.01798     0.00249
+    2    -0.01854    -0.00001     0.02452     0.04761     0.99640    -0.05175
+    3    -0.00010     0.99976    -0.01741    -0.01326     0.00119     0.00088
+    4    -0.03898     0.01387     0.03267     0.99733    -0.04964    -0.00334
+    5     0.01913     0.00194    -0.00158    -0.00917    -0.03126     0.00440
+    6    -0.01091     0.00039     0.00023    -0.00183    -0.01652     0.00114
+    7     0.03584     0.01700     0.99826    -0.03275    -0.02322    -0.01715
+    8    -0.00304    -0.00056     0.01863     0.00519     0.05118     0.99849
+
+
+ ROOT NO.    7           8
+
+        7.615225    8.807791
+  
+    1    -0.01780     0.01193
+    2     0.03281     0.01521
+    3    -0.00207    -0.00031
+    4     0.00840     0.00026
+    5     0.99859    -0.03700
+    6     0.03669     0.99913
+    7    -0.00010    -0.00027
+    8    -0.00267    -0.00023
+   
+   
+    
+ TRANSITION DIPOLES DIABATIC STATES
+      0.0984362     -0.2086040     -1.5316090
+      0.9452699     -0.2789447     -0.5086325
+      0.0241643      0.0928002     -0.0208189
+     -0.4464587     -0.1420593     -1.0505889
+     -0.0069402     -0.0006964      0.0043439
+     -0.0472323      0.0089521      0.0068661
+      0.0196960     -0.0044991     -0.0072989
+      0.0395626     -0.0043862     -0.0145764
+    
+  TRANSITION DIPOLE MOMENTS LVC ADIABATIC STATES
+   1         0.0990988        -0.1977814        -1.4786375
+   2         0.0182390         0.0907390        -0.0354767
+   3         0.0252204        -0.0105685        -0.0018833
+   4        -0.3968220        -0.1646667        -1.1346887
+   5         0.9683861        -0.2747744        -0.4830396
+   6        -0.0080770         0.0101757         0.0115914
+   7         0.0166924        -0.0071777         0.0064316
+   8        -0.0315255         0.0021747        -0.0195786
+    
+ TRANSITION VELOCITY DIPOLES DIABATIC STATES
+     -0.0077838      0.0392261      0.3021297
+     -0.2325868      0.0678670      0.1193370
+     -0.0058291     -0.0126853      0.0033844
+      0.1163805      0.0295346      0.2304615
+      0.0005291      0.0001766      0.0009202
+      0.0078268     -0.0019859      0.0014010
+     -0.0025393      0.0000145     -0.0016561
+     -0.0058650      0.0005173      0.0004335
+    
+ TRANSITION MAGNETIC DIPOLES DIABATIC STATES
+      0.3605518      1.4240352     -0.1845289
+     -0.1101070     -0.5394574      0.0800092
+      0.1638935      0.0571151      0.3990008
+     -0.1768037     -2.7467107      0.4542226
+      0.0232454      0.0077834      0.0073354
+      0.0021089     -0.0379649      0.0135975
+      0.0056896      0.0594217     -0.0114407
+     -0.0182653      0.0095878     -0.0071536
+    
+ nmodes npermax           0           0
+ ZERO PERTURBATIONS REQUIRED
+ THE CODE WILL STOP

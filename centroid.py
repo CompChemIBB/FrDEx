@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-geometry.py
+centroid.py
 
 Utilities for reading fragment XYZ files and computing fragment centroids.
 """
@@ -15,7 +15,7 @@ def read_xyz(filename):
 
     Parameters
     ----------
-    filename : str
+    filename : str or Path
 
     Returns
     -------
@@ -24,7 +24,6 @@ def read_xyz(filename):
     """
 
     with open(filename) as f:
-
         lines = f.readlines()
 
     natoms = int(lines[0])
@@ -33,31 +32,39 @@ def read_xyz(filename):
     coords = []
 
     for line in lines[2:2 + natoms]:
-
         toks = line.split()
 
         atoms.append(toks[0])
-
-        coords.append(
-            [float(x) for x in toks[1:4]]
-        )
+        coords.append([float(x) for x in toks[1:4]])
 
     return atoms, np.array(coords)
 
 
 def compute_centroid(coords):
     """
-    Geometric centroid.
+    Compute the geometric centroid.
     """
-
     return coords.mean(axis=0)
 
+
 def compute_fragment_centroids(
-        xyz_pattern="frag*.xyz",
-        outfile="fragment_centroids.dat"
+    directory=".",
+    xyz_pattern="frag*.xyz",
+    outfile="fragment_centroids.dat",
 ):
     """
-    Compute centroids for every fragment xyz.
+    Compute centroids for every fragment XYZ file.
+
+    Parameters
+    ----------
+    directory : str or Path
+        Directory containing frag*.xyz files.
+
+    xyz_pattern : str
+        Pattern used to locate fragment xyz files.
+
+    outfile : str
+        Output filename written inside `directory`.
 
     Returns
     -------
@@ -70,15 +77,17 @@ def compute_fragment_centroids(
         }
     """
 
-    xyz_files = sorted(
-        Path(".").glob(xyz_pattern)
-    )
+    directory = Path(directory)
 
-    if len(xyz_files) == 0:
+    xyz_files = sorted(directory.glob(xyz_pattern))
 
+    if not xyz_files:
         raise RuntimeError(
-            "No fragment xyz files found."
+            f"No fragment XYZ files matching '{xyz_pattern}' "
+            f"found in '{directory}'."
         )
+
+    outfile = directory / outfile
 
     centroids = {}
 
@@ -117,8 +126,4 @@ if __name__ == "__main__":
     print()
 
     for frag in sorted(centroids):
-
-        print(
-            frag,
-            centroids[frag]
-        )
+        print(frag, centroids[frag])

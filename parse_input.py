@@ -3,13 +3,13 @@
 ## ToDo parse CT states from start_define_states block
 import re
 from pathlib import Path
-from typing import List
 from models import State
+from pathlib import Path
 
 
 
 # def parse_frdex_input(inpfile):
-def parse_frdex_input(inpfile):
+def parse_frdex_input(inpfile: str | Path):
 
     with open(inpfile) as f:
 
@@ -29,7 +29,8 @@ def parse_frdex_input(inpfile):
 
 # EXAMPLE
 
-def parse_le_states(lines):
+# def parse_le_states(lines):
+def parse_le_states(lines: list[str]):
 
     states = []
 
@@ -75,7 +76,8 @@ def parse_le_states(lines):
 
     return states
 
-def parse_ct_states(lines):
+# def parse_ct_states(lines):
+def parse_ct_states(lines: list[str]):
 
     states = []
 
@@ -142,20 +144,37 @@ def parse_ct_states(lines):
 
 if __name__ == "__main__":
 
+    import argparse
+
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument(
+        "directory",
+        nargs="?",
+        default=".",
+        help="Directory containing FrDEx input files."
+    )
+
+    args = parser.parse_args()
+
     files = sorted(
-    Path(".").glob("*.inp")
-)
+        Path(args.directory).glob("*.inp")
+    )
 
-
-    print(f"Found {len(files)} output files.\n")
+    print(f"\nFound {len(files)} input files.\n")
 
     for f in files:
 
+        print(f.name)
+
         try:
+
             states = parse_frdex_input(f)
 
             for s in states:
-                print(s)
+
+                print("   ", s)
 
         except Exception as exc:
-            print(f"Failed to parse {f}: {exc}")
+
+            print(exc)

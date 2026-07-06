@@ -1,0 +1,33 @@
+'test_frag3_frag4-mon_sub-diab.log' log file of pair
+0                      number of modes
+0.1d0                  number of displacement size
+40                     number of TD states
+custom_states          possible ops KSORB/MXORB/FRAMO/FRATD/
+8                      number of diabatic states from input
+2                      number of fragments
+test_frag3-mon_sub-diab fchk files
+test_frag4-mon_sub-diab fchk files
+start_read_states      !Block to read state vectors from input files
+d1 1 s1                !read diabatic state 1 from fragment 1 (C1), s1 state (pipil)
+d2 1 s3                !read diabatic state 2 from fragment 1 (C1), s3 state (pipi2)
+d3 2 s1                !read diabatic state 3 from fragment 2 (C2), s1 state (pipil)
+d4 2 s3                !read diabatic state 4 from fragment 2 (C2), s5 state (pipi2)
+end_read_states
+start_define_states    !Block to define states based on orbital transitions
+d5_start               !start the definition of diabatic state 5
+1                      !number of components of the state
+1H0 2L0 1.d0           !transition from HOMO fragment 1 to LUMO fragment 2
+d5_end                 !end the definition of diabatic state 5
+d6_start               !start the definition of diabatic state 6
+1                      !number of components of the state
+1H0 2L1 1.d0           !transition from HOMO fragment 1 to LUMO+1 fragment 2
+d6_end                 !end the definition of diabatic state 6
+d7_start               !start the definition of diabatic state 7
+1                      !number of components of the state
+2H0 1L0 1.d0           !transition from HOMO fragment 2 to LUMO fragment 1
+d7_end                 !end the definition of diabatic state 7
+d8_start               !start the definition of diabatic state 8
+1                      !number of components of the state
+2H0 1L1 1.d0           !transition from HOMO fragment 2 to LUMO+1 fragment 1
+d8_end                 !end the definition of diabatic state 8
+end_define_states
