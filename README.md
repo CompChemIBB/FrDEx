@@ -267,7 +267,9 @@ replace_optimize_heavy.py
 
 ## Purpose
 
-Replaces fragment geometries using heavy-atom RMSD alignment against optimized reference structures. It rotates optimised geometry to match the input geometry. The rotated optimized structure is saved in an array. The RMSD of this rotational transformation will be displayed. We expect the RMSD below 0.2. The saved rotated optimized coordinates will be used to generate TD-DFT input files. Monomer and pairs files can be generated. Currently, only pair base calculations are supported. Trimer or other moieties geometries will be explored in future. 
+1. Generating TD-DFT input files for each fragment and pairs. 
+
+2. Replaces fragment geometries using heavy-atom RMSD alignment against optimized reference structures. It rotates optimised geometry to match the input geometry. The rotated optimized structure is saved in an array. The RMSD of this rotational transformation will be displayed. We expect the RMSD below 0.2. The saved rotated optimized coordinates will be used to generate TD-DFT input files. Currently, only pair base calculations are supported. Trimer or other moieties geometries will be explored in future. 
 
 Currently supported references
 
@@ -292,7 +294,7 @@ The procedure preserves the fragment orientation while replacing the coordinates
 
 ## Output
 
-Optimized Gaussian input files for excited-state calculations with the following header. 
+Optimized Gaussian input files for excited-state calculations with the following header. A Short submission script for fragments and pair are also generated. 
 
 ```
 1. Monomer calculation: #p m052x/6-31G(d) scrf=(pcm,solvent=water) scf=tight iop(3/33=4)
