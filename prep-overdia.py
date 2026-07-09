@@ -1,29 +1,18 @@
 #!/usr/bin/env python3
 """
 Generate OVERDIA input files for all unique fragment pairs.
-
-The electronic model is configurable from the command line.
-
-Examples
---------
-
-Two LE states + one CT state per direction (6 states)
-
-    ./prep-overdia_mod.py 8 \
-        --le-states s1 s3 \
-        --ct-levels 1
-
-Two LE states + two CT states per direction (8 states)
-
-    ./prep-overdia_mod.py 8 \
-        --le-states s1 s3 \
-        --ct-levels 2
 """
 
 from pathlib import Path
 import argparse
 
-# --------------------------------------------------s----------
+from state_classifier import (
+    parse_gaussian_log,
+    suggest_le_states,
+    write_report,
+)
+
+# ------------------------------------------------------------
 # Command line
 # ------------------------------------------------------------
 
@@ -45,46 +34,88 @@ parser.add_argument(
 )
 
 parser.add_argument(
+    "--auto-le",
+    action="store_true",
+    help="Automatically determine LE states from fragment TDDFT logs."
+)
+
+parser.add_argument(
     "--le-states",
     nargs="+",
     default=["s1", "s3"],
-    help="Local excited states to read from each fragment."
+    help="Manual LE states."
 )
 
 parser.add_argument(
     "--ct-levels",
     type=int,
     default=2,
-    help=(
-        "Number of CT acceptor orbitals.\n"
-        "1 -> LUMO only\n"
-        "2 -> LUMO and LUMO+1"
-    )
+    help="Number of CT acceptor orbitals."
 )
 
 args = parser.parse_args()
 
 NFRAGS = args.NFRAGS
 SYSTEM_NAME = args.system_name
-
-LE_STATES = args.le_states
 N_CT = args.ct_levels
 
 OVERDIA_EXE = (
     "/home/roberto/JAMES/Programs/Overdia/1.1/source/overdia-par.e"
 )
 
+# ============================================================
+# FIRST PASS
+# Determine LE states for EVERY fragment
+# ============================================================
+
+fragment_le_states = {}
+
+for frag in range(1, NFRAGS + 1):
+
+    if args.auto_le:
+
+        logfile = f"{SYSTEM_NAME}_frag{frag}-mon_sub-diab.log"
+
+        print(f"Analyzing {logfile}")
+
+        states = parse_gaussian_log(logfile)
+
+        write_report(
+            states,
+            f"fragment{frag}.states.dat"
+        )
+
+        fragment_le_states[frag] = suggest_le_states(
+            states,
+            len(args.le_states)
+        )
+
+    else:
+
+        fragment_le_states[frag] = list(args.le_states)
+
+print()
+print("Selected LE states")
+print("------------------")
+
+for frag in sorted(fragment_le_states):
+
+    print(
+        f"Fragment {frag}: {fragment_le_states[frag]}"
+    )
+
 # ------------------------------------------------------------
 # Number of diabatic states
 # ------------------------------------------------------------
 
-N_LE = len(LE_STATES)
+N_LE = len(next(iter(fragment_le_states.values())))
 
 TOTAL_STATES = 2 * N_LE + 2 * N_CT
 
-# ------------------------------------------------------------
-# Build run script
-# ------------------------------------------------------------
+# ============================================================
+# SECOND PASS
+# Generate all pair calculations
+# ============================================================
 
 run_script = Path("run_diab.sh")
 
@@ -140,18 +171,20 @@ with run_script.open("w") as runfile:
 
             state_index = 1
 
-            for s in LE_STATES:
+            for state in fragment_le_states[frag1]:
 
                 lines.append(
-                    f"d{state_index} 1 {s}"
+                    f"d{state_index} 1 {state}"
                 )
+
                 state_index += 1
 
-            for s in LE_STATES:
+            for state in fragment_le_states[frag2]:
 
                 lines.append(
-                    f"d{state_index} 2 {s}"
+                    f"d{state_index} 2 {state}"
                 )
+
                 state_index += 1
 
             lines.append("end_read_states")
@@ -162,7 +195,7 @@ with run_script.open("w") as runfile:
 
             lines.append("start_define_states")
 
-            # Fragment 1 -> Fragment 2
+            # frag1 -> frag2
 
             for level in range(N_CT):
 
@@ -175,7 +208,7 @@ with run_script.open("w") as runfile:
 
                 state_index += 1
 
-            # Fragment 2 -> Fragment 1
+            # frag2 -> frag1
 
             for level in range(N_CT):
 
@@ -193,6 +226,7 @@ with run_script.open("w") as runfile:
             # -------------------------------------------------
 
             with open(inp_name, "w") as inp:
+
                 inp.write("\n".join(lines))
                 inp.write("\n")
 
@@ -203,9 +237,10 @@ with run_script.open("w") as runfile:
 print()
 
 print(f"Fragments            : {NFRAGS}")
-print(f"LE states            : {LE_STATES}")
 print(f"CT levels            : {N_CT}")
 print(f"Diabatic states/pair : {TOTAL_STATES}")
 print(f"Pair calculations    : {NFRAGS*(NFRAGS-1)//2}")
 
-print("\nGenerated OVERDIA input files and run_diab.sh")
+print()
+print("Generated OVERDIA input files.")
+print("Generated run_diab.sh")
