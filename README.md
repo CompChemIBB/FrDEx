@@ -317,7 +317,7 @@ prep-overdia_mod.py
 ```
 
 ## Purpose
-Once the TD-DFT results are ready, we can start our FrDEx Calculation. Generally, we will use Dimer calculation for calculating Excitonic coupling and CT couplings. Here our H-intra terms also comes from Pair calculation. Automatically generates FrDEx input files for every unique fragment pair. For **N** fragments the total number of calculations is N(N−1)/2. Example, 8 fragments → 28 FrDEx calculations.
+Once the TD-DFT results are ready, we can start our FrDEx Calculation. Generally, we will use Dimer calculation for calculating Excitonic coupling and CT couplings. Here our H-intra terms also comes from Pair calculation. Automatically generates FrDEx input files for every unique fragment pair. For **N** fragments the total number of calculations is N(N−1)/2. Example, 8 fragments → 28 FrDEx calculations. It supports automatic selection of local excited (LE) states from fragment TDDFT calculations and flexible generation of charge-transfer (CT) states by combining multiple donor (HOMO, HOMO−1, …) and acceptor (LUMO, LUMO+1, …) orbitals, allowing the size of the diabatic basis to be tailored to the system under investigation.
 
 ---
 
