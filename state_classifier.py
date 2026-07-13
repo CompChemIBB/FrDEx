@@ -182,7 +182,7 @@ def suggest_le_states(
         states,
         nstates=2,
         emin=4.5,
-        emax=6.5,
+        emax=6.90,
     ):
     
     candidates = []

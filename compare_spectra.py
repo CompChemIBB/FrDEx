@@ -126,6 +126,74 @@ def read_exat(filename):
     )
 
 
+def match_states(Etd, Ftd, Eex, Fex):
+
+    n = min(len(Etd), len(Eex))
+
+    matches = []
+
+    for i in range(n):
+
+        matches.append(
+            (
+                i + 1,
+                Etd[i],
+                Eex[i],
+                Ftd[i],
+                Fex[i],
+                Eex[i] - Etd[i],
+            )
+        )
+
+    return matches
+
+def compute_shift(matches):
+
+    diff = np.array([m[5] for m in matches])
+
+    weights = np.array([m[3] for m in matches])
+
+    #
+    # ignore almost dark states
+    #
+
+    mask = weights > 0.01
+
+    diff = diff[mask]
+    weights = weights[mask]
+
+    mean_shift = np.mean(diff)
+
+    weighted_shift = np.average(diff, weights=weights)
+
+    std = np.std(diff)
+
+    rmse = np.sqrt(np.mean(diff**2))
+
+    return (
+        mean_shift,
+        weighted_shift,
+        std,
+        rmse,
+    )
+
+def print_report(matches):
+
+    print()
+
+    print(" State    TDDFT     EXAT      ΔE")
+
+    print("----------------------------------------")
+
+    for s,e1,e2,f1,f2,d in matches:
+
+        print(
+            f"{s:4d}"
+            f"{e1:10.3f}"
+            f"{e2:10.3f}"
+            f"{d:10.3f}"
+        )
+
 # ------------------------------------------------------------
 # Gaussian broadening
 # ------------------------------------------------------------
@@ -170,15 +238,38 @@ Eg, fg, rg = read_gaussian(args.gaussian)
 
 Ee, fe, re = read_exat(args.exat)
 
+matches = match_states(
+    Eg,
+    fg,
+    Ee,
+    fe,
+)
+
+print_report(matches)
+
+mean_shift, weighted_shift, std, rmse = compute_shift(matches)
+
+print()
+print("------------------------------------------")
+print("Comparison statistics")
+print("------------------------------------------")
+print(f"Average shift          : {mean_shift:8.3f} eV")
+print(f"Weighted shift         : {weighted_shift:8.3f} eV")
+print(f"Standard deviation     : {std:8.3f} eV")
+print(f"RMSE                  : {rmse:8.3f} eV")
+
+
+Ee_shift = Ee - weighted_shift
+
 #
 # broaden
 #
 
-xg_uv, yg_uv = broaden(Eg, fg, args.sigma)
-xe_uv, ye_uv = broaden(Ee, fe, args.sigma)
+xg_uv, yg_uv = broaden(Ee_shift, fg, args.sigma)
+xe_uv, ye_uv = broaden(Ee_shift, fe, args.sigma)
 
-xg_cd, yg_cd = broaden(Eg, rg, args.sigma)
-xe_cd, ye_cd = broaden(Ee, re, args.sigma)
+xg_cd, yg_cd = broaden(Ee_shift, rg, args.sigma)
+xe_cd, ye_cd = broaden(Ee_shift, re, args.sigma)
 
 #
 # normalize

@@ -17,29 +17,36 @@ import rmsd
 
 # 1. Parse command-line arguments
 parser = arg.ArgumentParser(description='Replace fragment geometries using heavy-atom alignment to 16-atom and 17-atom references.')
-parser.add_argument('-i16', '--input16', required=True, help='Input 16-atom optimized reference geometry (standard cytosine)')
-parser.add_argument('-i17', '--input17', required=True, help='Input 17-atom optimized reference geometry (hemi-protonated cytosine)')
+parser.add_argument('-i16', '--input16', default=None, help='Input 16-atom optimized reference geometry (standard cytosine)')
+parser.add_argument('-i17', '--input17', default=None, help='Input 17-atom optimized reference geometry (hemi-protonated cytosine)')
 parser.add_argument('-f', '--format', default='xyz', help='Format of the input reference files (default: xyz)')
 parser.add_argument('-n', '--num_frags', type=int, default=6, help='Total number of fragments to process (default: 6)')
 parser.add_argument('-s', '--system-name', default='test', help='System name for output files (default: test)')
 args = parser.parse_args()
 
-# Load 16-atom reference
-ref16_atoms, ref16_coords = rmsd.get_coordinates(args.input16, args.format)
-# Load 17-atom reference
-ref17_atoms, ref17_coords = rmsd.get_coordinates(args.input17, args.format)
+# Alignment is performed only if BOTH reference structures are supplied.
+ALIGN = (args.input16 is not None) and (args.input17 is not None)
 
-# Helper function to prepare reference objects for alignment
-def prepare_reference(atoms, coords):
-    heavy_idx = [i for i, atom in enumerate(atoms) if atom.strip().upper() in ['C', 'N', 'O']]
-    heavy_atoms = atoms[heavy_idx]
-    centroid = rmsd.centroid(coords[heavy_idx])
-    centered_coords = coords - centroid
-    return heavy_idx, heavy_atoms, centered_coords
+if (args.input16 is None) != (args.input17 is None):
+    parser.error("Either specify both -i16 and -i17 or neither.")
 
-# Precompute centered reference heavy-atom criteria
-ref16_heavy_idx, ref16_heavy_atoms, ref16_coords_centered = prepare_reference(ref16_atoms, ref16_coords)
-ref17_heavy_idx, ref17_heavy_atoms, ref17_coords_centered = prepare_reference(ref17_atoms, ref17_coords)
+if ALIGN:
+    # Load 16-atom reference
+    ref16_atoms, ref16_coords = rmsd.get_coordinates(args.input16, args.format)
+    # Load 17-atom reference
+    ref17_atoms, ref17_coords = rmsd.get_coordinates(args.input17, args.format)
+    
+    # Helper function to prepare reference objects for alignment
+    def prepare_reference(atoms, coords):
+        heavy_idx = [i for i, atom in enumerate(atoms) if atom.strip().upper() in ['C', 'N', 'O']]
+        heavy_atoms = atoms[heavy_idx]
+        centroid = rmsd.centroid(coords[heavy_idx])
+        centered_coords = coords - centroid
+        return heavy_idx, heavy_atoms, centered_coords
+    
+    # Precompute centered reference heavy-atom criteria
+    ref16_heavy_idx, ref16_heavy_atoms, ref16_coords_centered = prepare_reference(ref16_atoms, ref16_coords)
+    ref17_heavy_idx, ref17_heavy_atoms, ref17_coords_centered = prepare_reference(ref17_atoms, ref17_coords)
 
 SYSTEM_NAME = args.system_name
 
@@ -70,52 +77,69 @@ for idx in range(total_loops):
     f_atoms, f_coords = rmsd.get_coordinates(frag_file, 'xyz')
     num_atoms_target = len(f_atoms)
 
-    # Automatically select the correct reference base based on fragment atom count
-    if num_atoms_target == 16:
-        ref_atoms = ref16_atoms
-        ref_coords_centered = ref16_coords_centered
-        ref_heavy_idx = ref16_heavy_idx
-        ref_heavy_atoms = ref16_heavy_atoms
-        print(" -> Detected: Standard Cytosine framework (16 atoms). Aligning to 16-atom reference.")
-    elif num_atoms_target == 17:
-        ref_atoms = ref17_atoms
-        ref_coords_centered = ref17_coords_centered
-        ref_heavy_idx = ref17_heavy_idx
-        ref_heavy_atoms = ref17_heavy_atoms
-        print(" -> Detected: Hemi-protonated Cytosine framework (17 atoms). Aligning to 17-atom reference.")
-    else:
-        print(f"Error: Fragment {fragnum1} has an unsupported number of atoms ({num_atoms_target}). Expected 16 or 17.")
-        sys.exit(1)
+    if ALIGN:
 
-    # Extract target fragment heavy atom indices
-    frag_heavy_indices = [i for i, atom in enumerate(f_atoms) if atom.strip().upper() in ['C', 'N', 'O']]
-    frag_heavy_atoms = f_atoms[frag_heavy_indices]
+        # Automatically select the correct reference base based on fragment atom count
+        if num_atoms_target == 16:
+            ref_atoms = ref16_atoms
+            ref_coords_centered = ref16_coords_centered
+            ref_heavy_idx = ref16_heavy_idx
+            ref_heavy_atoms = ref16_heavy_atoms
+            print(" -> Detected: Standard Cytosine framework (16 atoms). Aligning to 16-atom reference.")
     
-    # Isolate core heavy atom frameworks for rotation mapping
-    ref_heavy_coords_centered = ref_coords_centered[ref_heavy_idx]
-    frag_heavy_coords = f_coords[frag_heavy_indices]
-    frag_heavy_centroid = rmsd.centroid(frag_heavy_coords)
-    frag_heavy_coords_centered = frag_heavy_coords - frag_heavy_centroid
+        elif num_atoms_target == 17:
+            ref_atoms = ref17_atoms
+            ref_coords_centered = ref17_coords_centered
+            ref_heavy_idx = ref17_heavy_idx
+            ref_heavy_atoms = ref17_heavy_atoms
+            print(" -> Detected: Hemi-protonated Cytosine framework (17 atoms). Aligning to 17-atom reference.")
+    
+        else:
+            print(f"Error: Fragment {fragnum1} has an unsupported number of atoms ({num_atoms_target}). Expected 16 or 17.")
+            sys.exit(1)
+    
+        frag_heavy_indices = [
+            i for i, atom in enumerate(f_atoms)
+            if atom.strip().upper() in ['C', 'N', 'O']
+        ]
+    
+        frag_heavy_atoms = f_atoms[frag_heavy_indices]
+    
+        ref_heavy_coords_centered = ref_coords_centered[ref_heavy_idx]
+    
+        frag_heavy_coords = f_coords[frag_heavy_indices]
+        frag_heavy_centroid = rmsd.centroid(frag_heavy_coords)
+        frag_heavy_coords_centered = frag_heavy_coords - frag_heavy_centroid
+    
+        reordered_heavy_idx = rmsd.reorder_brute(
+            ref_heavy_atoms,
+            frag_heavy_atoms,
+            ref_heavy_coords_centered,
+            frag_heavy_coords_centered
+        )
+    
+        frag_heavy_coords_centered = frag_heavy_coords_centered[reordered_heavy_idx]
+        frag_heavy_atoms = frag_heavy_atoms[reordered_heavy_idx]
+    
+        if not all(ref_heavy_atoms == frag_heavy_atoms):
+            print(f"Error: Heavy atom mapping could not be aligned for Fragment {fragnum1}.")
+            sys.exit(1)
+    
+        rotmat = rmsd.quaternion_rotate(
+            ref_heavy_coords_centered,
+            frag_heavy_coords_centered
+        )
+    
+        print(f"...heavy atoms matched. Quaternion RMSD: {rmsd.quaternion_rmsd(ref_heavy_coords_centered, frag_heavy_coords_centered):.6f}")
+    
+        final_frag_atoms[idx] = ref_atoms
+        final_frag_coords[idx] = np.dot(ref_coords_centered, rotmat) + frag_heavy_centroid
 
-    # Align the core frameworks via brute force permutation matching
-    reordered_heavy_idx = rmsd.reorder_brute(
-        ref_heavy_atoms, frag_heavy_atoms, 
-        ref_heavy_coords_centered, frag_heavy_coords_centered
-    )
-    frag_heavy_coords_centered = frag_heavy_coords_centered[reordered_heavy_idx]
-    frag_heavy_atoms = frag_heavy_atoms[reordered_heavy_idx]
-
-    if not all(ref_heavy_atoms == frag_heavy_atoms):
-        print(f"Error: Heavy atom mapping could not be aligned for Fragment {fragnum1}.")
-        sys.exit(1)
-        
-    # Generate the rotation matrix
-    rotmat = rmsd.quaternion_rotate(ref_heavy_coords_centered, frag_heavy_coords_centered)
-    print(f"...heavy atoms matched. Quaternion RMSD: {rmsd.quaternion_rmsd(ref_heavy_coords_centered, frag_heavy_coords_centered):.6f}")
-
-    # Rotate the matching full reference geometry and reposition it to the snapshot space
-    final_frag_atoms[idx] = ref_atoms
-    final_frag_coords[idx] = np.dot(ref_coords_centered, rotmat) + frag_heavy_centroid
+    else:
+        # No alignment requested: keep the original fragment geometry.
+        print(" -> No reference geometries supplied. Using fragment coordinates as-is.")
+        final_frag_atoms[idx] = f_atoms
+        final_frag_coords[idx] = f_coords
 
 
 # 3. Generating Single Monomer Gaussian inputs

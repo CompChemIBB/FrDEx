@@ -47,17 +47,48 @@ parser.add_argument(
 )
 
 parser.add_argument(
-    "--ct-levels",
+    "--n-le",
+    type=int,
+    default=4,
+    help="Number of LE states automatically selected per fragment."
+)
+
+# parser.add_argument(
+#     "--ct-levels",
+#     type=int,
+#     default=2,
+#     help="Number of CT acceptor orbitals."
+# )
+
+parser.add_argument(
+    "--ct-holes",
+    type=int,
+    default=1,
+    help=(
+        "Number of occupied donor orbitals "
+        "(HOMO, HOMO-1, HOMO-2, ...)."
+    )
+)
+
+parser.add_argument(
+    "--ct-electrons",
     type=int,
     default=2,
-    help="Number of CT acceptor orbitals."
+    help=(
+        "Number of virtual acceptor orbitals "
+        "(LUMO, LUMO+1, LUMO+2, ...)."
+    )
 )
+
+
 
 args = parser.parse_args()
 
 NFRAGS = args.NFRAGS
 SYSTEM_NAME = args.system_name
-N_CT = args.ct_levels
+# N_CT = args.ct_levels
+N_HOLES = args.ct_holes
+N_ELECTRONS = args.ct_electrons
 
 OVERDIA_EXE = (
     "/home/roberto/JAMES/Programs/Overdia/1.1/source/overdia-par.e"
@@ -87,7 +118,9 @@ for frag in range(1, NFRAGS + 1):
 
         fragment_le_states[frag] = suggest_le_states(
             states,
-            len(args.le_states)
+            nstates=args.n_le,
+            emin=4.5,
+            emax=6.90,
         )
 
     else:
@@ -110,7 +143,10 @@ for frag in sorted(fragment_le_states):
 
 N_LE = len(next(iter(fragment_le_states.values())))
 
-TOTAL_STATES = 2 * N_LE + 2 * N_CT
+# TOTAL_STATES = 2 * N_LE + 2 * N_CT
+
+N_CT = 2 * N_HOLES * N_ELECTRONS
+TOTAL_STATES = 2 * N_LE + N_CT
 
 # ============================================================
 # SECOND PASS
@@ -196,31 +232,41 @@ with run_script.open("w") as runfile:
             lines.append("start_define_states")
 
             # frag1 -> frag2
-
-            for level in range(N_CT):
-
-                lines.append(f"d{state_index}_start")
-                lines.append("1")
-                lines.append(
-                    f"1H0 2L{level} 1.d0"
-                )
-                lines.append(f"d{state_index}_end")
-
-                state_index += 1
-
-            # frag2 -> frag1
-
-            for level in range(N_CT):
-
-                lines.append(f"d{state_index}_start")
-                lines.append("1")
-                lines.append(
-                    f"2H0 1L{level} 1.d0"
-                )
-                lines.append(f"d{state_index}_end")
-
-                state_index += 1
-
+            for hole in range(N_HOLES):
+            
+                for electron in range(N_ELECTRONS):
+            
+                    lines.append(f"d{state_index}_start")
+                    lines.append("1")
+            
+                    lines.append(
+                        f"1H{hole} 2L{electron} 1.d0"
+                    )
+            
+                    lines.append(f"d{state_index}_end")
+            
+                    state_index += 1
+            
+            
+            #
+            # Fragment 2 -> Fragment 1
+            #
+            
+            for hole in range(N_HOLES):
+            
+                for electron in range(N_ELECTRONS):
+            
+                    lines.append(f"d{state_index}_start")
+                    lines.append("1")
+            
+                    lines.append(
+                        f"2H{hole} 1L{electron} 1.d0"
+                    )
+            
+                    lines.append(f"d{state_index}_end")
+            
+                    state_index += 1
+            
             lines.append("end_define_states")
 
             # -------------------------------------------------
@@ -237,7 +283,12 @@ with run_script.open("w") as runfile:
 print()
 
 print(f"Fragments            : {NFRAGS}")
-print(f"CT levels            : {N_CT}")
+# print(f"CT levels            : {N_CT}")
+print(f"CT donor orbitals    : HOMO ... HOMO-{N_HOLES-1}")
+print(f"CT acceptor orbitals : LUMO ... LUMO+{N_ELECTRONS-1}")
+print(f"CT states            : {N_CT}")
+print(f"LE states/fragment   : {N_LE}")
+print(f"Diabatic states/pair : {TOTAL_STATES}")
 print(f"Diabatic states/pair : {TOTAL_STATES}")
 print(f"Pair calculations    : {NFRAGS*(NFRAGS-1)//2}")
 
