@@ -12,8 +12,13 @@ def build_registry(pair_results):
 
     for pair in pair_results:
 
+        # print("\nPAIR", pair.pair)
+
         for state in pair.states:
 
+            # print(vars(state))
+            # print("key =", state.key)
+    
             key = state.key
 
             if key not in registry.lookup:

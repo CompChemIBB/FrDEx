@@ -85,8 +85,31 @@ def write_chromlist(system, filename="chromlist.in"):
 
             f.write(f"{i+1:d} 1\n")
 
+def validate_system(system):
+
+    n = system.H.shape[0]
+
+    print("Hamiltonian:", system.H.shape)
+    print("Site energies:", np.shape(system.site_energies))
+    print("Electric dipoles:", np.shape(system.mu))
+    print("Velocity dipoles:", np.shape(system.vel))
+    print("Magnetic dipoles:", np.shape(system.mag))
+    print("State centers:", np.shape(system.state_centers))
+    print("Registry entries:", len(system.registry))
+    print("Expected couplings:", n * (n - 1) // 2)
+
+    assert system.H.shape == (n, n)
+    assert len(system.site_energies) == n
+    assert system.mu.shape == (n, 3)
+    assert system.vel.shape == (n, 3)
+    assert system.mag.shape == (n, 3)
+    assert np.shape(system.state_centers) == (n, 3)
+    assert len(system.registry) == n
 
 def write_all(system, output_dir):
+
+    validate_system(system)
+
 
     write_site_file(system, filename=f"{output_dir}/site.in")
 

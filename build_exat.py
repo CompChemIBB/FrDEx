@@ -24,6 +24,7 @@ from pathlib import Path
 import argparse
 
 from pair_parser import parse_pair
+from full_parser import parse_full_system
 from state_registry import build_registry
 from system_builder import (
     build_system,
@@ -31,6 +32,31 @@ from system_builder import (
 )
 from exat_writer import write_all
 
+# ---------------------------------------------------------
+# Detect input format
+# ---------------------------------------------------------
+
+def detect_input_type(inpfile):
+    """
+    Detect whether the input file is
+
+      - a FrDEx pair calculation
+      - a full OVERDIA calculation
+
+    FrDEx inputs contain the keyword
+        start_read_states
+
+    whereas original OVERDIA inputs do not.
+    """
+
+    with open(inpfile) as f:
+
+        text = f.read().lower()
+
+    if "start_read_states" in text:
+        return "pair"
+
+    return "full"
 
 # ---------------------------------------------------------
 # Command line
@@ -95,23 +121,29 @@ def main():
 
     pair_results = []
 
-    #
-    # Parse every pair
-    #
-
     for inp in inp_files:
-
+    
         out = inp.with_suffix(".out")
-
+    
         if not out.exists():
-
+    
             print(f"WARNING : missing {out.name}")
-
+    
             continue
-
-        pair_results.append(
-            parse_pair(inp, out)
-        )
+    
+        input_type = detect_input_type(inp)
+    
+        print(f"Parsing {inp.name} ({input_type})")
+    
+        if input_type == "pair":
+    
+            result = parse_pair(inp, out)
+    
+        else:
+    
+            result = parse_full_system(inp, out)
+    
+        pair_results.append(result)
 
     if len(pair_results) == 0:
 

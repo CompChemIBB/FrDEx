@@ -2,42 +2,86 @@ from dataclasses import dataclass
 import numpy as np
 
 
-
 @dataclass
 class State:
-
     label: str
-
     state_type: str
 
     fragment: int | None = None
 
     donor: int | None = None
-
     acceptor: int | None = None
 
+    donor_orbital: int | None = None
+    acceptor_orbital: int | None = None
+
     root: int | None = None
-
     local_index: int | None = None
-
     global_index: int | None = None
 
     @property
     def key(self):
-        """
-        Unique identifier for a diabatic state.
-        """
 
         if self.state_type == "LE":
-            return ("LE", self.fragment, self.root)
+
+            return (
+                "LE",
+                self.fragment,
+                self.root
+            )
 
         elif self.state_type == "CT":
-            return ("CT", self.donor, self.acceptor)
+
+            return (
+                "CT",
+                self.donor,
+                self.acceptor,
+                self.donor_orbital,
+                self.acceptor_orbital
+            )
 
         else:
+
             raise ValueError(
                 f"Unknown state type: {self.state_type}"
             )
+
+
+# @dataclass
+# class State:
+
+#     label: str
+
+#     state_type: str
+
+#     fragment: int | None = None
+
+#     donor: int | None = None
+
+#     acceptor: int | None = None
+
+#     root: int | None = None
+
+#     local_index: int | None = None
+
+#     global_index: int | None = None
+
+#     @property
+#     def key(self):
+#         """
+#         Unique identifier for a diabatic state.
+#         """
+
+#         if self.state_type == "LE":
+#             return ("LE", self.fragment, self.root)
+
+#         elif self.state_type == "CT":
+#             return ("CT", self.donor, self.acceptor)
+
+#         else:
+#             raise ValueError(
+#                 f"Unknown state type: {self.state_type}"
+#             )
     
 
 @dataclass

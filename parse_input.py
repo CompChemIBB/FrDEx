@@ -76,7 +76,6 @@ def parse_le_states(lines: list[str]):
 
     return states
 
-# def parse_ct_states(lines):
 def parse_ct_states(lines: list[str]):
 
     states = []
@@ -110,26 +109,34 @@ def parse_ct_states(lines: list[str]):
 
             transition = lines[i+2].strip()
 
+            # Extract fragment and orbital indices
             m = re.match(
-                r"(\d+)H\d+\s+(\d+)L\d+",
+                r"(\d+)H(\d+)\s+(\d+)L(\d+)",
                 transition
             )
 
             if m:
 
-                donor, acceptor = map(int, m.groups())
+                donor, donor_orbital, acceptor, acceptor_orbital = map(
+                    int, m.groups()
+                )
 
                 states.append(
 
                     State(
 
-                        label=f"CT_F{donor}_F{acceptor}",
+                        label=(
+                            f"CT_F{donor}_H{donor_orbital}"
+                            f"_F{acceptor}_L{acceptor_orbital}"
+                        ),
 
                         state_type="CT",
 
                         donor=donor,
-
                         acceptor=acceptor,
+
+                        donor_orbital=donor_orbital,
+                        acceptor_orbital=acceptor_orbital,
 
                         local_index=diab
 
@@ -140,6 +147,73 @@ def parse_ct_states(lines: list[str]):
         i += 1
 
     return states
+
+# def parse_ct_states(lines):
+
+
+# def parse_ct_states(lines: list[str]):
+
+#     states = []
+
+#     inside = False
+
+#     i = 0
+
+#     while i < len(lines):
+
+#         line = lines[i].strip()
+
+#         if line.startswith("start_define_states"):
+
+#             inside = True
+#             i += 1
+#             continue
+
+#         if line.startswith("end_define_states"):
+#             break
+
+#         if not inside:
+#             i += 1
+#             continue
+
+#         if "_start" in line:
+
+#             diab = int(
+#                 re.search(r"d(\d+)_start", line).group(1)
+#             )
+
+#             transition = lines[i+2].strip()
+
+#             m = re.match(
+#                 r"(\d+)H\d+\s+(\d+)L\d+",
+#                 transition
+#             )
+
+#             if m:
+
+#                 donor, acceptor = map(int, m.groups())
+
+#                 states.append(
+
+#                     State(
+
+#                         label=f"CT_F{donor}_F{acceptor}",
+
+#                         state_type="CT",
+
+#                         donor=donor,
+
+#                         acceptor=acceptor,
+
+#                         local_index=diab
+
+#                     )
+
+#                 )
+
+#         i += 1
+
+#     return states
 
 
 if __name__ == "__main__":

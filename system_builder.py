@@ -143,12 +143,16 @@ def build_system(
     # Average Hamiltonian
     #
 
+
     system.H = np.divide(
         system.Hsum,
         system.Hcount,
         out=np.zeros_like(system.Hsum),
         where=system.Hcount > 0
     )
+
+     # no average
+    # system.H = np.where(system.Hcount > 0, system.Hsum, 0)
 
     system.H = 0.5 * (system.H + system.H.T)
 

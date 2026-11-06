@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+import argparse
+
 from parse_input import parse_frdex_input
 from parse_output import parse_frdex_output
 from models import FrDExPairResult
@@ -21,6 +23,9 @@ def parse_pair(inpfile, outfile):
     r"frag(\d+)_frag(\d+)",
     inpfile.name
     )
+
+    print(f"group 1: {m.group(1)}")
+    print(f"group 2: {m.group(2)}")
 
     pair = (
         int(m.group(1)),
@@ -46,14 +51,29 @@ def parse_pair(inpfile, outfile):
 
 if __name__ == "__main__":
 
-    result = parse_pair(
-
-    "diab_fratd_resp_2ct_imot_frag1_frag2.inp",
-
-    "diab_fratd_resp_2ct_imot_frag1_frag2.out"
-
+    parser = argparse.ArgumentParser(
+        description="Parser Test input/output files from FrDEx pair calculations."
     )
-    
+
+    parser.add_argument(
+        "-i",
+        "--input",
+        default=".",
+        help="FrDEx *.inp files (default: current directory)"
+    )
+
+    parser.add_argument(
+        "-o",
+        "--output",
+        default=".",
+        help="FrDEx *.out files (default: current directory)"
+    )
+
+    args = parser.parse_args()
+
+
+    result = parse_pair(args.input, args.output)
+
     print(result.pair)
     
     print(result.states)
